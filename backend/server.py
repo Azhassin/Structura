@@ -69,6 +69,10 @@ async def get_status_checks():
     
     return status_checks
 
+# Include route modules
+api_router.include_router(chat.router, tags=["chat"])
+api_router.include_router(contact.router, tags=["contact"])
+
 # Include the router in the main app
 app.include_router(api_router)
 
