@@ -29,12 +29,16 @@ class ChatService:
     def __init__(self):
         self.api_key = os.environ.get('EMERGENT_LLM_KEY')
         if not self.api_key:
-            raise ValueError("EMERGENT_LLM_KEY not found in environment variables")
+            logger.warning("EMERGENT_LLM_KEY not found in environment variables")
+            self.api_key = None
     
     async def get_response(self, session_id: str, user_message: str) -> str:
         """
         Get AI response for a user message
         """
+        if not self.api_key:
+            return "I apologize, but the AI service is not configured properly. Please contact support."
+        
         try:
             # Initialize chat with session ID and system message
             chat = LlmChat(
@@ -58,4 +62,11 @@ class ChatService:
             logger.error(f"Error getting chat response: {str(e)}")
             return "I apologize, but I'm having trouble processing your request right now. Please try again in a moment."
 
-chat_service = ChatService()
+# Create instance lazily
+_chat_service_instance = None
+
+def get_chat_service():
+    global _chat_service_instance
+    if _chat_service_instance is None:
+        _chat_service_instance = ChatService()
+    return _chat_service_instance
