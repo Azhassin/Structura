@@ -78,19 +78,21 @@ async def chat(request: ChatRequest):
         )
         
     except Exception as e:
-        logger.error(f"Error in chat endpoint: {str(e)}\")\n        raise HTTPException(status_code=500, detail=\"Failed to process chat message\")
+        logger.error(f"Error in chat endpoint: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to process chat message")
 
-@router.get(\"/chat/history/{session_id}\")\nasync def get_chat_history(session_id: str):
-    \"\"\"
+@router.get("/chat/history/{session_id}")
+async def get_chat_history(session_id: str):
+    """
     Get chat history for a session
-    \"\"\"
+    """
     try:
-        session = await db.chat_sessions.find_one({\"session_id\": session_id})
+        session = await db.chat_sessions.find_one({"session_id": session_id})
         if not session:
-            return {\"messages\": []}
+            return {"messages": []}
         
-        return {\"messages\": session.get(\"messages\", [])}
+        return {"messages": session.get("messages", [])}
         
     except Exception as e:
-        logger.error(f\"Error getting chat history: {str(e)}\")
-        raise HTTPException(status_code=500, detail=\"Failed to retrieve chat history\")
+        logger.error(f"Error getting chat history: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to retrieve chat history")
