@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from models import ChatRequest, ChatResponse, ChatSession, ChatMessage
-from chat_service import chat_service
+from chat_service import get_chat_service
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
@@ -35,6 +35,7 @@ async def chat(request: ChatRequest):
         )
         
         # Get AI response
+        chat_service = get_chat_service()
         ai_response_text = await chat_service.get_response(session_id, request.message)
         
         # Create assistant message
@@ -77,21 +78,19 @@ async def chat(request: ChatRequest):
         )
         
     except Exception as e:
-        logger.error(f"Error in chat endpoint: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to process chat message")
+        logger.error(f"Error in chat endpoint: {str(e)}\")\n        raise HTTPException(status_code=500, detail=\"Failed to process chat message\")
 
-@router.get("/chat/history/{session_id}")
-async def get_chat_history(session_id: str):
-    """
+@router.get(\"/chat/history/{session_id}\")\nasync def get_chat_history(session_id: str):
+    \"\"\"
     Get chat history for a session
-    """
+    \"\"\"
     try:
-        session = await db.chat_sessions.find_one({"session_id": session_id})
+        session = await db.chat_sessions.find_one({\"session_id\": session_id})
         if not session:
-            return {"messages": []}
+            return {\"messages\": []}
         
-        return {"messages": session.get("messages", [])}
+        return {\"messages\": session.get(\"messages\", [])}
         
     except Exception as e:
-        logger.error(f"Error getting chat history: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to retrieve chat history")
+        logger.error(f\"Error getting chat history: {str(e)}\")
+        raise HTTPException(status_code=500, detail=\"Failed to retrieve chat history\")
