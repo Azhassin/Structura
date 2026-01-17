@@ -186,6 +186,12 @@ const ContactPage = () => {
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
+                      {errorMessage && (
+                        <div className="p-3 bg-red-500/10 border border-red-500/50 rounded-lg text-red-400 text-sm">
+                          {errorMessage}
+                        </div>
+                      )}
+                      
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="name" className="text-gray-300">
@@ -198,6 +204,7 @@ const ContactPage = () => {
                             value={formData.name}
                             onChange={handleChange}
                             required
+                            disabled={isSubmitting}
                             className="bg-gray-800 border-green-500/30 text-white placeholder:text-gray-500 focus:border-green-500"
                           />
                         </div>
@@ -213,6 +220,7 @@ const ContactPage = () => {
                             value={formData.email}
                             onChange={handleChange}
                             required
+                            disabled={isSubmitting}
                             className="bg-gray-800 border-green-500/30 text-white placeholder:text-gray-500 focus:border-green-500"
                           />
                         </div>
@@ -229,6 +237,7 @@ const ContactPage = () => {
                           value={formData.subject}
                           onChange={handleChange}
                           required
+                          disabled={isSubmitting}
                           className="bg-gray-800 border-green-500/30 text-white placeholder:text-gray-500 focus:border-green-500"
                         />
                       </div>
@@ -244,6 +253,7 @@ const ContactPage = () => {
                           value={formData.message}
                           onChange={handleChange}
                           required
+                          disabled={isSubmitting}
                           rows={6}
                           className="bg-gray-800 border-green-500/30 text-white placeholder:text-gray-500 focus:border-green-500 resize-none"
                         />
@@ -252,10 +262,11 @@ const ContactPage = () => {
                       <Button
                         type="submit"
                         size="lg"
-                        className="w-full bg-green-500 hover:bg-green-600 text-black font-semibold shadow-lg shadow-green-500/50 transition-all duration-300 hover:scale-105"
+                        disabled={isSubmitting}
+                        className="w-full bg-green-500 hover:bg-green-600 text-black font-semibold shadow-lg shadow-green-500/50 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Send Message
-                        <Send className="ml-2 w-4 h-4" />
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
+                        {!isSubmitting && <Send className="ml-2 w-4 h-4" />}
                       </Button>
                     </form>
                   )}
