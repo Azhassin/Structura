@@ -2,14 +2,38 @@ import React, { useState, useRef, useEffect } from 'react';
 import { X, Send, MessageSquare } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { mockChatMessages, mockChatResponses } from '../mock';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState(mockChatMessages);
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      role: 'assistant',
+      content: 'Hello! Welcome to CodeForge Web Studio. How can I help you today?'
+    }
+  ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [sessionId, setSessionId] = useState(null);
   const messagesEndRef = useRef(null);
+
+  // Initialize or retrieve session ID
+  useEffect(() => {
+    const storedSessionId = localStorage.getItem('chat_session_id');
+    if (storedSessionId) {
+      setSessionId(storedSessionId);
+      // Optionally load chat history here
+    } else {
+      // Generate new session ID (will be provided by backend on first message)
+      const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      setSessionId(newSessionId);
+      localStorage.setItem('chat_session_id', newSessionId);
+    }
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -32,17 +56,36 @@ const ChatBot = () => {
     setInputValue('');
     setIsTyping(true);
 
-    // Simulate AI response with mock data
-    setTimeout(() => {
-      const randomResponse = mockChatResponses[Math.floor(Math.random() * mockChatResponses.length)];
+    try {
+      const response = await axios.post(`${API}/chat`, {
+        session_id: sessionId,
+        message: inputValue
+      });
+
       const botMessage = {
         id: messages.length + 2,
         role: 'assistant',
-        content: randomResponse
+        content: response.data.response
       };
+
+      // Update session ID if new one was created
+      if (response.data.session_id !== sessionId) {
+        setSessionId(response.data.session_id);
+        localStorage.setItem('chat_session_id', response.data.session_id);
+      }
+
       setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      const errorMessage = {
+        id: messages.length + 2,
+        role: 'assistant',
+        content: 'Sorry, I encountered an error. Please try again.'
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1000);
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -127,6 +170,7 @@ const ChatBot = () => {
               <Button
                 onClick={handleSend}
                 className="bg-green-500 hover:bg-green-600 text-black"
+                disabled={!inputValue.trim() || isTyping}
               >
                 <Send className="w-4 h-4" />
               </Button>
