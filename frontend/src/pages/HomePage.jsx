@@ -235,10 +235,21 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Demo Catalogue Section */}
+      {/* Demo Catalogue Section with parallax */}
       <section ref={catalogRef} className="relative py-24 px-4 z-10">
-        <div className="container mx-auto">
-          <div className="text-center mb-12 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
+        {/* Animated background waves */}
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            background: 'linear-gradient(45deg, transparent 30%, rgba(139, 92, 246, 0.1) 50%, transparent 70%)',
+            transform: `translateX(${scrollY * 0.2}px)`,
+            transition: 'transform 0.2s ease-out',
+          }}
+        />
+        
+        <div className="container mx-auto relative">
+          <ParallaxSection speed={0.1}>
+            <div className="text-center mb-12 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
             <Badge className="mb-4 bg-purple-100 text-purple-700 px-4 py-2">Our Portfolio</Badge>
             <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-purple-900 bg-clip-text text-transparent">
               Websites That Make an Impact
