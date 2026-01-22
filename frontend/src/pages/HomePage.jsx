@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Palette, ShoppingCart, Smartphone, Bot, Search, Wrench } from 'lucide-react';
+import { ArrowRight, Sparkles, Palette, ShoppingCart, Smartphone, Bot, Search, Wrench, Zap, TrendingUp } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import ProfessionalBackground from '../components/ProfessionalBackground';
+import ScrollProgress from '../components/ScrollProgress';
+import ParallaxSection from '../components/ParallaxSection';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ChatBot from '../components/ChatBot';
