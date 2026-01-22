@@ -181,7 +181,11 @@ const HomePage = () => {
                   key={category}
                   onClick={() => setSelectedCategory(category)}
                   variant={selectedCategory === category ? 'default' : 'outline'}
-                  className={`rounded-full font-medium transition-all duration-300 ${\n                    selectedCategory === category\n                      ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/30 hover:scale-105'\n                      : 'border-purple-200 text-purple-600 hover:bg-purple-50'\n                  }`}
+                  className={`rounded-full font-medium transition-all duration-300 ${
+                    selectedCategory === category
+                      ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/30 hover:scale-105'
+                      : 'border-purple-200 text-purple-600 hover:bg-purple-50'
+                  }`}
                 >
                   {category}
                 </Button>
