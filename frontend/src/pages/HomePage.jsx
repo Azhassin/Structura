@@ -214,6 +214,9 @@ const HomePage = () => {
                     transform: `perspective(1000px) rotateX(${scrollY * 0.01}deg)`
                   }}
                 >
+                  {/* Shine effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-100/50 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                  
                   <CardHeader>
                     <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                       <Icon className="w-7 h-7 text-purple-600" />
