@@ -172,10 +172,27 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services Section with stagger animations */}
       <section id="services" className="relative py-24 px-4 z-10 bg-white/50 backdrop-blur-sm">
-        <div className="container mx-auto">
-          <div className="text-center mb-16 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
+        {/* Floating accent circles */}
+        <div
+          className="absolute top-10 right-10 w-64 h-64 bg-gradient-to-br from-purple-200/30 to-blue-200/30 rounded-full blur-3xl"
+          style={{
+            transform: `translateY(${scrollY * 0.15}px)`,
+            transition: 'transform 0.2s ease-out',
+          }}
+        />
+        <div
+          className="absolute bottom-20 left-10 w-48 h-48 bg-gradient-to-br from-pink-200/30 to-purple-200/30 rounded-full blur-3xl"
+          style={{
+            transform: `translateY(${-scrollY * 0.12}px)`,
+            transition: 'transform 0.2s ease-out',
+          }}
+        />
+
+        <div className="container mx-auto relative">
+          <ParallaxSection speed={0.15}>
+            <div className="text-center mb-16 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
             <Badge className="mb-4 bg-purple-100 text-purple-700 px-4 py-2">Our Services</Badge>
             <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-purple-900 bg-clip-text text-transparent">
               Everything You Need to Succeed Online
