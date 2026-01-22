@@ -72,13 +72,49 @@ const HomePage = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
       <ProfessionalBackground />
+      <ScrollProgress />
       <Header />
       <ChatBot />
 
-      {/* Hero Section */}
+      {/* Cursor follower effect */}
+      <div
+        className="fixed w-96 h-96 rounded-full pointer-events-none z-0 mix-blend-screen"
+        style={{
+          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
+          left: `${mousePosition.x - 192}px`,
+          top: `${mousePosition.y - 192}px`,
+          transition: 'left 0.3s ease-out, top 0.3s ease-out',
+        }}
+      />
+
+      {/* Hero Section with parallax */}
       <section className="relative min-h-screen flex items-center justify-center px-4 pt-20">
+        {/* Floating geometric shapes */}
+        <div
+          className="absolute top-20 left-10 w-32 h-32 border-2 border-purple-300/30 rounded-2xl rotate-12"
+          style={{
+            transform: `translateY(${scrollY * 0.3}px) rotate(${12 + scrollY * 0.05}deg)`,
+            transition: 'transform 0.1s ease-out',
+          }}
+        />
+        <div
+          className="absolute bottom-40 right-20 w-24 h-24 border-2 border-blue-300/30 rounded-full"
+          style={{
+            transform: `translateY(${-scrollY * 0.4}px) scale(${1 + scrollY * 0.0005})`,
+            transition: 'transform 0.1s ease-out',
+          }}
+        />
+        <div
+          className="absolute top-1/3 right-1/4 w-16 h-16 bg-gradient-to-br from-purple-400/20 to-blue-400/20 rounded-lg rotate-45"
+          style={{
+            transform: `translateY(${scrollY * 0.2}px) rotate(${45 + scrollY * 0.08}deg)`,
+            transition: 'transform 0.1s ease-out',
+          }}
+        />
+
         <div className="container mx-auto text-center z-10">
-          <div className="max-w-5xl mx-auto space-y-8 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
+          <ParallaxSection speed={0.2}>
+            <div className="max-w-5xl mx-auto space-y-8 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium backdrop-blur-sm">
               <Sparkles className="w-4 h-4" />
               <span>Trusted by 500+ Businesses Worldwide</span>
