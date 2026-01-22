@@ -72,7 +72,7 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <ProfessionalBackground />
+      <AnimatedBackground />
       <ScrollProgress />
       <Header />
       <ChatBot />
