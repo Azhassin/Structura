@@ -208,8 +208,11 @@ const HomePage = () => {
               return (
                 <Card
                   key={service.id}
-                  className="bg-white/80 backdrop-blur-sm border-purple-100 hover:border-purple-300 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 scroll-animate opacity-0 translate-y-10 group cursor-pointer hover:-translate-y-2"
-                  style={{ transitionDelay: `${index * 100}ms` }}
+                  className="bg-white/80 backdrop-blur-sm border-purple-100 hover:border-purple-300 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 scroll-animate opacity-0 translate-y-10 group cursor-pointer hover:-translate-y-2 relative overflow-hidden"
+                  style={{ 
+                    transitionDelay: `${index * 100}ms`,
+                    transform: `perspective(1000px) rotateX(${scrollY * 0.01}deg)`
+                  }}
                 >
                   <CardHeader>
                     <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
