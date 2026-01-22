@@ -250,10 +250,10 @@ const HomePage = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   
                   <CardHeader className="relative z-10">
-                    <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="w-7 h-7 text-purple-600" />
+                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-purple-500/30">
+                      <Icon className="w-8 h-8 text-white group-hover:scale-110 transition-transform duration-300" />
                     </div>
-                    <CardTitle className="text-xl font-bold text-slate-900">{service.title}</CardTitle>
+                    <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-purple-600 transition-colors duration-300">{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <CardDescription className="text-gray-600 text-base">
