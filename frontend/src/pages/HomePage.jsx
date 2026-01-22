@@ -214,16 +214,42 @@ const HomePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => {
               const Icon = iconMap[service.icon] || Sparkles;
+              const delay = index * 150;
               return (
                 <Card
                   key={service.id}
-                  className="bg-white/80 backdrop-blur-sm border-purple-100 hover:border-purple-300 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 scroll-animate opacity-0 translate-y-10 group cursor-pointer hover:-translate-y-2 relative overflow-hidden"
-                  style={{ transitionDelay: `${index * 100}ms` }}
+                  className="bg-white/90 backdrop-blur-md border-2 border-purple-100 hover:border-purple-400 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(139,92,246,0.4)] scroll-animate opacity-0 translate-y-10 group cursor-pointer relative overflow-hidden"
+                  style={{ 
+                    transitionDelay: `${delay}ms`,
+                    animation: `float-gentle 3s ease-in-out infinite`,
+                    animationDelay: `${delay}ms`
+                  }}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
+                  }}
                 >
-                  {/* Shine effect on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-100/50 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                  {/* Animated gradient overlay */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                      background: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(139, 92, 246, 0.15), transparent 50%)'
+                    }}
+                  />
                   
-                  <CardHeader>
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  
+                  <CardHeader className="relative z-10">
                     <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                       <Icon className="w-7 h-7 text-purple-600" />
                     </div>
