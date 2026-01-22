@@ -281,8 +281,17 @@ const HomePage = () => {
             {filteredWebsites.map((website, index) => (
               <Card
                 key={website.id}
-                className="bg-white/80 backdrop-blur-sm border-purple-100 hover:border-purple-300 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 overflow-hidden group scroll-animate opacity-0 translate-y-10 cursor-pointer hover:-translate-y-2"
-                style={{ transitionDelay: `${index * 100}ms` }}
+                className="bg-white/80 backdrop-blur-sm border-purple-100 hover:border-purple-300 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20 overflow-hidden group scroll-animate opacity-0 translate-y-10 cursor-pointer relative"
+                style={{ 
+                  transitionDelay: `${index * 100}ms`,
+                  transform: `translateY(${scrollY * 0.05}px)`
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = `translateY(-12px) rotateX(5deg) scale(1.02)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = `translateY(${scrollY * 0.05}px)`;
+                }}
               >
                 <div className="relative h-52 overflow-hidden">
                   <img
