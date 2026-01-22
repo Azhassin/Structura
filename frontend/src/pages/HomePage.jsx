@@ -156,17 +156,23 @@ const HomePage = () => {
               </div>
 
               <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12">
-                <div className="text-center">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">500+</div>
-                  <div className="text-sm text-gray-600 mt-1">Projects Delivered</div>
+                <div className="text-center transform transition-all duration-500 hover:scale-110">
+                  <div className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    <ScrollCounter end={500} suffix="+" />
+                  </div>
+                  <div className="text-sm text-gray-600 mt-2 font-medium">Projects Delivered</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">98%</div>
-                  <div className="text-sm text-gray-600 mt-1">Client Satisfaction</div>
+                <div className="text-center transform transition-all duration-500 hover:scale-110">
+                  <div className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    <ScrollCounter end={98} suffix="%" />
+                  </div>
+                  <div className="text-sm text-gray-600 mt-2 font-medium">Client Satisfaction</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">50+</div>
-                  <div className="text-sm text-gray-600 mt-1">Expert Team</div>
+                <div className="text-center transform transition-all duration-500 hover:scale-110">
+                  <div className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    <ScrollCounter end={50} suffix="+" />
+                  </div>
+                  <div className="text-sm text-gray-600 mt-2 font-medium">Expert Team</div>
                 </div>
               </div>
             </div>
