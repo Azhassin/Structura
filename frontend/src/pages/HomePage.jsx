@@ -168,7 +168,7 @@ const HomePage = () => {
                 <div className="text-sm text-gray-600 mt-1">Expert Team</div>
               </div>
             </div>
-          </div>
+          </ParallaxSection>
         </div>
       </section>
 
