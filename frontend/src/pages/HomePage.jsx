@@ -332,16 +332,23 @@ const HomePage = () => {
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
                 }}
               >
-                <div className="relative h-52 overflow-hidden">
+                <div className="relative h-56 overflow-hidden">
                   <img
                     src={website.image}
                     alt={website.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                  <Badge className="absolute top-4 right-4 bg-white/90 text-purple-700 font-medium shadow-lg backdrop-blur-sm">
+                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/80 via-purple-900/40 to-transparent group-hover:from-purple-900/90 transition-all duration-500"></div>
+                  
+                  {/* Animated overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 via-blue-600/0 to-pink-600/0 group-hover:from-purple-600/20 group-hover:via-blue-600/20 group-hover:to-pink-600/20 transition-all duration-700" />
+                  
+                  <Badge className="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-2xl backdrop-blur-sm border-0 transform group-hover:scale-110 transition-transform duration-300">
                     {website.category}
                   </Badge>
+                  
+                  {/* Sparkle effect on hover */}
+                  <Sparkles className="absolute top-4 left-4 w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:rotate-180" />
                 </div>
                 <CardHeader>
                   <CardTitle className="text-xl font-bold text-slate-900">{website.title}</CardTitle>
