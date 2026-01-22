@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Code2, Menu, X } from 'lucide-react';
+import { Zap, Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 
 const Header = () => {
@@ -25,7 +25,9 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled ? 'bg-black/90 backdrop-blur-md border-b border-green-500/30' : 'bg-transparent'
+        isScrolled
+          ? 'bg-white/80 backdrop-blur-lg border-b border-purple-100 shadow-sm'
+          : 'bg-transparent'
       }`}
     >
       <nav className="container mx-auto px-4 py-4">
@@ -33,12 +35,16 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <div className="relative">
-              <Code2 className="w-8 h-8 text-green-500 transition-transform group-hover:scale-110" />
-              <div className="absolute inset-0 bg-green-500 blur-md opacity-0 group-hover:opacity-50 transition-opacity"></div>
+              <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                <Zap className="w-6 h-6 text-white" />
+              </div>
             </div>
-            <span className="text-xl font-bold text-green-400 font-mono tracking-wider">
-              CodeForge
-            </span>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                PixelForge
+              </span>
+              <span className="text-xs text-gray-500 -mt-1">Studio</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -47,15 +53,21 @@ const Header = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-all duration-300 hover:text-green-400 relative group ${
-                  location.pathname === link.path ? 'text-green-400' : 'text-gray-400'
+                className={`text-sm font-medium transition-all duration-300 relative group ${
+                  location.pathname === link.path
+                    ? 'text-purple-600'
+                    : 'text-gray-600 hover:text-purple-600'
                 }`}
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
+                <span
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-300 ${
+                    location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+                ></span>
               </Link>
             ))}
-            <Button className="bg-green-500 hover:bg-green-600 text-black font-semibold shadow-lg shadow-green-500/50 transition-all duration-300 hover:scale-105">
+            <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold shadow-lg shadow-purple-500/30 transition-all duration-300 hover:scale-105">
               Get Started
             </Button>
           </div>
@@ -64,7 +76,7 @@ const Header = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden text-green-400"
+            className="md:hidden text-purple-600"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -73,20 +85,20 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 py-4 border-t border-green-500/30 space-y-4 animate-in fade-in slide-in-from-top duration-300">
+          <div className="md:hidden mt-4 py-4 border-t border-purple-100 space-y-4 animate-in fade-in slide-in-from-top duration-300">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`block text-sm font-medium transition-colors hover:text-green-400 ${
-                  location.pathname === link.path ? 'text-green-400' : 'text-gray-400'
+                className={`block text-sm font-medium transition-colors ${
+                  location.pathname === link.path ? 'text-purple-600' : 'text-gray-600 hover:text-purple-600'
                 }`}
               >
                 {link.label}
               </Link>
             ))}
-            <Button className="w-full bg-green-500 hover:bg-green-600 text-black font-semibold">
+            <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold">
               Get Started
             </Button>
           </div>
