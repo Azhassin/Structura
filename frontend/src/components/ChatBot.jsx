@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { X, Send, MessageSquare } from 'lucide-react';
+import { X, Send, MessageSquare, Sparkles } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import axios from 'axios';
@@ -13,7 +13,7 @@ const ChatBot = () => {
     {
       id: 1,
       role: 'assistant',
-      content: 'Hello! Welcome to CodeForge Web Studio. How can I help you today?'
+      content: 'Hello! Welcome to PixelForge Studio. How can I help you today? 👋'
     }
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -26,9 +26,7 @@ const ChatBot = () => {
     const storedSessionId = localStorage.getItem('chat_session_id');
     if (storedSessionId) {
       setSessionId(storedSessionId);
-      // Optionally load chat history here
     } else {
-      // Generate new session ID (will be provided by backend on first message)
       const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       setSessionId(newSessionId);
       localStorage.setItem('chat_session_id', newSessionId);
@@ -68,7 +66,6 @@ const ChatBot = () => {
         content: response.data.response
       };
 
-      // Update session ID if new one was created
       if (response.data.session_id !== sessionId) {
         setSessionId(response.data.session_id);
         localStorage.setItem('chat_session_id', response.data.session_id);
@@ -100,56 +97,61 @@ const ChatBot = () => {
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 shadow-lg shadow-green-500/50 transition-all duration-300 hover:scale-110"
+          className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 shadow-2xl shadow-purple-500/40 transition-all duration-300 hover:scale-110"
         >
-          <MessageSquare className="w-6 h-6 text-black" />
+          <MessageSquare className="w-7 h-7 text-white" />
         </Button>
       )}
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-96 h-[500px] bg-black border-2 border-green-500 rounded-lg shadow-2xl shadow-green-500/50 flex flex-col">
+        <div className="fixed bottom-6 right-6 z-50 w-96 h-[550px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-purple-100">
           {/* Header */}
-          <div className="bg-green-500 p-4 rounded-t-lg flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <MessageSquare className="w-5 h-5 text-black" />
-              <h3 className="font-bold text-black">AI Assistant</h3>
+          <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-5 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="font-bold text-white text-lg">AI Assistant</h3>
+                <p className="text-xs text-purple-100">Online • Ready to help</p>
+              </div>
             </div>
             <Button
               onClick={() => setIsOpen(false)}
               variant="ghost"
               size="sm"
-              className="text-black hover:bg-green-600 h-8 w-8 p-0"
+              className="text-white hover:bg-white/20 h-8 w-8 p-0 rounded-full"
             >
               <X className="w-5 h-5" />
             </Button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-purple-50/30 to-white">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] p-3 rounded-lg ${
+                  className={`max-w-[80%] p-3 rounded-2xl shadow-sm ${
                     message.role === 'user'
-                      ? 'bg-green-500 text-black'
-                      : 'bg-gray-800 text-green-400 border border-green-500/30'
+                      ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-br-none'
+                      : 'bg-white text-gray-800 border border-purple-100 rounded-bl-none'
                   }`}
                 >
-                  <p className="text-sm">{message.content}</p>
+                  <p className="text-sm leading-relaxed">{message.content}</p>
                 </div>
               </div>
             ))}
             {isTyping && (
               <div className="flex justify-start">
-                <div className="bg-gray-800 text-green-400 border border-green-500/30 p-3 rounded-lg">
+                <div className="bg-white border border-purple-100 p-3 rounded-2xl rounded-bl-none shadow-sm">
                   <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                   </div>
                 </div>
               </div>
@@ -158,18 +160,18 @@ const ChatBot = () => {
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t border-green-500/30">
+          <div className="p-4 bg-white border-t border-purple-100">
             <div className="flex gap-2">
               <Input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
-                className="flex-1 bg-gray-900 border-green-500/30 text-green-400 placeholder:text-gray-500 focus:border-green-500"
+                className="flex-1 border-purple-200 focus:border-purple-500 focus:ring-purple-500 rounded-full px-4"
               />
               <Button
                 onClick={handleSend}
-                className="bg-green-500 hover:bg-green-600 text-black"
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full w-10 h-10 p-0 shadow-lg"
                 disabled={!inputValue.trim() || isTyping}
               >
                 <Send className="w-4 h-4" />
