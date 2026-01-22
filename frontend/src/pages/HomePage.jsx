@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Palette, ShoppingCart, Smartphone, Bot, Search, Wrench, Zap, TrendingUp } from 'lucide-react';
+import { ArrowRight, Sparkles, Palette, ShoppingCart, Smartphone, Bot, Search, Wrench } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -115,57 +115,58 @@ const HomePage = () => {
         <div className="container mx-auto text-center z-10">
           <ParallaxSection speed={0.2}>
             <div className="max-w-5xl mx-auto space-y-8 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium backdrop-blur-sm">
-              <Sparkles className="w-4 h-4" />
-              <span>Trusted by 500+ Businesses Worldwide</span>
-            </div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium backdrop-blur-sm">
+                <Sparkles className="w-4 h-4" />
+                <span>Trusted by 500+ Businesses Worldwide</span>
+              </div>
 
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
-              <span className="block bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 bg-clip-text text-transparent animate-gradient">
-                Transform Your
-              </span>
-              <span className="block mt-2 bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 bg-clip-text text-transparent">
-                Digital Presence
-              </span>
-            </h1>
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
+                <span className="block bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 bg-clip-text text-transparent animate-gradient">
+                  Transform Your
+                </span>
+                <span className="block mt-2 bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 bg-clip-text text-transparent">
+                  Digital Presence
+                </span>
+              </h1>
 
-            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              We craft <span className="font-semibold text-purple-600">stunning websites</span> that drive growth, 
-              engage customers, and elevate your brand to new heights.
-            </p>
+              <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                We craft <span className="font-semibold text-purple-600">stunning websites</span> that drive growth, 
+                engage customers, and elevate your brand to new heights.
+              </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-8 py-6 text-lg shadow-2xl shadow-purple-500/30 transition-all duration-300 hover:scale-105 rounded-full"
-                onClick={() => catalogRef.current?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                View Our Work
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-              <Link to="/contact">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="border-2 border-purple-600 text-purple-600 hover:bg-purple-50 px-8 py-6 text-lg transition-all duration-300 hover:scale-105 rounded-full font-semibold"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-8 py-6 text-lg shadow-2xl shadow-purple-500/30 transition-all duration-300 hover:scale-105 rounded-full"
+                  onClick={() => catalogRef.current?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  Start Your Project
+                  View Our Work
+                  <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
-              </Link>
-            </div>
+                <Link to="/contact">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-purple-600 text-purple-600 hover:bg-purple-50 px-8 py-6 text-lg transition-all duration-300 hover:scale-105 rounded-full font-semibold"
+                  >
+                    Start Your Project
+                  </Button>
+                </Link>
+              </div>
 
-            <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12">
-              <div className="text-center">
-                <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">500+</div>
-                <div className="text-sm text-gray-600 mt-1">Projects Delivered</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">98%</div>
-                <div className="text-sm text-gray-600 mt-1">Client Satisfaction</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">50+</div>
-                <div className="text-sm text-gray-600 mt-1">Expert Team</div>
+              <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12">
+                <div className="text-center">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">500+</div>
+                  <div className="text-sm text-gray-600 mt-1">Projects Delivered</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">98%</div>
+                  <div className="text-sm text-gray-600 mt-1">Client Satisfaction</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">50+</div>
+                  <div className="text-sm text-gray-600 mt-1">Expert Team</div>
+                </div>
               </div>
             </div>
           </ParallaxSection>
@@ -193,14 +194,15 @@ const HomePage = () => {
         <div className="container mx-auto relative">
           <ParallaxSection speed={0.15}>
             <div className="text-center mb-16 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-            <Badge className="mb-4 bg-purple-100 text-purple-700 px-4 py-2">Our Services</Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-purple-900 bg-clip-text text-transparent">
-              Everything You Need to Succeed Online
-            </h2>
-            <p className="text-gray-600 text-xl max-w-2xl mx-auto">
-              Comprehensive solutions tailored to your business goals
-            </p>
-          </div>
+              <Badge className="mb-4 bg-purple-100 text-purple-700 px-4 py-2">Our Services</Badge>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-purple-900 bg-clip-text text-transparent">
+                Everything You Need to Succeed Online
+              </h2>
+              <p className="text-gray-600 text-xl max-w-2xl mx-auto">
+                Comprehensive solutions tailored to your business goals
+              </p>
+            </div>
+          </ParallaxSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => {
@@ -209,10 +211,7 @@ const HomePage = () => {
                 <Card
                   key={service.id}
                   className="bg-white/80 backdrop-blur-sm border-purple-100 hover:border-purple-300 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 scroll-animate opacity-0 translate-y-10 group cursor-pointer hover:-translate-y-2 relative overflow-hidden"
-                  style={{ 
-                    transitionDelay: `${index * 100}ms`,
-                    transform: `perspective(1000px) rotateX(${scrollY * 0.01}deg)`
-                  }}
+                  style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   {/* Shine effect on hover */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-100/50 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
@@ -250,47 +249,44 @@ const HomePage = () => {
         <div className="container mx-auto relative">
           <ParallaxSection speed={0.1}>
             <div className="text-center mb-12 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-            <Badge className="mb-4 bg-purple-100 text-purple-700 px-4 py-2">Our Portfolio</Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-purple-900 bg-clip-text text-transparent">
-              Websites That Make an Impact
-            </h2>
-            <p className="text-gray-600 text-xl max-w-2xl mx-auto mb-8">
-              Explore our portfolio of high-performing websites
-            </p>
+              <Badge className="mb-4 bg-purple-100 text-purple-700 px-4 py-2">Our Portfolio</Badge>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-purple-900 bg-clip-text text-transparent">
+                Websites That Make an Impact
+              </h2>
+              <p className="text-gray-600 text-xl max-w-2xl mx-auto mb-8">
+                Explore our portfolio of high-performing websites
+              </p>
 
-            <div className="flex flex-wrap gap-3 justify-center">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  variant={selectedCategory === category ? 'default' : 'outline'}
-                  className={`rounded-full font-medium transition-all duration-300 ${
-                    selectedCategory === category
-                      ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/30 hover:scale-105'
-                      : 'border-purple-200 text-purple-600 hover:bg-purple-50'
-                  }`}
-                >
-                  {category}
-                </Button>
-              ))}
+              <div className="flex flex-wrap gap-3 justify-center">
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    variant={selectedCategory === category ? 'default' : 'outline'}
+                    className={`rounded-full font-medium transition-all duration-300 ${
+                      selectedCategory === category
+                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/30 hover:scale-105'
+                        : 'border-purple-200 text-purple-600 hover:bg-purple-50'
+                    }`}
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </div>
             </div>
-          </div>
           </ParallaxSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredWebsites.map((website, index) => (
               <Card
                 key={website.id}
-                className="bg-white/80 backdrop-blur-sm border-purple-100 hover:border-purple-300 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20 overflow-hidden group scroll-animate opacity-0 translate-y-10 cursor-pointer relative"
-                style={{ 
-                  transitionDelay: `${index * 100}ms`,
-                  transform: `translateY(${scrollY * 0.05}px)`
-                }}
+                className="bg-white/80 backdrop-blur-sm border-purple-100 hover:border-purple-300 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20 overflow-hidden group scroll-animate opacity-0 translate-y-10 cursor-pointer"
+                style={{ transitionDelay: `${index * 100}ms` }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = `translateY(-12px) rotateX(5deg) scale(1.02)`;
+                  e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = `translateY(${scrollY * 0.05}px)`;
+                  e.currentTarget.style.transform = 'translateY(0px)';
                 }}
               >
                 <div className="relative h-52 overflow-hidden">
@@ -330,10 +326,26 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-24 px-4 z-10 bg-gradient-to-br from-purple-600 via-blue-600 to-purple-700 text-white">
-        <div className="container mx-auto">
+      <section className="relative py-24 px-4 z-10 bg-gradient-to-br from-purple-600 via-blue-600 to-purple-700 text-white overflow-hidden">
+        {/* Animated background elements */}
+        <div
+          className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"
+          style={{
+            transform: `translate(${scrollY * 0.1}px, ${scrollY * 0.15}px)`,
+            transition: 'transform 0.2s ease-out',
+          }}
+        />
+        <div
+          className="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"
+          style={{
+            transform: `translate(-${scrollY * 0.12}px, -${scrollY * 0.1}px)`,
+            transition: 'transform 0.2s ease-out',
+          }}
+        />
+        
+        <div className="container mx-auto relative">
           <div className="max-w-4xl mx-auto text-center scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-            <Sparkles className="w-16 h-16 mx-auto mb-6 text-purple-200" />
+            <Sparkles className="w-16 h-16 mx-auto mb-6 text-purple-200 animate-pulse-glow" />
             <h2 className="text-5xl md:text-6xl font-bold mb-6">
               Ready to Elevate Your Business?
             </h2>
