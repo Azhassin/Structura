@@ -313,13 +313,23 @@ const HomePage = () => {
             {filteredWebsites.map((website, index) => (
               <Card
                 key={website.id}
-                className="bg-white/80 backdrop-blur-sm border-purple-100 hover:border-purple-300 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20 overflow-hidden group scroll-animate opacity-0 translate-y-10 cursor-pointer"
-                style={{ transitionDelay: `${index * 100}ms` }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)';
+                className="bg-white/90 backdrop-blur-md border-2 border-purple-100 hover:border-purple-400 transition-all duration-700 hover:shadow-[0_25px_70px_-20px_rgba(139,92,246,0.5)] overflow-hidden group scroll-animate opacity-0 cursor-pointer relative"
+                style={{ 
+                  transitionDelay: `${index * 120}ms`,
+                  transformStyle: 'preserve-3d'
+                }}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 15;
+                  const rotateY = (centerX - x) / 15;
+                  e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.08)`;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0px)';
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
                 }}
               >
                 <div className="relative h-52 overflow-hidden">
