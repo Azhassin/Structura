@@ -20,7 +20,7 @@ db = client[os.environ['DB_NAME']]
 # Resend configuration
 RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '')
 SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'onboarding@resend.dev')
-RECIPIENT_EMAIL = 'naseemazhan@outlook.com'
+RECIPIENT_EMAIL = os.environ.get('RECIPIENT_EMAIL', 'naseemazhan@outlook.com')
 
 # Emergent LLM key for AI enhancement
 EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY', '')
