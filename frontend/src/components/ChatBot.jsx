@@ -97,7 +97,8 @@ const ChatBot = () => {
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 shadow-2xl shadow-purple-500/40 transition-all duration-300 hover:scale-110"
+          className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 shadow-2xl shadow-teal-500/40 transition-all duration-300 hover:scale-110"
+          data-testid="chatbot-toggle-btn"
         >
           <MessageSquare className="w-7 h-7 text-white" />
         </Button>
@@ -105,16 +106,16 @@ const ChatBot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-96 h-[550px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-purple-100">
+        <div className="fixed bottom-6 right-6 z-50 w-96 h-[550px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-teal-100" data-testid="chatbot-window">
           {/* Header */}
-          <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-5 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-blue-500 to-teal-500 p-5 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h3 className="font-bold text-white text-lg">AI Assistant</h3>
-                <p className="text-xs text-purple-100">Online • Ready to help</p>
+                <p className="text-xs text-cyan-100">Online • Ready to help</p>
               </div>
             </div>
             <Button
@@ -122,13 +123,14 @@ const ChatBot = () => {
               variant="ghost"
               size="sm"
               className="text-white hover:bg-white/20 h-8 w-8 p-0 rounded-full"
+              data-testid="chatbot-close-btn"
             >
               <X className="w-5 h-5" />
             </Button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-purple-50/30 to-white">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-teal-50/30 to-white">
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -137,8 +139,8 @@ const ChatBot = () => {
                 <div
                   className={`max-w-[80%] p-3 rounded-2xl shadow-sm ${
                     message.role === 'user'
-                      ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-br-none'
-                      : 'bg-white text-gray-800 border border-purple-100 rounded-bl-none'
+                      ? 'bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-br-none'
+                      : 'bg-white text-gray-800 border border-teal-100 rounded-bl-none'
                   }`}
                 >
                   <p className="text-sm leading-relaxed">{message.content}</p>
@@ -147,11 +149,11 @@ const ChatBot = () => {
             ))}
             {isTyping && (
               <div className="flex justify-start">
-                <div className="bg-white border border-purple-100 p-3 rounded-2xl rounded-bl-none shadow-sm">
+                <div className="bg-white border border-teal-100 p-3 rounded-2xl rounded-bl-none shadow-sm">
                   <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                    <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                    <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    <div className="w-2 h-2 bg-teal-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-2 h-2 bg-teal-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-2 h-2 bg-teal-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                   </div>
                 </div>
               </div>
@@ -160,19 +162,21 @@ const ChatBot = () => {
           </div>
 
           {/* Input */}
-          <div className="p-4 bg-white border-t border-purple-100">
+          <div className="p-4 bg-white border-t border-teal-100">
             <div className="flex gap-2">
               <Input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
-                className="flex-1 border-purple-200 focus:border-purple-500 focus:ring-purple-500 rounded-full px-4"
+                className="flex-1 border-teal-200 focus:border-teal-500 focus:ring-teal-500 rounded-full px-4"
+                data-testid="chatbot-input"
               />
               <Button
                 onClick={handleSend}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full w-10 h-10 p-0 shadow-lg"
+                className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white rounded-full w-10 h-10 p-0 shadow-lg"
                 disabled={!inputValue.trim() || isTyping}
+                data-testid="chatbot-send-btn"
               >
                 <Send className="w-4 h-4" />
               </Button>
