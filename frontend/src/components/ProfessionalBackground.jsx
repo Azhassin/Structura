@@ -1,7 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 
 const ProfessionalBackground = () => {
   const [scrollY, setScrollY] = useState(0);
+
+  // Generate stable random values for particles
+  const particles = useMemo(() => {
+    return [...Array(15)].map((_, i) => ({
+      id: i,
+      width: Math.random() * 8 + 4,
+      height: Math.random() * 8 + 4,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      speedY: 0.1 + Math.random() * 0.2,
+      speedX: Math.random() * 0.1 - 0.05
+    }));
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,16 +103,16 @@ const ProfessionalBackground = () => {
         ></div>
         
         {/* Floating particles */}
-        {[...Array(15)].map((_, i) => (
+        {particles.map((particle) => (
           <div
-            key={i}
+            key={particle.id}
             className="absolute rounded-full bg-gradient-to-br from-blue-400 to-teal-400 opacity-20"
             style={{
-              width: `${Math.random() * 8 + 4}px`,
-              height: `${Math.random() * 8 + 4}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              transform: `translateY(${scrollY * (0.1 + Math.random() * 0.2)}px) translateX(${scrollY * (Math.random() * 0.1 - 0.05)}px)`,
+              width: `${particle.width}px`,
+              height: `${particle.height}px`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
+              transform: `translateY(${scrollY * particle.speedY}px) translateX(${scrollY * particle.speedX}px)`,
               transition: 'transform 0.3s ease-out',
               filter: 'blur(2px)'
             }}
@@ -107,7 +120,8 @@ const ProfessionalBackground = () => {
         ))}
       </div>
 
-      <style jsx>{`
+      <style>
+        {`
         @keyframes blob {
           0%, 100% {
             transform: translate(0px, 0px) scale(1);
@@ -134,7 +148,8 @@ const ProfessionalBackground = () => {
         .bg-grid-slate-100 {
           background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
         }
-      `}</style>
+        `}
+      </style>
     </>
   );
 };
