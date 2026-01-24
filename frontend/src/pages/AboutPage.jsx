@@ -159,8 +159,8 @@ const AboutPage = () => {
                   data-testid={`value-card-${index}`}
                 >
                   <CardHeader>
-                    <div className={`w-14 h-14 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-teal-500/30 overflow-hidden relative ${value.animClass}`}>
-                      <Icon className="w-7 h-7 text-white relative z-10" />
+                    <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-teal-500/30 overflow-hidden relative">
+                      <Icon className={`w-7 h-7 text-white relative z-10 ${value.animClass}`} />
                     </div>
                     <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors duration-300">{value.title}</CardTitle>
                   </CardHeader>

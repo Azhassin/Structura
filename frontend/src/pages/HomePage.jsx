@@ -224,8 +224,8 @@ const HomePage = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   
                   <CardHeader className="relative z-10">
-                    <div className={`w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-teal-500/30 overflow-hidden ${iconAnimClass}`}>
-                      <Icon className="w-8 h-8 text-white" />
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-teal-500/30 overflow-hidden">
+                      <Icon className={`w-8 h-8 text-white ${iconAnimClass}`} />
                     </div>
                     <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors duration-300">{service.title}</CardTitle>
                   </CardHeader>
