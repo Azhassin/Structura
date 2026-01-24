@@ -41,7 +41,7 @@
 
 /* ========== HOME PAGE SERVICE ICON ANIMATIONS ========== */
 
-/* 1. Palette - Color Inversion (PERFECT - keeping as is) */
+/* 1. Palette - Color Inversion */
 @keyframes palette-invert {
   0%, 100% {
     filter: hue-rotate(0deg);
@@ -51,8 +51,11 @@
   }
 }
 
-.group-hover\:animate-palette-invert:hover,
-.group:hover .group-hover\:animate-palette-invert {
+.icon-palette {
+  transition: all 0.3s ease;
+}
+
+.group:hover .icon-palette {
   animation: palette-invert 0.8s ease-in-out;
 }
 
@@ -78,8 +81,11 @@
   }
 }
 
-.group-hover\:animate-cart-run:hover,
-.group:hover .group-hover\:animate-cart-run {
+.icon-cart {
+  transition: all 0.3s ease;
+}
+
+.group:hover .icon-cart {
   animation: cart-run 0.6s ease-in-out;
 }
 
@@ -117,8 +123,11 @@
   }
 }
 
-.group-hover\:animate-phone-vibrate:hover,
-.group:hover .group-hover\:animate-phone-vibrate {
+.icon-phone {
+  transition: all 0.3s ease;
+}
+
+.group:hover .icon-phone {
   animation: phone-vibrate 0.5s ease-in-out;
 }
 
@@ -144,8 +153,11 @@
   }
 }
 
-.group-hover\:animate-bot-wink:hover,
-.group:hover .group-hover\:animate-bot-wink {
+.icon-bot {
+  transition: all 0.3s ease;
+}
+
+.group:hover .icon-bot {
   animation: bot-wink 0.7s ease-in-out;
 }
 
@@ -165,8 +177,11 @@
   }
 }
 
-.group-hover\:animate-search-sparkle:hover,
-.group:hover .group-hover\:animate-search-sparkle {
+.icon-search {
+  transition: all 0.3s ease;
+}
+
+.group:hover .icon-search {
   animation: search-sparkle 0.8s ease-in-out;
 }
 
@@ -195,8 +210,11 @@
   }
 }
 
-.group-hover\:animate-wrench-shake:hover,
-.group:hover .group-hover\:animate-wrench-shake {
+.icon-wrench {
+  transition: all 0.3s ease;
+}
+
+.group:hover .icon-wrench {
   animation: wrench-shake 0.5s ease-in-out;
 }
 
@@ -218,25 +236,25 @@
   }
   70% {
     transform: scale(1.2);
-    box-shadow: 0 0 0 8px rgba(20, 184, 166, 0.3);
   }
   85% {
     transform: scale(1.1);
-    box-shadow: 0 0 0 15px rgba(20, 184, 166, 0);
   }
   100% {
     clip-path: inset(0 0 0 0);
     transform: scale(1);
-    box-shadow: 0 0 0 0 transparent;
   }
 }
 
-.group-hover\:animate-target-arrow:hover,
-.group:hover .group-hover\:animate-target-arrow {
+.icon-target {
+  transition: all 0.3s ease;
+}
+
+.group:hover .icon-target {
   animation: target-arrow 0.8s ease-out;
 }
 
-/* 8. Heart - Pop up and fill with white glow */
+/* 8. Heart - Pop up and glow white */
 @keyframes heart-fill {
   0%, 100% {
     transform: scale(1);
@@ -256,8 +274,11 @@
   }
 }
 
-.group-hover\:animate-heart-fill:hover,
-.group:hover .group-hover\:animate-heart-fill {
+.icon-heart {
+  transition: all 0.3s ease;
+}
+
+.group:hover .icon-heart {
   animation: heart-fill 0.6s ease-in-out;
 }
 
@@ -289,8 +310,11 @@
   }
 }
 
-.group-hover\:animate-rocket-fire:hover,
-.group:hover .group-hover\:animate-rocket-fire {
+.icon-rocket {
+  transition: all 0.3s ease;
+}
+
+.group:hover .icon-rocket {
   animation: rocket-fire 0.8s ease-out;
 }
 
@@ -318,8 +342,11 @@
   }
 }
 
-.group-hover\:animate-medal-sparkle:hover,
-.group:hover .group-hover\:animate-medal-sparkle {
+.icon-medal {
+  transition: all 0.3s ease;
+}
+
+.group:hover .icon-medal {
   animation: medal-sparkle 0.9s ease-in-out;
 }
 
@@ -363,13 +390,6 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #0284c7, #0d9488);
-}
-
-/* Glassmorphism effect */
-.glass-effect {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Floating animation delays */
