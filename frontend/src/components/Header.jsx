@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Zap, Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 
@@ -7,6 +7,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +16,20 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const scrollToContactForm = () => {
+    if (location.pathname === '/contact') {
+      // Already on contact page, just scroll to form
+      const formElement = document.getElementById('contact-form-section');
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    } else {
+      // Navigate to contact page with hash
+      navigate('/contact#contact-form-section');
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   const navLinks = [
     { path: '/', label: 'Home' },
@@ -67,7 +82,11 @@ const Header = () => {
                 ></span>
               </Link>
             ))}
-            <Button className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold shadow-lg shadow-teal-500/30 transition-all duration-300 hover:scale-105">
+            <Button 
+              onClick={scrollToContactForm}
+              className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold shadow-lg shadow-teal-500/30 transition-all duration-300 hover:scale-105"
+              data-testid="get-started-btn"
+            >
               Get Started
             </Button>
           </div>
@@ -98,7 +117,10 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
-            <Button className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold">
+            <Button 
+              onClick={scrollToContactForm}
+              className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold"
+            >
               Get Started
             </Button>
           </div>
