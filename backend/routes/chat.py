@@ -34,9 +34,12 @@ async def chat(request: ChatRequest):
             timestamp=datetime.utcnow()
         )
         
-        # Get AI response
+        # Get AI response (now returns dict with message and navigate)
         chat_service = get_chat_service()
-        ai_response_text = await chat_service.get_response(session_id, request.message)
+        ai_response = await chat_service.get_response(session_id, request.message)
+        
+        ai_response_text = ai_response.get("message", "")
+        navigate_path = ai_response.get("navigate")
         
         # Create assistant message
         assistant_message = ChatMessage(
@@ -74,7 +77,8 @@ async def chat(request: ChatRequest):
         
         return ChatResponse(
             response=ai_response_text,
-            session_id=session_id
+            session_id=session_id,
+            navigate=navigate_path
         )
         
     except Exception as e:
