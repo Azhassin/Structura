@@ -201,7 +201,7 @@ const ContactPage = () => {
                 <CardHeader>
                   <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">Send Us a Message</CardTitle>
                   <CardDescription className="text-gray-600">
-                    Fill out the form below and we'll get back to you as soon as possible
+                    Fill out the form below and we&apos;ll get back to you as soon as possible
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -212,7 +212,7 @@ const ContactPage = () => {
                       </div>
                       <h3 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">Message Sent!</h3>
                       <p className="text-gray-600 text-center">
-                        Thank you for contacting us. We'll get back to you soon.
+                        Thank you for contacting us. We&apos;ll get back to you soon.
                       </p>
                     </div>
                   ) : (

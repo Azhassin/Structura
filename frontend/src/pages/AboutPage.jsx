@@ -128,7 +128,7 @@ const AboutPage = () => {
                 We combine technical expertise with creative innovation to deliver websites that not only look stunning but also drive real business results. Our team specializes in custom web development, e-commerce solutions, and AI-powered features that set your business apart from the competition.
               </p>
               <p>
-                Today, we're proud to serve clients across multiple industries, from startups to established enterprises, helping them build their digital presence and achieve their online goals.
+                Today, we&apos;re proud to serve clients across multiple industries, from startups to established enterprises, helping them build their digital presence and achieve their online goals.
               </p>
             </div>
           </div>
