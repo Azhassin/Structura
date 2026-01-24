@@ -51,7 +51,7 @@ DEMO_WEBSITES = {
     }
 }
 
-SYSTEM_MESSAGE = """You are the AI assistant for PixelForge-AZ Studio, a premium web development agency.
+SYSTEM_MESSAGE = """You are the AI assistant for Structura Studio, a premium web development agency.
 
 IMPORTANT RULES:
 1. Keep responses SHORT and TO THE POINT (2-3 sentences max for most queries)

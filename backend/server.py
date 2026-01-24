@@ -20,8 +20,8 @@ db = client[os.environ['DB_NAME']]
 
 # Create the main app
 app = FastAPI(
-    title="PixelForge-AZ Studio API",
-    description="Backend API for PixelForge-AZ Studio website",
+    title="Structura Studio API",
+    description="Backend API for Structura Studio website",
     version="1.0.0"
 )
 
@@ -31,7 +31,7 @@ api_router = APIRouter(prefix="/api")
 
 @api_router.get("/")
 async def root():
-    return {"message": "PixelForge-AZ Studio API is running"}
+    return {"message": "Structura Studio API is running"}
 
 
 # Include route modules
