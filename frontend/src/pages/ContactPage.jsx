@@ -182,6 +182,7 @@ const ContactPage = () => {
             {/* Contact Form */}
             <div className="lg:col-span-2">
               <Card 
+                id="contact-form-section"
                 className="bg-white/90 backdrop-blur-md border-2 border-teal-100 scroll-animate opacity-0 translate-y-10 transition-all duration-1000 hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.3)]"
                 data-testid="contact-form-card"
               >
