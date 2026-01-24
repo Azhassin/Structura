@@ -310,9 +310,10 @@ const HomePage = () => {
               filteredWebsites.map((website, index) => (
                 <Card
                   key={`${website.id}-${selectedCategory}`}
-                  className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-700 hover:shadow-[0_25px_70px_-20px_rgba(20,184,166,0.5)] overflow-hidden group scroll-animate opacity-0 cursor-pointer relative"
+                  className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-700 hover:shadow-[0_25px_70px_-20px_rgba(20,184,166,0.5)] overflow-hidden group cursor-pointer relative animate-fade-in-up"
                   style={{ 
-                    transitionDelay: `${index * 120}ms`,
+                    animationDelay: `${index * 100}ms`,
+                    animationFillMode: 'both',
                     transformStyle: 'preserve-3d'
                   }}
                   onMouseMove={(e) => {
