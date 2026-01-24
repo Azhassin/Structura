@@ -160,11 +160,11 @@ const HomePage = () => {
         <div className="container mx-auto text-center z-10">
           <ParallaxSection speed={0.2}>
             <div className="max-w-5xl mx-auto space-y-8 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
-                <span className="block bg-gradient-to-r from-blue-600 via-teal-500 to-blue-600 bg-clip-text text-transparent animate-gradient">
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-none pb-2">
+                <span className="block bg-gradient-to-r from-blue-600 via-teal-500 to-blue-600 bg-clip-text text-transparent animate-gradient pb-1">
                   Transform Your
                 </span>
-                <span className="block mt-2 bg-gradient-to-r from-slate-900 via-teal-900 to-slate-900 bg-clip-text text-transparent">
+                <span className="block mt-2 bg-gradient-to-r from-slate-900 via-teal-900 to-slate-900 bg-clip-text text-transparent pb-2">
                   Digital Presence
                 </span>
               </h1>
