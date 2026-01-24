@@ -93,8 +93,8 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'hello@pixelforge.studio',
-      link: 'mailto:hello@pixelforge.studio'
+      value: 'hello@structura.studio',
+      link: 'mailto:hello@structura.studio'
     },
     {
       icon: Phone,

@@ -1,4 +1,4 @@
-// Mock data for CodeForge Web Studio
+// Mock data for Structura Studio
 
 export const demoWebsites = [
   {
@@ -110,7 +110,7 @@ export const mockChatMessages = [
   {
     id: 1,
     role: 'assistant',
-    content: 'Hello! Welcome to CodeForge Web Studio. How can I help you today?'
+    content: 'Hello! Welcome to Structura Studio. How can I help you today?'
   }
 ];
 

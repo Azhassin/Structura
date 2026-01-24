@@ -140,7 +140,7 @@ async def send_contact_email(request: ContactRequest):
                 <!-- Header -->
                 <div style="background: linear-gradient(135deg, #0ea5e9 0%, #14b8a6 100%); padding: 30px; text-align: center;">
                     <h1 style="color: white; margin: 0; font-size: 24px;">New Client Inquiry</h1>
-                    <p style="color: #e0f2fe; margin: 10px 0 0 0; font-size: 14px;">PixelForge Studio</p>
+                    <p style="color: #e0f2fe; margin: 10px 0 0 0; font-size: 14px;">Structura Studio</p>
                 </div>
                 
                 <!-- Client Info -->
@@ -183,7 +183,7 @@ async def send_contact_email(request: ContactRequest):
                 <!-- Footer -->
                 <div style="background: #f8fafc; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
                     <p style="color: #94a3b8; margin: 0; font-size: 12px;">
-                        Received via PixelForge Studio Contact Form<br>
+                        Received via Structura Studio Contact Form<br>
                         <span style="color: #0ea5e9;">{datetime.utcnow().strftime('%B %d, %Y at %H:%M UTC')}</span>
                     </p>
                 </div>
@@ -197,7 +197,7 @@ async def send_contact_email(request: ContactRequest):
             "from": SENDER_EMAIL,
             "to": [RECIPIENT_EMAIL],
             "reply_to": request.email,
-            "subject": f"[PixelForge] {request.subject} - from {request.name}",
+            "subject": f"[Structura] {request.subject} - from {request.name}",
             "html": html_content
         }
         
