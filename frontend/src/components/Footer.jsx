@@ -14,7 +14,7 @@ const Footer = () => {
                 <Zap className="w-6 h-6 text-white" />
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold">PixelForge</span>
+                <span className="text-xl font-bold">PixelForge-AZ</span>
                 <span className="text-xs text-teal-300 -mt-1">Studio</span>
               </div>
             </div>
@@ -75,7 +75,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-teal-800/30 pt-8 mt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} PixelForge Studio. All rights reserved.
+            © {new Date().getFullYear()} PixelForge-AZ Studio. All rights reserved.
           </p>
         </div>
       </div>
