@@ -6,7 +6,7 @@ import logging
 import asyncio
 import resend
 from datetime import datetime
-from emergentintegrations.llm.chat import Chat, Message, Role
+from emergentintegrations.llm.chat import LlmChat, UserMessage
 
 logger = logging.getLogger(__name__)
 
