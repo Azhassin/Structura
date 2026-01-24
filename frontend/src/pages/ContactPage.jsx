@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, Clock, Sparkles } from 'lucide-react';
+import { Mail, Phone, Send, CheckCircle, Sparkles } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
@@ -72,7 +72,7 @@ const ContactPage = () => {
     setErrorMessage('');
 
     try {
-      const response = await axios.post(`${API}/contact`, formData);
+      const response = await axios.post(`${API}/contact/send-email`, formData);
       
       if (response.data.success) {
         setIsSubmitted(true);
@@ -83,7 +83,7 @@ const ContactPage = () => {
       }
     } catch (error) {
       console.error('Error submitting contact form:', error);
-      setErrorMessage('Failed to send message. Please try again.');
+      setErrorMessage(error.response?.data?.detail || 'Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -101,12 +101,6 @@ const ContactPage = () => {
       title: 'Phone',
       value: '+1 (555) 123-4567',
       link: 'tel:+15551234567'
-    },
-    {
-      icon: MapPin,
-      title: 'Location',
-      value: '123 Innovation Drive, Tech Valley',
-      link: '#'
     }
   ];
 
@@ -117,7 +111,7 @@ const ContactPage = () => {
       <ChatBot />
 
       {/* Hero Section */}
-      <section className="relative min-h-[50vh] flex items-center justify-center px-4 pt-32 pb-12">
+      <section className="relative min-h-[40vh] flex items-center justify-center px-4 pt-32 pb-12">
         {/* Floating shapes */}
         <div
           className="absolute top-20 left-10 w-28 h-28 border-2 border-blue-300/30 rounded-full"
@@ -152,7 +146,7 @@ const ContactPage = () => {
 
       {/* Contact Section */}
       <section className="relative py-12 px-4 z-10">
-        <div className="container mx-auto max-w-6xl">
+        <div className="container mx-auto max-w-5xl">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Contact Info Cards */}
             <div className="space-y-6">
@@ -196,28 +190,6 @@ const ContactPage = () => {
                   </Card>
                 );
               })}
-
-              {/* Business Hours Card */}
-              <Card 
-                className="bg-gradient-to-br from-blue-50 to-teal-50 border-2 border-teal-100 scroll-animate opacity-0 translate-y-10" 
-                style={{ transitionDelay: '300ms' }}
-                data-testid="business-hours-card"
-              >
-                <CardContent className="pt-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl flex items-center justify-center">
-                      <Clock className="w-5 h-5 text-white" />
-                    </div>
-                    <h3 className="text-teal-600 font-semibold">Business Hours</h3>
-                  </div>
-                  <p className="text-gray-600 text-sm mb-2">
-                    Monday - Friday: 9:00 AM - 6:00 PM
-                  </p>
-                  <p className="text-gray-500 text-sm">
-                    Saturday - Sunday: Closed
-                  </p>
-                </CardContent>
-              </Card>
             </div>
 
             {/* Contact Form */}
@@ -350,32 +322,6 @@ const ContactPage = () => {
               </Card>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Map Section */}
-      <section className="relative py-12 px-4 z-10">
-        <div className="container mx-auto max-w-6xl">
-          <Card 
-            className="bg-white/90 backdrop-blur-md border-2 border-teal-100 overflow-hidden scroll-animate opacity-0 translate-y-10 transition-all duration-1000 hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.3)]"
-            data-testid="map-section"
-          >
-            <div className="h-80 bg-gradient-to-br from-blue-50 via-teal-50 to-cyan-50 flex items-center justify-center relative overflow-hidden">
-              {/* Decorative elements */}
-              <div className="absolute top-10 left-10 w-20 h-20 border-2 border-teal-200 rounded-full opacity-50" />
-              <div className="absolute bottom-10 right-10 w-16 h-16 border-2 border-blue-200 rounded-2xl rotate-45 opacity-50" />
-              <div className="absolute top-1/2 left-1/4 w-8 h-8 bg-teal-200 rounded-full opacity-30" />
-              <div className="absolute bottom-1/3 right-1/3 w-12 h-12 bg-blue-200 rounded-full opacity-30" />
-              
-              <div className="text-center space-y-4 z-10">
-                <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg shadow-teal-500/30">
-                  <MapPin className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">Visit Our Office</h3>
-                <p className="text-gray-600">123 Innovation Drive, Tech Valley</p>
-              </div>
-            </div>
-          </Card>
         </div>
       </section>
 

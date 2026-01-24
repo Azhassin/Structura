@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Palette, ShoppingCart, Smartphone, Bot, Search, Wrench, Zap, TrendingUp } from 'lucide-react';
+import { ArrowRight, Sparkles, Palette, ShoppingCart, Smartphone, Bot, Search, Wrench } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import AnimatedBackground from '../components/AnimatedBackground';
 import ScrollProgress from '../components/ScrollProgress';
-import ScrollCounter from '../components/ScrollCounter';
 import ParallaxSection from '../components/ParallaxSection';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -24,12 +23,13 @@ const iconMap = {
 
 const HomePage = () => {
   const catalogRef = useRef(null);
-  const [selectedCategory, setSelectedCategory] = React.useState('All');
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const categories = ['All', 'E-commerce', 'Portfolio', 'Corporate', 'Blog', 'Restaurant', 'Real Estate', 'Healthcare', 'Education'];
 
+  // Filter websites based on selected category
   const filteredWebsites = selectedCategory === 'All'
     ? demoWebsites
     : demoWebsites.filter(site => site.category === selectedCategory);
@@ -69,6 +69,24 @@ const HomePage = () => {
       observer.disconnect();
     };
   }, []);
+
+  // Handle category selection
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+  };
+
+  // Get icon animation class based on icon name
+  const getIconAnimationClass = (iconName) => {
+    switch(iconName) {
+      case 'Palette': return 'group-hover:animate-palette-invert';
+      case 'ShoppingCart': return 'group-hover:animate-cart-roll';
+      case 'Smartphone': return 'group-hover:animate-phone-activate';
+      case 'Bot': return 'group-hover:animate-bot-react';
+      case 'Search': return 'group-hover:animate-search-zoom';
+      case 'Wrench': return 'group-hover:animate-wrench-turn';
+      default: return '';
+    }
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -116,11 +134,6 @@ const HomePage = () => {
         <div className="container mx-auto text-center z-10">
           <ParallaxSection speed={0.2}>
             <div className="max-w-5xl mx-auto space-y-8 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 text-teal-700 rounded-full text-sm font-medium backdrop-blur-sm">
-                <Sparkles className="w-4 h-4" />
-                <span>Trusted by 500+ Businesses Worldwide</span>
-              </div>
-
               <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
                 <span className="block bg-gradient-to-r from-blue-600 via-teal-500 to-blue-600 bg-clip-text text-transparent animate-gradient">
                   Transform Your
@@ -156,33 +169,12 @@ const HomePage = () => {
                   </Button>
                 </Link>
               </div>
-
-              <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12">
-                <div className="text-center transform transition-all duration-500 hover:scale-110">
-                  <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
-                    <ScrollCounter end={500} suffix="+" />
-                  </div>
-                  <div className="text-sm text-gray-600 mt-2 font-medium">Projects Delivered</div>
-                </div>
-                <div className="text-center transform transition-all duration-500 hover:scale-110">
-                  <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
-                    <ScrollCounter end={98} suffix="%" />
-                  </div>
-                  <div className="text-sm text-gray-600 mt-2 font-medium">Client Satisfaction</div>
-                </div>
-                <div className="text-center transform transition-all duration-500 hover:scale-110">
-                  <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
-                    <ScrollCounter end={50} suffix="+" />
-                  </div>
-                  <div className="text-sm text-gray-600 mt-2 font-medium">Expert Team</div>
-                </div>
-              </div>
             </div>
           </ParallaxSection>
         </div>
       </section>
 
-      {/* Services Section with stagger animations */}
+      {/* Services Section with animated icons */}
       <section id="services" className="relative py-24 px-4 z-10 bg-white/50 backdrop-blur-sm">
         {/* Floating accent circles */}
         <div
@@ -217,14 +209,14 @@ const HomePage = () => {
             {services.map((service, index) => {
               const Icon = iconMap[service.icon] || Sparkles;
               const delay = index * 150;
+              const iconAnimClass = getIconAnimationClass(service.icon);
+              
               return (
                 <Card
                   key={service.id}
                   className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.4)] scroll-animate opacity-0 translate-y-10 group cursor-pointer relative overflow-hidden"
                   style={{ 
                     transitionDelay: `${delay}ms`,
-                    animation: `float-gentle 3s ease-in-out infinite`,
-                    animationDelay: `${delay}ms`
                   }}
                   onMouseMove={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
@@ -253,8 +245,8 @@ const HomePage = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   
                   <CardHeader className="relative z-10">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-teal-500/30">
-                      <Icon className="w-8 h-8 text-white group-hover:scale-110 transition-transform duration-300" />
+                    <div className={`w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 transition-all duration-500 shadow-lg shadow-teal-500/30 group-hover:shadow-teal-500/50 ${iconAnimClass}`}>
+                      <Icon className="w-8 h-8 text-white transition-transform duration-300" />
                     </div>
                     <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors duration-300">{service.title}</CardTitle>
                   </CardHeader>
@@ -297,7 +289,7 @@ const HomePage = () => {
                 {categories.map((category) => (
                   <Button
                     key={category}
-                    onClick={() => setSelectedCategory(category)}
+                    onClick={() => handleCategorySelect(category)}
                     variant={selectedCategory === category ? 'default' : 'outline'}
                     className={`rounded-full font-medium transition-all duration-300 ${
                       selectedCategory === category
@@ -314,68 +306,74 @@ const HomePage = () => {
           </ParallaxSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredWebsites.map((website, index) => (
-              <Card
-                key={website.id}
-                className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-700 hover:shadow-[0_25px_70px_-20px_rgba(20,184,166,0.5)] overflow-hidden group scroll-animate opacity-0 cursor-pointer relative"
-                style={{ 
-                  transitionDelay: `${index * 120}ms`,
-                  transformStyle: 'preserve-3d'
-                }}
-                onMouseMove={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 15;
-                  const rotateY = (centerX - x) / 15;
-                  e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.08)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
-                }}
-                data-testid={`portfolio-card-${website.id}`}
-              >
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={website.image}
-                    alt={website.title}
-                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-teal-900/80 via-teal-900/40 to-transparent group-hover:from-teal-900/90 transition-all duration-500"></div>
-                  
-                  {/* Animated overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/0 via-teal-600/0 to-cyan-600/0 group-hover:from-blue-600/20 group-hover:via-teal-600/20 group-hover:to-cyan-600/20 transition-all duration-700" />
-                  
-                  <Badge className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-semibold shadow-2xl backdrop-blur-sm border-0 transform group-hover:scale-110 transition-transform duration-300">
-                    {website.category}
-                  </Badge>
-                  
-                  {/* Sparkle effect on hover */}
-                  <Sparkles className="absolute top-4 left-4 w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:rotate-180" />
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-xl font-bold text-slate-900">{website.title}</CardTitle>
-                  <CardDescription className="text-gray-600">
-                    {website.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {website.features.slice(0, 3).map((feature, idx) => (
-                      <Badge
-                        key={idx}
-                        variant="outline"
-                        className="border-teal-200 text-teal-600 text-xs"
-                      >
-                        {feature}
-                      </Badge>
-                    ))}
+            {filteredWebsites.length > 0 ? (
+              filteredWebsites.map((website, index) => (
+                <Card
+                  key={`${website.id}-${selectedCategory}`}
+                  className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-700 hover:shadow-[0_25px_70px_-20px_rgba(20,184,166,0.5)] overflow-hidden group scroll-animate opacity-0 cursor-pointer relative"
+                  style={{ 
+                    transitionDelay: `${index * 120}ms`,
+                    transformStyle: 'preserve-3d'
+                  }}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 15;
+                    const rotateY = (centerX - x) / 15;
+                    e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.08)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
+                  }}
+                  data-testid={`portfolio-card-${website.id}`}
+                >
+                  <div className="relative h-56 overflow-hidden">
+                    <img
+                      src={website.image}
+                      alt={website.title}
+                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-teal-900/80 via-teal-900/40 to-transparent group-hover:from-teal-900/90 transition-all duration-500"></div>
+                    
+                    {/* Animated overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/0 via-teal-600/0 to-cyan-600/0 group-hover:from-blue-600/20 group-hover:via-teal-600/20 group-hover:to-cyan-600/20 transition-all duration-700" />
+                    
+                    <Badge className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-semibold shadow-2xl backdrop-blur-sm border-0 transform group-hover:scale-110 transition-transform duration-300">
+                      {website.category}
+                    </Badge>
+                    
+                    {/* Sparkle effect on hover */}
+                    <Sparkles className="absolute top-4 left-4 w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:rotate-180" />
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                  <CardHeader>
+                    <CardTitle className="text-xl font-bold text-slate-900">{website.title}</CardTitle>
+                    <CardDescription className="text-gray-600">
+                      {website.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {website.features.slice(0, 3).map((feature, idx) => (
+                        <Badge
+                          key={idx}
+                          variant="outline"
+                          className="border-teal-200 text-teal-600 text-xs"
+                        >
+                          {feature}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-gray-500 text-lg">No websites found in this category.</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

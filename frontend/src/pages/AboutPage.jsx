@@ -6,7 +6,6 @@ import AnimatedBackground from '../components/AnimatedBackground';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ChatBot from '../components/ChatBot';
-import ScrollCounter from '../components/ScrollCounter';
 
 const AboutPage = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -47,37 +46,27 @@ const AboutPage = () => {
     {
       icon: Target,
       title: 'Mission Driven',
-      description: 'We are committed to delivering exceptional web solutions that drive real business results.'
+      description: 'We are committed to delivering exceptional web solutions that drive real business results.',
+      animClass: 'group-hover:animate-target-hit'
     },
     {
       icon: Heart,
       title: 'Client Focused',
-      description: 'Your success is our success. We work closely with you to understand and achieve your goals.'
+      description: 'Your success is our success. We work closely with you to understand and achieve your goals.',
+      animClass: 'group-hover:animate-heart-fill'
     },
     {
       icon: Rocket,
       title: 'Innovation First',
-      description: 'We leverage the latest technologies, including AI, to create cutting-edge digital experiences.'
+      description: 'We leverage the latest technologies, including AI, to create cutting-edge digital experiences.',
+      animClass: 'group-hover:animate-rocket-launch'
     },
     {
       icon: Award,
       title: 'Quality Assured',
-      description: 'Every project undergoes rigorous testing to ensure the highest standards of excellence.'
+      description: 'Every project undergoes rigorous testing to ensure the highest standards of excellence.',
+      animClass: 'group-hover:animate-medal-shine'
     }
-  ];
-
-  const stats = [
-    { number: 500, suffix: '+', label: 'Projects Completed' },
-    { number: 200, suffix: '+', label: 'Happy Clients' },
-    { number: 50, suffix: '+', label: 'Team Members' },
-    { number: 10, suffix: '+', label: 'Years Experience' }
-  ];
-
-  const team = [
-    { name: 'Sarah Chen', role: 'Creative Director', color: 'from-blue-400 to-teal-400' },
-    { name: 'Marcus Johnson', role: 'Lead Developer', color: 'from-teal-400 to-cyan-400' },
-    { name: 'Elena Rodriguez', role: 'UX Designer', color: 'from-cyan-400 to-blue-400' },
-    { name: 'David Kim', role: 'AI Specialist', color: 'from-blue-500 to-teal-500' }
   ];
 
   return (
@@ -146,7 +135,7 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Values Section */}
+      {/* Values Section with Animated Icons */}
       <section className="relative py-20 px-4 z-10 bg-white/50 backdrop-blur-sm">
         <div className="container mx-auto">
           <div className="text-center mb-16 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
@@ -183,8 +172,8 @@ const AboutPage = () => {
                   data-testid={`value-card-${index}`}
                 >
                   <CardHeader>
-                    <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg shadow-teal-500/30">
-                      <Icon className="w-7 h-7 text-white" />
+                    <div className={`w-14 h-14 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 transition-all duration-500 shadow-lg shadow-teal-500/30 overflow-hidden ${value.animClass}`}>
+                      <Icon className="w-7 h-7 text-white icon-inner" />
                     </div>
                     <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors duration-300">{value.title}</CardTitle>
                   </CardHeader>
@@ -194,79 +183,6 @@ const AboutPage = () => {
                 </Card>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="relative py-20 px-4 z-10 bg-gradient-to-br from-blue-600 via-teal-500 to-cyan-500 text-white overflow-hidden">
-        {/* Background elements */}
-        <div
-          className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"
-          style={{
-            transform: `translate(${scrollY * 0.05}px, ${scrollY * 0.08}px)`,
-          }}
-        />
-        <div
-          className="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"
-          style={{
-            transform: `translate(-${scrollY * 0.06}px, -${scrollY * 0.05}px)`,
-          }}
-        />
-
-        <div className="container mx-auto relative">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div className="text-5xl md:text-6xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">
-                  <ScrollCounter end={stat.number} suffix={stat.suffix} />
-                </div>
-                <div className="text-cyan-100 text-sm md:text-base font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="relative py-20 px-4 z-10">
-        <div className="container mx-auto">
-          <div className="text-center mb-16 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-            <Badge className="mb-4 bg-teal-100 text-teal-700 px-4 py-2">Our Team</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-slate-900 to-teal-800 bg-clip-text text-transparent">
-              Meet the Experts
-            </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Talented professionals dedicated to your success
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {team.map((member, index) => (
-              <div
-                key={index}
-                className="bg-white/90 backdrop-blur-md border-2 border-teal-100 rounded-2xl p-6 text-center hover:border-teal-400 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.4)] scroll-animate opacity-0 translate-y-10 group cursor-pointer"
-                style={{ transitionDelay: `${index * 100}ms` }}
-                data-testid={`team-member-${index}`}
-              >
-                <div className={`w-20 h-20 mx-auto mb-4 bg-gradient-to-br ${member.color} rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                  <span className="text-2xl font-bold text-white">
-                    {member.name.split(' ').map(n => n[0]).join('')}
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 group-hover:text-teal-600 transition-colors duration-300">{member.name}</h3>
-                <p className="text-gray-600 text-sm">{member.role}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Team description */}
-          <div className="max-w-4xl mx-auto mt-12 bg-gradient-to-br from-blue-50 to-teal-50 border-2 border-teal-100 rounded-3xl p-8 md:p-12 text-center scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-            <Users className="w-16 h-16 text-teal-500 mx-auto mb-6" />
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent mb-4">Our Expert Team</h3>
-            <p className="text-gray-600 text-lg">
-              Our diverse team of developers, designers, and strategists brings together years of experience and cutting-edge expertise. We're passionate about creating digital solutions that make a real impact.
-            </p>
           </div>
         </div>
       </section>
