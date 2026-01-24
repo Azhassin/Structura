@@ -218,6 +218,19 @@ const HomePage = () => {
                   style={{ 
                     transitionDelay: `${delay}ms`,
                   }}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
+                  }}
                   data-testid={`service-card-${service.id}`}
                 >
                   {/* Shine effect */}

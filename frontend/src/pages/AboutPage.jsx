@@ -156,6 +156,19 @@ const AboutPage = () => {
                   key={index}
                   className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.4)] scroll-animate opacity-0 translate-y-10 group cursor-pointer"
                   style={{ transitionDelay: `${index * 100}ms` }}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 15;
+                    const rotateY = (centerX - x) / 15;
+                    e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px) scale(1.02)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
+                  }}
                   data-testid={`value-card-${index}`}
                 >
                   <CardHeader>
