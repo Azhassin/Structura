@@ -93,14 +93,14 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'hello@structura.studio',
-      link: 'mailto:hello@structura.studio'
+      value: 'naseemazhan@outlook.com',
+      link: 'mailto:naseemazhan@outlook.com'
     },
     {
       icon: Phone,
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567'
+      value: '+44 7342328508',
+      link: 'tel:+447342328508'
     }
   ];
 
