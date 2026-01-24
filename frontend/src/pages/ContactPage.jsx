@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Clock, Sparkles } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Label } from '../components/ui/label';
-import MatrixRain from '../components/MatrixRain';
+import { Badge } from '../components/ui/badge';
+import AnimatedBackground from '../components/AnimatedBackground';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ChatBot from '../components/ChatBot';
@@ -24,9 +25,16 @@ const ContactPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     const observerOptions = {
       threshold: 0.1,
@@ -45,7 +53,10 @@ const ContactPage = () => {
       observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const handleChange = (e) => {
@@ -82,8 +93,8 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'contact@codeforge.com',
-      link: 'mailto:contact@codeforge.com'
+      value: 'hello@pixelforge.studio',
+      link: 'mailto:hello@pixelforge.studio'
     },
     {
       icon: Phone,
@@ -94,25 +105,45 @@ const ContactPage = () => {
     {
       icon: MapPin,
       title: 'Location',
-      value: '123 Web Street, Digital City',
+      value: '123 Innovation Drive, Tech Valley',
       link: '#'
     }
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      <MatrixRain />
+    <div className="min-h-screen relative overflow-hidden" data-testid="contact-page">
+      <AnimatedBackground />
       <Header />
       <ChatBot />
 
       {/* Hero Section */}
       <section className="relative min-h-[50vh] flex items-center justify-center px-4 pt-32 pb-12">
+        {/* Floating shapes */}
+        <div
+          className="absolute top-20 left-10 w-28 h-28 border-2 border-blue-300/30 rounded-full"
+          style={{
+            transform: `translateY(${scrollY * 0.2}px)`,
+          }}
+        />
+        <div
+          className="absolute bottom-20 right-10 w-20 h-20 border-2 border-teal-300/30 rounded-2xl rotate-45"
+          style={{
+            transform: `translateY(${-scrollY * 0.15}px) rotate(${45 + scrollY * 0.03}deg)`,
+          }}
+        />
+
         <div className="container mx-auto text-center z-10">
           <div className="max-w-4xl mx-auto space-y-6 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-            <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-              Get In <span className="text-green-400">Touch</span>
+            <Badge className="mb-4 bg-teal-100 text-teal-700 px-4 py-2">
+              <Sparkles className="w-4 h-4 inline mr-2" />
+              Contact Us
+            </Badge>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+              <span className="bg-gradient-to-r from-blue-600 via-teal-500 to-cyan-500 bg-clip-text text-transparent">
+                Get In Touch
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-400">
+            <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
               Let's discuss your project and bring your vision to life
             </p>
           </div>
@@ -130,18 +161,32 @@ const ContactPage = () => {
                 return (
                   <Card
                     key={index}
-                    className="bg-gray-900/50 border-green-500/30 hover:border-green-500 transition-all duration-300 scroll-animate opacity-0 translate-y-10 group"
+                    className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-500 hover:shadow-[0_15px_40px_-10px_rgba(20,184,166,0.4)] scroll-animate opacity-0 translate-y-10 group cursor-pointer"
                     style={{ transitionDelay: `${index * 100}ms` }}
+                    onMouseMove={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      const x = e.clientX - rect.left;
+                      const y = e.clientY - rect.top;
+                      const centerX = rect.width / 2;
+                      const centerY = rect.height / 2;
+                      const rotateX = (y - centerY) / 20;
+                      const rotateY = (centerX - x) / 20;
+                      e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+                    }}
+                    data-testid={`contact-info-${info.title.toLowerCase()}`}
                   >
                     <CardHeader>
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center group-hover:bg-green-500/20 transition-colors">
-                          <Icon className="w-6 h-6 text-green-400" />
+                        <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg shadow-teal-500/30">
+                          <Icon className="w-7 h-7 text-white" />
                         </div>
                         <div>
-                          <CardTitle className="text-green-400 text-lg">{info.title}</CardTitle>
-                          <CardDescription className="text-gray-400 text-sm mt-1">
-                            <a href={info.link} className="hover:text-green-400 transition-colors">
+                          <CardTitle className="text-teal-600 text-lg">{info.title}</CardTitle>
+                          <CardDescription className="text-gray-600 text-sm mt-1">
+                            <a href={info.link} className="hover:text-teal-500 transition-colors">
                               {info.value}
                             </a>
                           </CardDescription>
@@ -152,14 +197,23 @@ const ContactPage = () => {
                 );
               })}
 
-              {/* Additional Info */}
-              <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-500/30 scroll-animate opacity-0 translate-y-10" style={{ transitionDelay: '300ms' }}>
+              {/* Business Hours Card */}
+              <Card 
+                className="bg-gradient-to-br from-blue-50 to-teal-50 border-2 border-teal-100 scroll-animate opacity-0 translate-y-10" 
+                style={{ transitionDelay: '300ms' }}
+                data-testid="business-hours-card"
+              >
                 <CardContent className="pt-6">
-                  <h3 className="text-green-400 font-semibold mb-2">Business Hours</h3>
-                  <p className="text-gray-400 text-sm mb-3">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl flex items-center justify-center">
+                      <Clock className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-teal-600 font-semibold">Business Hours</h3>
+                  </div>
+                  <p className="text-gray-600 text-sm mb-2">
                     Monday - Friday: 9:00 AM - 6:00 PM
                   </p>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-gray-500 text-sm">
                     Saturday - Sunday: Closed
                   </p>
                 </CardContent>
@@ -168,33 +222,38 @@ const ContactPage = () => {
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <Card className="bg-gray-900/50 border-green-500/30 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
+              <Card 
+                className="bg-white/90 backdrop-blur-md border-2 border-teal-100 scroll-animate opacity-0 translate-y-10 transition-all duration-1000 hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.3)]"
+                data-testid="contact-form-card"
+              >
                 <CardHeader>
-                  <CardTitle className="text-green-400 text-2xl">Send Us a Message</CardTitle>
-                  <CardDescription className="text-gray-400">
+                  <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">Send Us a Message</CardTitle>
+                  <CardDescription className="text-gray-600">
                     Fill out the form below and we'll get back to you as soon as possible
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   {isSubmitted ? (
                     <div className="flex flex-col items-center justify-center py-12 space-y-4">
-                      <CheckCircle className="w-16 h-16 text-green-400" />
-                      <h3 className="text-2xl font-semibold text-green-400">Message Sent!</h3>
-                      <p className="text-gray-400 text-center">
+                      <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center animate-bounce">
+                        <CheckCircle className="w-10 h-10 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">Message Sent!</h3>
+                      <p className="text-gray-600 text-center">
                         Thank you for contacting us. We'll get back to you soon.
                       </p>
                     </div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form onSubmit={handleSubmit} className="space-y-6" data-testid="contact-form">
                       {errorMessage && (
-                        <div className="p-3 bg-red-500/10 border border-red-500/50 rounded-lg text-red-400 text-sm">
+                        <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
                           {errorMessage}
                         </div>
                       )}
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="name" className="text-gray-300">
+                          <Label htmlFor="name" className="text-gray-700 font-medium">
                             Your Name *
                           </Label>
                           <Input
@@ -205,11 +264,12 @@ const ContactPage = () => {
                             onChange={handleChange}
                             required
                             disabled={isSubmitting}
-                            className="bg-gray-800 border-green-500/30 text-white placeholder:text-gray-500 focus:border-green-500"
+                            className="bg-white border-2 border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-teal-400 focus:ring-teal-400 rounded-xl transition-all duration-300"
+                            data-testid="name-input"
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="email" className="text-gray-300">
+                          <Label htmlFor="email" className="text-gray-700 font-medium">
                             Email Address *
                           </Label>
                           <Input
@@ -221,13 +281,14 @@ const ContactPage = () => {
                             onChange={handleChange}
                             required
                             disabled={isSubmitting}
-                            className="bg-gray-800 border-green-500/30 text-white placeholder:text-gray-500 focus:border-green-500"
+                            className="bg-white border-2 border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-teal-400 focus:ring-teal-400 rounded-xl transition-all duration-300"
+                            data-testid="email-input"
                           />
                         </div>
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="subject" className="text-gray-300">
+                        <Label htmlFor="subject" className="text-gray-700 font-medium">
                           Subject *
                         </Label>
                         <Input
@@ -238,12 +299,13 @@ const ContactPage = () => {
                           onChange={handleChange}
                           required
                           disabled={isSubmitting}
-                          className="bg-gray-800 border-green-500/30 text-white placeholder:text-gray-500 focus:border-green-500"
+                          className="bg-white border-2 border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-teal-400 focus:ring-teal-400 rounded-xl transition-all duration-300"
+                          data-testid="subject-input"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="message" className="text-gray-300">
+                        <Label htmlFor="message" className="text-gray-700 font-medium">
                           Message *
                         </Label>
                         <Textarea
@@ -255,7 +317,8 @@ const ContactPage = () => {
                           required
                           disabled={isSubmitting}
                           rows={6}
-                          className="bg-gray-800 border-green-500/30 text-white placeholder:text-gray-500 focus:border-green-500 resize-none"
+                          className="bg-white border-2 border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-teal-400 focus:ring-teal-400 rounded-xl resize-none transition-all duration-300"
+                          data-testid="message-input"
                         />
                       </div>
 
@@ -263,10 +326,23 @@ const ContactPage = () => {
                         type="submit"
                         size="lg"
                         disabled={isSubmitting}
-                        className="w-full bg-green-500 hover:bg-green-600 text-black font-semibold shadow-lg shadow-green-500/50 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold shadow-lg shadow-teal-500/30 transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed rounded-xl py-6"
+                        data-testid="submit-button"
                       >
-                        {isSubmitting ? 'Sending...' : 'Send Message'}
-                        {!isSubmitting && <Send className="ml-2 w-4 h-4" />}
+                        {isSubmitting ? (
+                          <span className="flex items-center gap-2">
+                            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                            </svg>
+                            Sending...
+                          </span>
+                        ) : (
+                          <span className="flex items-center gap-2">
+                            Send Message
+                            <Send className="w-5 h-5" />
+                          </span>
+                        )}
                       </Button>
                     </form>
                   )}
@@ -277,15 +353,26 @@ const ContactPage = () => {
         </div>
       </section>
 
-      {/* Map Section Placeholder */}
+      {/* Map Section */}
       <section className="relative py-12 px-4 z-10">
         <div className="container mx-auto max-w-6xl">
-          <Card className="bg-gray-900/50 border-green-500/30 overflow-hidden scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-            <div className="h-96 bg-gray-800 flex items-center justify-center">
-              <div className="text-center space-y-2">
-                <MapPin className="w-12 h-12 text-green-400 mx-auto" />
-                <p className="text-gray-400">Map Integration Placeholder</p>
-                <p className="text-gray-500 text-sm">Location: 123 Web Street, Digital City</p>
+          <Card 
+            className="bg-white/90 backdrop-blur-md border-2 border-teal-100 overflow-hidden scroll-animate opacity-0 translate-y-10 transition-all duration-1000 hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.3)]"
+            data-testid="map-section"
+          >
+            <div className="h-80 bg-gradient-to-br from-blue-50 via-teal-50 to-cyan-50 flex items-center justify-center relative overflow-hidden">
+              {/* Decorative elements */}
+              <div className="absolute top-10 left-10 w-20 h-20 border-2 border-teal-200 rounded-full opacity-50" />
+              <div className="absolute bottom-10 right-10 w-16 h-16 border-2 border-blue-200 rounded-2xl rotate-45 opacity-50" />
+              <div className="absolute top-1/2 left-1/4 w-8 h-8 bg-teal-200 rounded-full opacity-30" />
+              <div className="absolute bottom-1/3 right-1/3 w-12 h-12 bg-blue-200 rounded-full opacity-30" />
+              
+              <div className="text-center space-y-4 z-10">
+                <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg shadow-teal-500/30">
+                  <MapPin className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">Visit Our Office</h3>
+                <p className="text-gray-600">123 Innovation Drive, Tech Valley</p>
               </div>
             </div>
           </Card>
