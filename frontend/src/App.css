@@ -1,5 +1,21 @@
 /* Professional animations and styles - Blue/Teal Theme */
 
+/* Hide Emergent watermark badge */
+#emergent-badge,
+a[href*="emergent.sh"],
+a[href*="emergent-badge"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: fixed !important;
+  left: -99999px !important;
+  top: -99999px !important;
+  pointer-events: none !important;
+  z-index: -99999 !important;
+}
+
 /* Fix for gradient text clipping descenders (g, y, p, etc.) */
 .bg-clip-text {
   padding-bottom: 0.15em;
