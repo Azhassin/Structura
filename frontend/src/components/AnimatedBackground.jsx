@@ -13,37 +13,37 @@ const AnimatedBackground = () => {
   }, []);
 
   // Calculate scroll progress (0 to 1)
-  const maxScroll = 3000; // Adjust this based on your page height
+  const maxScroll = 3000;
   const scrollProgress = Math.min(scrollY / maxScroll, 1);
 
-  // Interpolate from purple to blue
-  const hue1 = 250 - (scrollProgress * 40); // Purple (250) to Blue (210)
-  const hue2 = 270 - (scrollProgress * 60); // Purple-Pink (270) to Blue (210)
-  const hue3 = 280 - (scrollProgress * 70); // Light Purple (280) to Cyan (210)
+  // Interpolate from Blue to Teal
+  const hue1 = 210 - (scrollProgress * 30); // Blue (210) to Teal-Blue (180)
+  const hue2 = 200 - (scrollProgress * 35); // Blue (200) to Teal (165)
+  const hue3 = 195 - (scrollProgress * 40); // Blue (195) to Cyan (155)
 
   return (
     <>
-      {/* Main Dynamic Gradient Background - Purple to Blue Transition */}
+      {/* Main Dynamic Gradient Background - Blue to Teal Transition */}
       <div className="fixed inset-0 -z-10">
         <div 
           className="absolute inset-0"
           style={{
             background: `linear-gradient(${135 + scrollY * 0.05}deg, 
-              hsl(${hue1}, ${70 - scrollProgress * 10}%, ${96 - scrollProgress * 2}%) 0%, 
-              hsl(${hue2}, ${80 - scrollProgress * 15}%, ${94 - scrollProgress * 2}%) 50%, 
-              hsl(${hue3}, ${75 - scrollProgress * 10}%, ${95 - scrollProgress * 2}%) 100%)`,
+              hsl(${hue1}, ${70 + scrollProgress * 10}%, ${96 - scrollProgress * 2}%) 0%, 
+              hsl(${hue2}, ${75 + scrollProgress * 10}%, ${94 - scrollProgress * 2}%) 50%, 
+              hsl(${hue3}, ${80 + scrollProgress * 5}%, ${95 - scrollProgress * 2}%) 100%)`,
             transition: 'background 0.5s ease-out'
           }}
         ></div>
         
-        {/* Animated Orbs - Color changes from purple to blue */}
+        {/* Animated Orbs - Color changes from blue to teal */}
         <div 
           className="absolute w-[500px] h-[500px] rounded-full mix-blend-multiply filter blur-[120px]"
           style={{
             top: '10%',
             left: '-10%',
             background: `radial-gradient(circle, 
-              hsla(${250 - scrollProgress * 40}, 70%, 60%, ${0.12 + scrollProgress * 0.05}), 
+              hsla(${210 - scrollProgress * 30}, 75%, 60%, ${0.12 + scrollProgress * 0.05}), 
               transparent)`,
             transform: `translate(${scrollY * 0.2}px, ${scrollY * 0.15}px)`,
             transition: 'all 0.5s ease-out'
@@ -55,7 +55,7 @@ const AnimatedBackground = () => {
             bottom: '15%',
             right: '10%',
             background: `radial-gradient(circle, 
-              hsla(${220 - scrollProgress * 10}, 75%, 65%, ${0.1 + scrollProgress * 0.08}), 
+              hsla(${175 - scrollProgress * 10}, 80%, 55%, ${0.1 + scrollProgress * 0.08}), 
               transparent)`,
             transform: `translate(-${scrollY * 0.18}px, -${scrollY * 0.2}px)`,
             transition: 'all 0.5s ease-out'
@@ -67,7 +67,7 @@ const AnimatedBackground = () => {
             top: '40%',
             right: '20%',
             background: `radial-gradient(circle, 
-              hsla(${240 - scrollProgress * 30}, 70%, 62%, ${0.08 + scrollProgress * 0.06}), 
+              hsla(${190 - scrollProgress * 20}, 75%, 58%, ${0.08 + scrollProgress * 0.06}), 
               transparent)`,
             transform: `translate(-${scrollY * 0.15}px, ${scrollY * 0.12}px)`,
             transition: 'all 0.5s ease-out'
@@ -80,7 +80,7 @@ const AnimatedBackground = () => {
           style={{
             top: '20%',
             right: '15%',
-            border: `2px solid hsla(${250 - scrollProgress * 40}, 60%, 70%, ${0.3 + scrollProgress * 0.2})`,
+            border: `2px solid hsla(${200 - scrollProgress * 25}, 70%, 65%, ${0.3 + scrollProgress * 0.2})`,
             transform: `rotate(${scrollY * 0.08}deg)`,
             transition: 'all 0.3s ease-out'
           }}
@@ -90,7 +90,7 @@ const AnimatedBackground = () => {
           style={{
             bottom: '30%',
             left: '10%',
-            border: `2px solid hsla(${220 - scrollProgress * 10}, 65%, 68%, ${0.25 + scrollProgress * 0.2})`,
+            border: `2px solid hsla(${175 - scrollProgress * 10}, 75%, 60%, ${0.25 + scrollProgress * 0.2})`,
             transform: `rotate(-${scrollY * 0.06}deg)`,
             transition: 'all 0.3s ease-out'
           }}
@@ -100,7 +100,7 @@ const AnimatedBackground = () => {
           style={{
             top: '55%',
             left: '8%',
-            border: `2px solid hsla(${235 - scrollProgress * 25}, 68%, 65%, ${0.28 + scrollProgress * 0.15})`,
+            border: `2px solid hsla(${185 - scrollProgress * 15}, 72%, 62%, ${0.28 + scrollProgress * 0.15})`,
             transform: `rotate(${45 + scrollY * 0.1}deg)`,
             transition: 'all 0.3s ease-out'
           }}
@@ -112,17 +112,17 @@ const AnimatedBackground = () => {
             <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop 
                 offset="0%" 
-                stopColor={`hsl(${250 - scrollProgress * 40}, 70%, 60%)`} 
+                stopColor={`hsl(${210 - scrollProgress * 30}, 75%, 55%)`} 
                 stopOpacity="0.3" 
               />
               <stop 
                 offset="50%" 
-                stopColor={`hsl(${230 - scrollProgress * 20}, 75%, 65%)`} 
+                stopColor={`hsl(${190 - scrollProgress * 20}, 80%, 50%)`} 
                 stopOpacity="0.25" 
               />
               <stop 
                 offset="100%" 
-                stopColor={`hsl(${210 - scrollProgress * 5}, 80%, 70%)`} 
+                stopColor={`hsl(${170 - scrollProgress * 10}, 85%, 45%)`} 
                 stopOpacity="0.3" 
               />
             </linearGradient>
@@ -155,8 +155,8 @@ const AnimatedBackground = () => {
           style={{
             opacity: 0.08,
             backgroundImage: `
-              linear-gradient(hsla(${250 - scrollProgress * 40}, 70%, 60%, 0.08) 1px, transparent 1px),
-              linear-gradient(90deg, hsla(${250 - scrollProgress * 40}, 70%, 60%, 0.08) 1px, transparent 1px)
+              linear-gradient(hsla(${200 - scrollProgress * 25}, 75%, 55%, 0.08) 1px, transparent 1px),
+              linear-gradient(90deg, hsla(${200 - scrollProgress * 25}, 75%, 55%, 0.08) 1px, transparent 1px)
             `,
             backgroundSize: '60px 60px',
             transform: `translate(${scrollY * 0.05}px, ${scrollY * 0.08}px)`,
@@ -175,7 +175,7 @@ const AnimatedBackground = () => {
           <p 
             className="text-sm font-medium"
             style={{
-              color: `hsl(${250 - scrollProgress * 40}, 70%, 50%)`
+              color: `hsl(${200 - scrollProgress * 25}, 75%, 45%)`
             }}
           >
             {scrollProgress < 0.3 ? 'Scroll to see the magic ✨' : 

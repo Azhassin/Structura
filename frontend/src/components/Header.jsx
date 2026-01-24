@@ -26,7 +26,7 @@ const Header = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/80 backdrop-blur-lg border-b border-purple-100 shadow-sm'
+          ? 'bg-white/80 backdrop-blur-lg border-b border-teal-100 shadow-sm'
           : 'bg-transparent'
       }`}
     >
@@ -35,12 +35,12 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
                 <Zap className="w-6 h-6 text-white" />
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
                 PixelForge
               </span>
               <span className="text-xs text-gray-500 -mt-1">Studio</span>
@@ -55,19 +55,19 @@ const Header = () => {
                 to={link.path}
                 className={`text-sm font-medium transition-all duration-300 relative group ${
                   location.pathname === link.path
-                    ? 'text-purple-600'
-                    : 'text-gray-600 hover:text-purple-600'
+                    ? 'text-teal-600'
+                    : 'text-gray-600 hover:text-teal-600'
                 }`}
               >
                 {link.label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-300 ${
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-teal-500 transition-all duration-300 ${
                     location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}
                 ></span>
               </Link>
             ))}
-            <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold shadow-lg shadow-purple-500/30 transition-all duration-300 hover:scale-105">
+            <Button className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold shadow-lg shadow-teal-500/30 transition-all duration-300 hover:scale-105">
               Get Started
             </Button>
           </div>
@@ -76,7 +76,7 @@ const Header = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden text-purple-600"
+            className="md:hidden text-teal-600"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -85,20 +85,20 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 py-4 border-t border-purple-100 space-y-4 animate-in fade-in slide-in-from-top duration-300">
+          <div className="md:hidden mt-4 py-4 border-t border-teal-100 space-y-4 animate-in fade-in slide-in-from-top duration-300">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`block text-sm font-medium transition-colors ${
-                  location.pathname === link.path ? 'text-purple-600' : 'text-gray-600 hover:text-purple-600'
+                  location.pathname === link.path ? 'text-teal-600' : 'text-gray-600 hover:text-teal-600'
                 }`}
               >
                 {link.label}
               </Link>
             ))}
-            <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold">
+            <Button className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold">
               Get Started
             </Button>
           </div>

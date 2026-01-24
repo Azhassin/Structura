@@ -14,10 +14,10 @@ const ProfessionalBackground = () => {
 
   return (
     <>
-      {/* Main Gradient Background */}
+      {/* Main Gradient Background - Blue to Teal */}
       <div className="fixed inset-0 -z-10">
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-slate-50 via-purple-50 to-blue-50"
+          className="absolute inset-0 bg-gradient-to-br from-slate-50 via-cyan-50 to-teal-50"
           style={{
             transform: `translateY(${scrollY * 0.1}px)`,
             transition: 'transform 0.1s ease-out'
@@ -26,21 +26,21 @@ const ProfessionalBackground = () => {
         
         {/* Animated gradient orbs with parallax */}
         <div 
-          className="absolute top-0 -left-4 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
+          className="absolute top-0 -left-4 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
           style={{
             transform: `translate(${scrollY * 0.15}px, ${scrollY * 0.2}px) scale(${1 + scrollY * 0.0002})`,
             transition: 'transform 0.3s ease-out'
           }}
         ></div>
         <div 
-          className="absolute top-0 -right-4 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"
+          className="absolute top-0 -right-4 w-96 h-96 bg-teal-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"
           style={{
             transform: `translate(-${scrollY * 0.12}px, ${scrollY * 0.18}px) scale(${1 + scrollY * 0.0001})`,
             transition: 'transform 0.3s ease-out'
           }}
         ></div>
         <div 
-          className="absolute -bottom-8 left-20 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"
+          className="absolute -bottom-8 left-20 w-96 h-96 bg-cyan-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"
           style={{
             transform: `translate(${scrollY * 0.08}px, -${scrollY * 0.15}px)`,
             transition: 'transform 0.3s ease-out'
@@ -49,14 +49,14 @@ const ProfessionalBackground = () => {
         
         {/* Additional floating orbs */}
         <div 
-          className="absolute top-1/3 right-1/4 w-64 h-64 bg-indigo-200 rounded-full mix-blend-multiply filter blur-2xl opacity-15 animate-blob"
+          className="absolute top-1/3 right-1/4 w-64 h-64 bg-sky-200 rounded-full mix-blend-multiply filter blur-2xl opacity-15 animate-blob"
           style={{
             transform: `translate(-${scrollY * 0.25}px, ${scrollY * 0.3}px) rotate(${scrollY * 0.1}deg)`,
             transition: 'transform 0.3s ease-out'
           }}
         ></div>
         <div 
-          className="absolute bottom-1/4 right-1/3 w-80 h-80 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob animation-delay-3000"
+          className="absolute bottom-1/4 right-1/3 w-80 h-80 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob animation-delay-3000"
           style={{
             transform: `translate(${scrollY * 0.18}px, -${scrollY * 0.22}px)`,
             transition: 'transform 0.3s ease-out'
@@ -70,8 +70,8 @@ const ProfessionalBackground = () => {
         }}>
           <defs>
             <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.1" />
+              <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#14b8a6" stopOpacity="0.1" />
             </linearGradient>
           </defs>
           <line x1="10%" y1="20%" x2="90%" y2="30%" stroke="url(#line-gradient)" strokeWidth="2" />
@@ -93,7 +93,7 @@ const ProfessionalBackground = () => {
         {[...Array(15)].map((_, i) => (
           <div
             key={i}
-            className="absolute rounded-full bg-gradient-to-br from-purple-400 to-blue-400 opacity-20"
+            className="absolute rounded-full bg-gradient-to-br from-blue-400 to-teal-400 opacity-20"
             style={{
               width: `${Math.random() * 8 + 4}px`,
               height: `${Math.random() * 8 + 4}px`,
