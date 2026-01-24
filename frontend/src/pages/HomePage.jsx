@@ -81,7 +81,7 @@ const HomePage = () => {
       <div
         className="fixed w-96 h-96 rounded-full pointer-events-none z-0 mix-blend-screen"
         style={{
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(20, 184, 166, 0.15) 0%, transparent 70%)',
           left: `${mousePosition.x - 192}px`,
           top: `${mousePosition.y - 192}px`,
           transition: 'left 0.3s ease-out, top 0.3s ease-out',
@@ -92,21 +92,21 @@ const HomePage = () => {
       <section className="relative min-h-screen flex items-center justify-center px-4 pt-20">
         {/* Floating geometric shapes */}
         <div
-          className="absolute top-20 left-10 w-32 h-32 border-2 border-purple-300/30 rounded-2xl rotate-12"
+          className="absolute top-20 left-10 w-32 h-32 border-2 border-blue-300/30 rounded-2xl rotate-12"
           style={{
             transform: `translateY(${scrollY * 0.3}px) rotate(${12 + scrollY * 0.05}deg)`,
             transition: 'transform 0.1s ease-out',
           }}
         />
         <div
-          className="absolute bottom-40 right-20 w-24 h-24 border-2 border-blue-300/30 rounded-full"
+          className="absolute bottom-40 right-20 w-24 h-24 border-2 border-teal-300/30 rounded-full"
           style={{
             transform: `translateY(${-scrollY * 0.4}px) scale(${1 + scrollY * 0.0005})`,
             transition: 'transform 0.1s ease-out',
           }}
         />
         <div
-          className="absolute top-1/3 right-1/4 w-16 h-16 bg-gradient-to-br from-purple-400/20 to-blue-400/20 rounded-lg rotate-45"
+          className="absolute top-1/3 right-1/4 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-teal-400/20 rounded-lg rotate-45"
           style={{
             transform: `translateY(${scrollY * 0.2}px) rotate(${45 + scrollY * 0.08}deg)`,
             transition: 'transform 0.1s ease-out',
@@ -116,30 +116,31 @@ const HomePage = () => {
         <div className="container mx-auto text-center z-10">
           <ParallaxSection speed={0.2}>
             <div className="max-w-5xl mx-auto space-y-8 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 text-teal-700 rounded-full text-sm font-medium backdrop-blur-sm">
                 <Sparkles className="w-4 h-4" />
                 <span>Trusted by 500+ Businesses Worldwide</span>
               </div>
 
               <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
-                <span className="block bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 bg-clip-text text-transparent animate-gradient">
+                <span className="block bg-gradient-to-r from-blue-600 via-teal-500 to-blue-600 bg-clip-text text-transparent animate-gradient">
                   Transform Your
                 </span>
-                <span className="block mt-2 bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 bg-clip-text text-transparent">
+                <span className="block mt-2 bg-gradient-to-r from-slate-900 via-teal-900 to-slate-900 bg-clip-text text-transparent">
                   Digital Presence
                 </span>
               </h1>
 
               <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                We craft <span className="font-semibold text-purple-600">stunning websites</span> that drive growth, 
+                We craft <span className="font-semibold text-teal-600">stunning websites</span> that drive growth, 
                 engage customers, and elevate your brand to new heights.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-8 py-6 text-lg shadow-2xl shadow-purple-500/30 transition-all duration-300 hover:scale-105 rounded-full"
+                  className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold px-8 py-6 text-lg shadow-2xl shadow-teal-500/30 transition-all duration-300 hover:scale-105 rounded-full"
                   onClick={() => catalogRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                  data-testid="view-our-work-btn"
                 >
                   View Our Work
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -148,7 +149,8 @@ const HomePage = () => {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-purple-600 text-purple-600 hover:bg-purple-50 px-8 py-6 text-lg transition-all duration-300 hover:scale-105 rounded-full font-semibold"
+                    className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 px-8 py-6 text-lg transition-all duration-300 hover:scale-105 rounded-full font-semibold"
+                    data-testid="start-project-btn"
                   >
                     Start Your Project
                   </Button>
@@ -157,19 +159,19 @@ const HomePage = () => {
 
               <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12">
                 <div className="text-center transform transition-all duration-500 hover:scale-110">
-                  <div className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
                     <ScrollCounter end={500} suffix="+" />
                   </div>
                   <div className="text-sm text-gray-600 mt-2 font-medium">Projects Delivered</div>
                 </div>
                 <div className="text-center transform transition-all duration-500 hover:scale-110">
-                  <div className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
                     <ScrollCounter end={98} suffix="%" />
                   </div>
                   <div className="text-sm text-gray-600 mt-2 font-medium">Client Satisfaction</div>
                 </div>
                 <div className="text-center transform transition-all duration-500 hover:scale-110">
-                  <div className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
                     <ScrollCounter end={50} suffix="+" />
                   </div>
                   <div className="text-sm text-gray-600 mt-2 font-medium">Expert Team</div>
@@ -184,14 +186,14 @@ const HomePage = () => {
       <section id="services" className="relative py-24 px-4 z-10 bg-white/50 backdrop-blur-sm">
         {/* Floating accent circles */}
         <div
-          className="absolute top-10 right-10 w-64 h-64 bg-gradient-to-br from-purple-200/30 to-blue-200/30 rounded-full blur-3xl"
+          className="absolute top-10 right-10 w-64 h-64 bg-gradient-to-br from-blue-200/30 to-teal-200/30 rounded-full blur-3xl"
           style={{
             transform: `translateY(${scrollY * 0.15}px)`,
             transition: 'transform 0.2s ease-out',
           }}
         />
         <div
-          className="absolute bottom-20 left-10 w-48 h-48 bg-gradient-to-br from-pink-200/30 to-purple-200/30 rounded-full blur-3xl"
+          className="absolute bottom-20 left-10 w-48 h-48 bg-gradient-to-br from-cyan-200/30 to-teal-200/30 rounded-full blur-3xl"
           style={{
             transform: `translateY(${-scrollY * 0.12}px)`,
             transition: 'transform 0.2s ease-out',
@@ -201,8 +203,8 @@ const HomePage = () => {
         <div className="container mx-auto relative">
           <ParallaxSection speed={0.15}>
             <div className="text-center mb-16 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-              <Badge className="mb-4 bg-purple-100 text-purple-700 px-4 py-2">Our Services</Badge>
-              <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-purple-900 bg-clip-text text-transparent">
+              <Badge className="mb-4 bg-teal-100 text-teal-700 px-4 py-2">Our Services</Badge>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-teal-800 bg-clip-text text-transparent">
                 Everything You Need to Succeed Online
               </h2>
               <p className="text-gray-600 text-xl max-w-2xl mx-auto">
@@ -218,7 +220,7 @@ const HomePage = () => {
               return (
                 <Card
                   key={service.id}
-                  className="bg-white/90 backdrop-blur-md border-2 border-purple-100 hover:border-purple-400 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(139,92,246,0.4)] scroll-animate opacity-0 translate-y-10 group cursor-pointer relative overflow-hidden"
+                  className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.4)] scroll-animate opacity-0 translate-y-10 group cursor-pointer relative overflow-hidden"
                   style={{ 
                     transitionDelay: `${delay}ms`,
                     animation: `float-gentle 3s ease-in-out infinite`,
@@ -237,12 +239,13 @@ const HomePage = () => {
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
                   }}
+                  data-testid={`service-card-${service.id}`}
                 >
                   {/* Animated gradient overlay */}
                   <div 
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
-                      background: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(139, 92, 246, 0.15), transparent 50%)'
+                      background: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(20, 184, 166, 0.15), transparent 50%)'
                     }}
                   />
                   
@@ -250,10 +253,10 @@ const HomePage = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   
                   <CardHeader className="relative z-10">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-purple-500/30">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-teal-500/30">
                       <Icon className="w-8 h-8 text-white group-hover:scale-110 transition-transform duration-300" />
                     </div>
-                    <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-purple-600 transition-colors duration-300">{service.title}</CardTitle>
+                    <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors duration-300">{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <CardDescription className="text-gray-600 text-base">
@@ -273,7 +276,7 @@ const HomePage = () => {
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            background: 'linear-gradient(45deg, transparent 30%, rgba(139, 92, 246, 0.1) 50%, transparent 70%)',
+            background: 'linear-gradient(45deg, transparent 30%, rgba(20, 184, 166, 0.1) 50%, transparent 70%)',
             transform: `translateX(${scrollY * 0.2}px)`,
             transition: 'transform 0.2s ease-out',
           }}
@@ -282,8 +285,8 @@ const HomePage = () => {
         <div className="container mx-auto relative">
           <ParallaxSection speed={0.1}>
             <div className="text-center mb-12 scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-              <Badge className="mb-4 bg-purple-100 text-purple-700 px-4 py-2">Our Portfolio</Badge>
-              <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-purple-900 bg-clip-text text-transparent">
+              <Badge className="mb-4 bg-teal-100 text-teal-700 px-4 py-2">Our Portfolio</Badge>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-teal-800 bg-clip-text text-transparent">
                 Websites That Make an Impact
               </h2>
               <p className="text-gray-600 text-xl max-w-2xl mx-auto mb-8">
@@ -298,9 +301,10 @@ const HomePage = () => {
                     variant={selectedCategory === category ? 'default' : 'outline'}
                     className={`rounded-full font-medium transition-all duration-300 ${
                       selectedCategory === category
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/30 hover:scale-105'
-                        : 'border-purple-200 text-purple-600 hover:bg-purple-50'
+                        ? 'bg-gradient-to-r from-blue-500 to-teal-500 text-white shadow-lg shadow-teal-500/30 hover:scale-105'
+                        : 'border-teal-200 text-teal-600 hover:bg-teal-50'
                     }`}
+                    data-testid={`category-${category.toLowerCase().replace(' ', '-')}`}
                   >
                     {category}
                   </Button>
@@ -313,7 +317,7 @@ const HomePage = () => {
             {filteredWebsites.map((website, index) => (
               <Card
                 key={website.id}
-                className="bg-white/90 backdrop-blur-md border-2 border-purple-100 hover:border-purple-400 transition-all duration-700 hover:shadow-[0_25px_70px_-20px_rgba(139,92,246,0.5)] overflow-hidden group scroll-animate opacity-0 cursor-pointer relative"
+                className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-700 hover:shadow-[0_25px_70px_-20px_rgba(20,184,166,0.5)] overflow-hidden group scroll-animate opacity-0 cursor-pointer relative"
                 style={{ 
                   transitionDelay: `${index * 120}ms`,
                   transformStyle: 'preserve-3d'
@@ -331,6 +335,7 @@ const HomePage = () => {
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
                 }}
+                data-testid={`portfolio-card-${website.id}`}
               >
                 <div className="relative h-56 overflow-hidden">
                   <img
@@ -338,12 +343,12 @@ const HomePage = () => {
                     alt={website.title}
                     className="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/80 via-purple-900/40 to-transparent group-hover:from-purple-900/90 transition-all duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-teal-900/80 via-teal-900/40 to-transparent group-hover:from-teal-900/90 transition-all duration-500"></div>
                   
                   {/* Animated overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 via-blue-600/0 to-pink-600/0 group-hover:from-purple-600/20 group-hover:via-blue-600/20 group-hover:to-pink-600/20 transition-all duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/0 via-teal-600/0 to-cyan-600/0 group-hover:from-blue-600/20 group-hover:via-teal-600/20 group-hover:to-cyan-600/20 transition-all duration-700" />
                   
-                  <Badge className="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-2xl backdrop-blur-sm border-0 transform group-hover:scale-110 transition-transform duration-300">
+                  <Badge className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-semibold shadow-2xl backdrop-blur-sm border-0 transform group-hover:scale-110 transition-transform duration-300">
                     {website.category}
                   </Badge>
                   
@@ -362,7 +367,7 @@ const HomePage = () => {
                       <Badge
                         key={idx}
                         variant="outline"
-                        className="border-purple-200 text-purple-600 text-xs"
+                        className="border-teal-200 text-teal-600 text-xs"
                       >
                         {feature}
                       </Badge>
@@ -376,7 +381,7 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-24 px-4 z-10 bg-gradient-to-br from-purple-600 via-blue-600 to-purple-700 text-white overflow-hidden">
+      <section className="relative py-24 px-4 z-10 bg-gradient-to-br from-blue-600 via-teal-500 to-cyan-500 text-white overflow-hidden">
         {/* Animated background elements */}
         <div
           className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"
@@ -395,18 +400,19 @@ const HomePage = () => {
         
         <div className="container mx-auto relative">
           <div className="max-w-4xl mx-auto text-center scroll-animate opacity-0 translate-y-10 transition-all duration-1000">
-            <Sparkles className="w-16 h-16 mx-auto mb-6 text-purple-200 animate-pulse-glow" />
+            <Sparkles className="w-16 h-16 mx-auto mb-6 text-cyan-200 animate-pulse-glow" />
             <h2 className="text-5xl md:text-6xl font-bold mb-6">
               Ready to Elevate Your Business?
             </h2>
-            <p className="text-xl text-purple-100 mb-10 max-w-2xl mx-auto">
+            <p className="text-xl text-cyan-100 mb-10 max-w-2xl mx-auto">
               Let's create something extraordinary together. Get started with a free consultation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">
                 <Button
                   size="lg"
-                  className="bg-white text-purple-600 hover:bg-purple-50 px-10 py-6 text-lg shadow-2xl transition-all duration-300 hover:scale-105 rounded-full font-bold"
+                  className="bg-white text-teal-600 hover:bg-cyan-50 px-10 py-6 text-lg shadow-2xl transition-all duration-300 hover:scale-105 rounded-full font-bold"
+                  data-testid="get-started-cta-btn"
                 >
                   Get Started Today
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -417,6 +423,7 @@ const HomePage = () => {
                   size="lg"
                   variant="outline"
                   className="border-2 border-white text-white hover:bg-white/10 px-10 py-6 text-lg transition-all duration-300 hover:scale-105 rounded-full font-semibold backdrop-blur-sm"
+                  data-testid="learn-more-btn"
                 >
                   Learn More
                 </Button>
