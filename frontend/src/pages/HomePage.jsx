@@ -78,7 +78,7 @@ const HomePage = () => {
   // Get icon animation class based on icon name
   const getIconAnimationClass = (iconName) => {
     switch(iconName) {
-      case 'Palette': return ''; // No animation
+      case 'Palette': return 'group-hover:animate-palette-invert';
       case 'ShoppingCart': return 'group-hover:animate-cart-run';
       case 'Smartphone': return 'group-hover:animate-phone-vibrate';
       case 'Bot': return 'group-hover:animate-bot-wink';
@@ -214,22 +214,9 @@ const HomePage = () => {
               return (
                 <Card
                   key={service.id}
-                  className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.4)] scroll-animate opacity-0 translate-y-10 group cursor-pointer relative overflow-hidden"
+                  className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.4)] hover:-translate-y-2 hover:scale-[1.02] scroll-animate opacity-0 translate-y-10 group cursor-pointer relative overflow-hidden"
                   style={{ 
                     transitionDelay: `${delay}ms`,
-                  }}
-                  onMouseMove={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = (y - centerY) / 10;
-                    const rotateY = (centerX - x) / 10;
-                    e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
                   }}
                   data-testid={`service-card-${service.id}`}
                 >
