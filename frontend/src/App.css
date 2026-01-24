@@ -1,4 +1,11 @@
 /* Professional animations and styles - Blue/Teal Theme */
+
+/* Fix for gradient text clipping descenders (g, y, p, etc.) */
+.bg-clip-text {
+  padding-bottom: 0.15em;
+  margin-bottom: -0.1em;
+}
+
 .scroll-animate {
   opacity: 0;
   transform: translateY(30px);
