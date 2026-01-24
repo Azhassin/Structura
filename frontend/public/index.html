@@ -26,19 +26,45 @@
                 visibility: hidden !important;
                 opacity: 0 !important;
                 pointer-events: none !important;
+                width: 0 !important;
+                height: 0 !important;
+                overflow: hidden !important;
             }
         </style>
         <script>
-            // Remove Emergent badge on load and observe for dynamic injection
-            function removeEmergentBadge() {
-                var badge = document.getElementById('emergent-badge');
-                if (badge) badge.remove();
-                var badges = document.querySelectorAll('a[href*="emergent.sh"]');
-                badges.forEach(function(b) { b.remove(); });
-            }
-            document.addEventListener('DOMContentLoaded', removeEmergentBadge);
-            window.addEventListener('load', removeEmergentBadge);
-            setInterval(removeEmergentBadge, 500);
+            // Immediately remove any emergent badges using MutationObserver
+            (function() {
+                function removeBadge() {
+                    var selectors = ['#emergent-badge', 'a[href*="emergent.sh"]', '[id*="emergent"]'];
+                    selectors.forEach(function(sel) {
+                        document.querySelectorAll(sel).forEach(function(el) {
+                            if (el && el.parentNode) el.parentNode.removeChild(el);
+                        });
+                    });
+                }
+                
+                // Run immediately
+                removeBadge();
+                
+                // Watch for DOM changes
+                var observer = new MutationObserver(function(mutations) {
+                    removeBadge();
+                });
+                
+                // Start observing when DOM is ready
+                if (document.body) {
+                    observer.observe(document.body, { childList: true, subtree: true });
+                } else {
+                    document.addEventListener('DOMContentLoaded', function() {
+                        observer.observe(document.body, { childList: true, subtree: true });
+                        removeBadge();
+                    });
+                }
+                
+                // Also run on load and periodically
+                window.addEventListener('load', removeBadge);
+                setInterval(removeBadge, 100);
+            })();
         </script>
         <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
         <!--
