@@ -46,6 +46,7 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     response: str
     session_id: str
+    navigate: Optional[str] = None
 
 
 # ========== CONTACT MODELS ==========
