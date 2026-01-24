@@ -11,6 +11,10 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ChatBot from '../components/ChatBot';
 import { demoWebsites, services } from '../mock';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const iconMap = {
   Palette,
@@ -26,13 +30,35 @@ const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [portfolioProjects, setPortfolioProjects] = useState([]);
+  const [loadingPortfolio, setLoadingPortfolio] = useState(true);
 
   const categories = ['All', 'E-commerce', 'Portfolio', 'Corporate', 'Blog', 'Restaurant', 'Real Estate', 'Healthcare', 'Education'];
 
+  // Fetch portfolio from API, fallback to mock data
+  useEffect(() => {
+    const fetchPortfolio = async () => {
+      try {
+        const response = await axios.get(`${API}/portfolio`);
+        if (response.data && response.data.length > 0) {
+          setPortfolioProjects(response.data);
+        } else {
+          setPortfolioProjects(demoWebsites);
+        }
+      } catch (err) {
+        console.log('Using mock data for portfolio');
+        setPortfolioProjects(demoWebsites);
+      } finally {
+        setLoadingPortfolio(false);
+      }
+    };
+    fetchPortfolio();
+  }, []);
+
   // Filter websites based on selected category
   const filteredWebsites = selectedCategory === 'All'
-    ? demoWebsites
-    : demoWebsites.filter(site => site.category === selectedCategory);
+    ? portfolioProjects
+    : portfolioProjects.filter(site => site.category === selectedCategory);
 
   useEffect(() => {
     const handleScroll = () => {
