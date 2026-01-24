@@ -34,41 +34,22 @@
                 position: absolute !important;
                 left: -9999px !important;
                 top: -9999px !important;
+                z-index: -9999 !important;
             }
         </style>
         <script>
-            // Immediately remove any emergent badges using MutationObserver
+            // Aggressively remove Emergent badge
             (function() {
-                function removeBadge() {
-                    var selectors = ['#emergent-badge', 'a[href*="emergent.sh"]', '[id*="emergent"]'];
-                    selectors.forEach(function(sel) {
-                        document.querySelectorAll(sel).forEach(function(el) {
-                            if (el && el.parentNode) el.parentNode.removeChild(el);
-                        });
+                var remove = function() {
+                    var el = document.getElementById('emergent-badge');
+                    if (el) { el.style.cssText = 'display:none!important;visibility:hidden!important;opacity:0!important;position:absolute!important;left:-9999px!important;'; }
+                    document.querySelectorAll('a[href*="emergent.sh"]').forEach(function(e) { 
+                        e.style.cssText = 'display:none!important;visibility:hidden!important;opacity:0!important;position:absolute!important;left:-9999px!important;';
                     });
-                }
-                
-                // Run immediately
-                removeBadge();
-                
-                // Watch for DOM changes
-                var observer = new MutationObserver(function(mutations) {
-                    removeBadge();
-                });
-                
-                // Start observing when DOM is ready
-                if (document.body) {
-                    observer.observe(document.body, { childList: true, subtree: true });
-                } else {
-                    document.addEventListener('DOMContentLoaded', function() {
-                        observer.observe(document.body, { childList: true, subtree: true });
-                        removeBadge();
-                    });
-                }
-                
-                // Also run on load and periodically
-                window.addEventListener('load', removeBadge);
-                setInterval(removeBadge, 100);
+                };
+                setInterval(remove, 50);
+                document.addEventListener('DOMContentLoaded', remove);
+                window.addEventListener('load', remove);
             })();
         </script>
         <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
