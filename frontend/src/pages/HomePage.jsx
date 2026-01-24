@@ -78,7 +78,7 @@ const HomePage = () => {
   // Get icon animation class based on icon name
   const getIconAnimationClass = (iconName) => {
     switch(iconName) {
-      case 'Palette': return 'group-hover:animate-palette-invert';
+      case 'Palette': return ''; // No animation
       case 'ShoppingCart': return 'group-hover:animate-cart-run';
       case 'Smartphone': return 'group-hover:animate-phone-vibrate';
       case 'Bot': return 'group-hover:animate-bot-wink';

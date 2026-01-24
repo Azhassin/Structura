@@ -53,7 +53,7 @@ const AboutPage = () => {
       icon: Heart,
       title: 'Client Focused',
       description: 'Your success is our success. We work closely with you to understand and achieve your goals.',
-      animClass: 'group-hover:animate-heart-fill'
+      animClass: '' // No animation
     },
     {
       icon: Rocket,
