@@ -236,26 +236,29 @@
   animation: target-arrow 0.8s ease-out;
 }
 
-/* 8. Heart - Fill with White (PERFECT - keeping as is) */
+/* 8. Heart - Pop up and fill with white glow */
 @keyframes heart-fill {
   0%, 100% {
-    background: linear-gradient(135deg, #3b82f6, #14b8a6);
+    transform: scale(1);
+    filter: brightness(1);
   }
   30% {
-    background: linear-gradient(135deg, #60a5fa, #2dd4bf);
+    transform: scale(1.2);
+    filter: brightness(1.3) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
   }
   50% {
-    background: linear-gradient(135deg, #ffffff, #e0f2fe);
-    transform: scale(1.15);
+    transform: scale(1.4);
+    filter: brightness(1.5) drop-shadow(0 0 15px rgba(255, 255, 255, 1)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.8));
   }
   70% {
-    background: linear-gradient(135deg, #60a5fa, #2dd4bf);
+    transform: scale(1.2);
+    filter: brightness(1.3) drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
   }
 }
 
 .group-hover\:animate-heart-fill:hover,
 .group:hover .group-hover\:animate-heart-fill {
-  animation: heart-fill 0.7s ease-in-out;
+  animation: heart-fill 0.6s ease-in-out;
 }
 
 /* 9. Rocket - Firing and Going Top-Right */
