@@ -1,7 +1,7 @@
-# PixelForge-AZ Studio - Product Requirements Document
+# Structura Studio - Product Requirements Document
 
 ## Original Problem Statement
-A professional portfolio website for a web design studio called "PixelForge-AZ Studio" with:
+A professional portfolio website for a web design studio called "Structura Studio" (previously PixelForge-AZ) with:
 - Modern, clean design suitable for entrepreneurs
 - AI chatbot integration using OpenAI GPT-5.2
 - User-controlled scroll animations
@@ -47,7 +47,7 @@ A professional portfolio website for a web design studio called "PixelForge-AZ S
    - AI-enhanced message formatting
 
 4. **AI Chatbot**
-   - OpenAI GPT-5.2 integration
+   - OpenAI GPT-5.2 integration via Emergent LLM Key
    - Session management
    - Short, professional responses
    - Demo request handling
@@ -92,8 +92,8 @@ A professional portfolio website for a web design studio called "PixelForge-AZ S
 - `chat_sessions`: session_id, messages[], created_at, updated_at
 
 ## Admin Credentials
-- Email: admin@pixelforge.com
-- Password: admin123
+- Email: admin@structura.com (or first registered user)
+- Password: Set during registration
 
 ## Environment Variables
 ```
@@ -103,7 +103,7 @@ DB_NAME=test_database
 EMERGENT_LLM_KEY=sk-emergent-xxx
 RESEND_API_KEY= (optional, for email)
 RECIPIENT_EMAIL=naseemazhan@outlook.com
-JWT_SECRET=pixelforge-az-secret-key-2024
+JWT_SECRET=structura-secret-key-2024
 
 # Frontend (.env)
 REACT_APP_BACKEND_URL=https://...
@@ -136,8 +136,8 @@ REACT_APP_BACKEND_URL=https://...
 │       └── ...
 ```
 
-## Completed Features
-- ✅ Full authentication system
+## Completed Features (as of December 2025)
+- ✅ Full authentication system (JWT)
 - ✅ Portfolio CRUD backend
 - ✅ Admin panel frontend
 - ✅ Contact submissions management
@@ -145,6 +145,10 @@ REACT_APP_BACKEND_URL=https://...
 - ✅ Dynamic portfolio loading from API
 - ✅ All icon animations
 - ✅ Blue-teal theme
+- ✅ AI Chatbot with OpenAI GPT-5.2
+- ✅ **Complete rebrand from PixelForge-AZ to Structura** (Jan 2026)
 
 ## Pending
-- Email sending (needs Resend API key)
+- **P1**: Email sending functionality - needs Resend API key from user
+- **P2**: Add more portfolio content via admin panel
+- **P3**: User role management (admin vs editor)
