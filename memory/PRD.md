@@ -1,95 +1,150 @@
-# PixelForge Studio - Product Requirements Document
+# PixelForge-AZ Studio - Product Requirements Document
 
 ## Original Problem Statement
-A professional portfolio website for a web design studio called "PixelForge Studio" with:
+A professional portfolio website for a web design studio called "PixelForge-AZ Studio" with:
 - Modern, clean design suitable for entrepreneurs
 - AI chatbot integration using OpenAI GPT-5.2
 - User-controlled scroll animations
 - Dynamic background color transitions (Blue-Teal theme)
+- Full backend with authentication and admin panel
 
 ## What's Been Implemented
 
-### Core Features
-1. **Full-Stack Architecture**
-   - React frontend with TailwindCSS and Shadcn UI
-   - FastAPI backend with MongoDB
-   - AI chatbot using OpenAI GPT-5.2 (Emergent LLM Key)
-
-2. **Pages Implemented**
+### Frontend Features
+1. **Pages**
    - Homepage with hero, services (animated icons), portfolio section
-   - About page with story and values sections (team removed)
-   - Contact page with email/phone only (location/hours removed)
+   - About page with story and values sections
+   - Contact page with email/phone contact form
+   - Login/Register page
+   - Admin Panel (dashboard, portfolio management, submissions)
 
-3. **Design Theme - Blue/Teal Gradient**
+2. **Design Theme - Blue/Teal Gradient**
    - Primary colors: Blue (#0ea5e9) to Teal (#14b8a6)
    - Scroll-based background gradient transition
    - Consistent color scheme across all pages
 
-4. **Interactive Features**
-   - Service icon animations on hover:
-     - Palette: color inversion
-     - Cart: rolling animation
-     - Phone: ringing animation
-     - Bot: reacting animation
-     - Search: zoom animation
-     - Wrench: turning animation
-   - Value icon animations (About page):
-     - Target: arrow hitting bullseye
-     - Heart: fill with white
-     - Rocket: launch upwards
-     - Medal: shining effect
-   - Portfolio filter (fixed category switching bug)
-   - 3D card tilt effects on hover
+3. **Interactive Features**
+   - Service icon animations on hover (palette, cart, phone, bot, search, wrench)
+   - Value icon animations (target, heart, rocket, medal)
+   - Card pop-up animations
+   - Portfolio category filter
 
-5. **Chatbot Features**
-   - Short, professional responses
-   - Demo request handling with portfolio links
-   - Session management
+### Backend Features
+1. **Authentication System**
+   - JWT token-based auth
+   - User registration (first user = admin)
+   - Login/logout
+   - Protected routes
 
-6. **Contact Form with Email (REQUIRES API KEY)**
-   - Form submission saves to MongoDB
-   - Email sending to naseemazhan@outlook.com via Resend
+2. **Portfolio Management (CRUD)**
+   - Create, Read, Update, Delete projects
+   - Public read access
+   - Admin-only write access
+
+3. **Contact Form**
+   - Form submission storage in MongoDB
+   - Email sending (requires Resend API key)
    - AI-enhanced message formatting
 
-## API Endpoints
-- `POST /api/chat` - Chat with AI assistant
-- `GET /api/chat/history/{session_id}` - Get chat history
-- `POST /api/contact` - Submit contact form (DB only)
-- `POST /api/contact/send-email` - Submit with email sending
-- `GET /api/contact/submissions` - Get all submissions
+4. **AI Chatbot**
+   - OpenAI GPT-5.2 integration
+   - Session management
+   - Short, professional responses
+   - Demo request handling
 
-## Environment Variables Required
+5. **Admin Panel**
+   - Dashboard with statistics
+   - Portfolio project management
+   - Contact submission viewer
+   - Mark as read / delete submissions
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login
+- `GET /api/auth/me` - Get current user
+
+### Portfolio
+- `GET /api/portfolio` - List all (public)
+- `GET /api/portfolio/{id}` - Get one (public)
+- `POST /api/portfolio` - Create (admin)
+- `PUT /api/portfolio/{id}` - Update (admin)
+- `DELETE /api/portfolio/{id}` - Delete (admin)
+
+### Admin
+- `GET /api/admin/dashboard` - Stats
+- `GET /api/admin/submissions` - All submissions
+- `PUT /api/admin/submissions/{id}/read` - Mark read
+- `DELETE /api/admin/submissions/{id}` - Delete
+- `GET /api/admin/users` - List users
+
+### Chat & Contact
+- `POST /api/chat` - Chat with AI
+- `GET /api/chat/history/{session_id}` - Chat history
+- `POST /api/contact` - Submit form
+- `POST /api/contact/send-email` - Submit with email
+
+## Database Schema (MongoDB)
+- `users`: id, email, name, password (hashed), is_admin, created_at
+- `portfolio`: id, title, description, category, image, features, demo_url, created_at, updated_at
+- `contact_submissions`: id, name, email, subject, message, submitted_at, is_read
+- `chat_sessions`: session_id, messages[], created_at, updated_at
+
+## Admin Credentials
+- Email: admin@pixelforge.com
+- Password: admin123
+
+## Environment Variables
 ```
+# Backend (.env)
 MONGO_URL=mongodb://localhost:27017
 DB_NAME=test_database
 EMERGENT_LLM_KEY=sk-emergent-xxx
-RESEND_API_KEY=re_xxx (REQUIRED for email functionality)
-SENDER_EMAIL=onboarding@resend.dev
+RESEND_API_KEY= (optional, for email)
+RECIPIENT_EMAIL=naseemazhan@outlook.com
+JWT_SECRET=pixelforge-az-secret-key-2024
+
+# Frontend (.env)
+REACT_APP_BACKEND_URL=https://...
 ```
 
-## Database Schema (MongoDB)
-- `chat_sessions`: session_id, messages[], created_at, updated_at
-- `contact_submissions`: name, email, subject, message, submitted_at
+## File Structure
+```
+/app
+├── backend/
+│   ├── routes/
+│   │   ├── auth.py
+│   │   ├── chat.py
+│   │   ├── contact.py
+│   │   ├── portfolio.py
+│   │   └── admin.py
+│   ├── chat_service.py
+│   ├── models.py
+│   └── server.py
+├── frontend/src/
+│   ├── pages/
+│   │   ├── HomePage.jsx
+│   │   ├── AboutPage.jsx
+│   │   ├── ContactPage.jsx
+│   │   ├── LoginPage.jsx
+│   │   └── AdminPage.jsx
+│   └── components/
+│       ├── Header.jsx
+│       ├── Footer.jsx
+│       ├── ChatBot.jsx
+│       └── ...
+```
 
-## Completed in Latest Session (Dec 2025)
-- ✅ Removed "Trusted by 500+ businesses" badge from hero
-- ✅ Removed stats section (projects, satisfaction, team)
-- ✅ Added animated icons for services section
-- ✅ Fixed portfolio category filter glitch
-- ✅ Added value icon animations on About page
-- ✅ Removed Team section from About page
-- ✅ Removed Location and Business Hours from Contact page
-- ✅ Updated chatbot for shorter responses
-- ✅ Added demo request handling in chatbot
-- ✅ Set up email integration with AI enhancement (needs API key)
+## Completed Features
+- ✅ Full authentication system
+- ✅ Portfolio CRUD backend
+- ✅ Admin panel frontend
+- ✅ Contact submissions management
+- ✅ Dashboard statistics
+- ✅ Dynamic portfolio loading from API
+- ✅ All icon animations
+- ✅ Blue-teal theme
 
-## Pending/Notes
-- **RESEND_API_KEY REQUIRED**: Email functionality needs Resend API key to work
-- Without key, form saves to DB but doesn't send emails
-
-## Backlog / Future Tasks
-1. **P1**: Get Resend API key for email functionality
-2. **P1**: Backend for portfolio section (replace mock data)
-3. **P2**: Add more demo websites to portfolio
-4. **P3**: Blog functionality
-5. **P3**: Newsletter subscription
+## Pending
+- Email sending (needs Resend API key)
