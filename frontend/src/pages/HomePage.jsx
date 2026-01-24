@@ -79,11 +79,11 @@ const HomePage = () => {
   const getIconAnimationClass = (iconName) => {
     switch(iconName) {
       case 'Palette': return 'group-hover:animate-palette-invert';
-      case 'ShoppingCart': return 'group-hover:animate-cart-roll';
-      case 'Smartphone': return 'group-hover:animate-phone-activate';
-      case 'Bot': return 'group-hover:animate-bot-react';
-      case 'Search': return 'group-hover:animate-search-zoom';
-      case 'Wrench': return 'group-hover:animate-wrench-turn';
+      case 'ShoppingCart': return 'group-hover:animate-cart-run';
+      case 'Smartphone': return 'group-hover:animate-phone-vibrate';
+      case 'Bot': return 'group-hover:animate-bot-wink';
+      case 'Search': return 'group-hover:animate-search-sparkle';
+      case 'Wrench': return 'group-hover:animate-wrench-shake';
       default: return '';
     }
   };
@@ -218,35 +218,14 @@ const HomePage = () => {
                   style={{ 
                     transitionDelay: `${delay}ms`,
                   }}
-                  onMouseMove={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = (y - centerY) / 10;
-                    const rotateY = (centerX - x) / 10;
-                    e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.05)`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
-                  }}
                   data-testid={`service-card-${service.id}`}
                 >
-                  {/* Animated gradient overlay */}
-                  <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{
-                      background: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(20, 184, 166, 0.15), transparent 50%)'
-                    }}
-                  />
-                  
                   {/* Shine effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   
                   <CardHeader className="relative z-10">
-                    <div className={`w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 transition-all duration-500 shadow-lg shadow-teal-500/30 group-hover:shadow-teal-500/50 ${iconAnimClass}`}>
-                      <Icon className="w-8 h-8 text-white transition-transform duration-300" />
+                    <div className={`w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-teal-500/30 overflow-hidden ${iconAnimClass}`}>
+                      <Icon className="w-8 h-8 text-white" />
                     </div>
                     <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors duration-300">{service.title}</CardTitle>
                   </CardHeader>
@@ -314,20 +293,6 @@ const HomePage = () => {
                   style={{ 
                     animationDelay: `${index * 100}ms`,
                     animationFillMode: 'both',
-                    transformStyle: 'preserve-3d'
-                  }}
-                  onMouseMove={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = (y - centerY) / 15;
-                    const rotateY = (centerX - x) / 15;
-                    e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.08)`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
                   }}
                   data-testid={`portfolio-card-${website.id}`}
                 >
@@ -335,12 +300,9 @@ const HomePage = () => {
                     <img
                       src={website.image}
                       alt={website.title}
-                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2"
+                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-teal-900/80 via-teal-900/40 to-transparent group-hover:from-teal-900/90 transition-all duration-500"></div>
-                    
-                    {/* Animated overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/0 via-teal-600/0 to-cyan-600/0 group-hover:from-blue-600/20 group-hover:via-teal-600/20 group-hover:to-cyan-600/20 transition-all duration-700" />
                     
                     <Badge className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-semibold shadow-2xl backdrop-blur-sm border-0 transform group-hover:scale-110 transition-transform duration-300">
                       {website.category}

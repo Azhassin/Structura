@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Code2, Rocket, Users, Award, Target, Heart, Sparkles } from 'lucide-react';
+import { Code2, Rocket, Award, Target, Heart, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import AnimatedBackground from '../components/AnimatedBackground';
@@ -47,7 +47,7 @@ const AboutPage = () => {
       icon: Target,
       title: 'Mission Driven',
       description: 'We are committed to delivering exceptional web solutions that drive real business results.',
-      animClass: 'group-hover:animate-target-hit'
+      animClass: 'group-hover:animate-target-arrow'
     },
     {
       icon: Heart,
@@ -59,13 +59,13 @@ const AboutPage = () => {
       icon: Rocket,
       title: 'Innovation First',
       description: 'We leverage the latest technologies, including AI, to create cutting-edge digital experiences.',
-      animClass: 'group-hover:animate-rocket-launch'
+      animClass: 'group-hover:animate-rocket-fire'
     },
     {
       icon: Award,
       title: 'Quality Assured',
       description: 'Every project undergoes rigorous testing to ensure the highest standards of excellence.',
-      animClass: 'group-hover:animate-medal-shine'
+      animClass: 'group-hover:animate-medal-sparkle'
     }
   ];
 
@@ -156,24 +156,11 @@ const AboutPage = () => {
                   key={index}
                   className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(20,184,166,0.4)] scroll-animate opacity-0 translate-y-10 group cursor-pointer"
                   style={{ transitionDelay: `${index * 100}ms` }}
-                  onMouseMove={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = (y - centerY) / 15;
-                    const rotateY = (centerX - x) / 15;
-                    e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-                  }}
                   data-testid={`value-card-${index}`}
                 >
                   <CardHeader>
-                    <div className={`w-14 h-14 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 transition-all duration-500 shadow-lg shadow-teal-500/30 overflow-hidden ${value.animClass}`}>
-                      <Icon className="w-7 h-7 text-white icon-inner" />
+                    <div className={`w-14 h-14 bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-teal-500/30 overflow-hidden relative ${value.animClass}`}>
+                      <Icon className="w-7 h-7 text-white relative z-10" />
                     </div>
                     <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-teal-600 transition-colors duration-300">{value.title}</CardTitle>
                   </CardHeader>
