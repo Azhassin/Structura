@@ -150,7 +150,7 @@ const ContactPage = () => {
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
-              Let's discuss your project and bring your vision to life
+              Let&apos;s discuss your project and bring your vision to life
             </p>
           </div>
         </div>

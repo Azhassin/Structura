@@ -392,7 +392,7 @@ const HomePage = () => {
               Ready to Elevate Your Business?
             </h2>
             <p className="text-xl text-cyan-100 mb-10 max-w-2xl mx-auto">
-              Let's create something extraordinary together. Get started with a free consultation.
+              Let&apos;s create something extraordinary together. Get started with a free consultation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">
