@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { X, Send, MessageSquare, Sparkles } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { X, Send, MessageSquare, Sparkles, ExternalLink } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import axios from 'axios';
@@ -8,12 +9,14 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const ChatBot = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 1,
       role: 'assistant',
-      content: 'Hello! Welcome to Structura Studio. How can I help you today? 👋'
+      content: 'Hello! Welcome to Structura Studio. How can I help you today? 👋',
+      navigate: null
     }
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -41,13 +44,35 @@ const ChatBot = () => {
     scrollToBottom();
   }, [messages]);
 
+  // Handle navigation
+  const handleNavigate = (path) => {
+    if (path) {
+      // Check if it's a hash link for same-page scrolling
+      if (path.startsWith('/#')) {
+        const elementId = path.substring(2);
+        navigate('/');
+        setTimeout(() => {
+          const element = document.getElementById(elementId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      } else {
+        navigate(path);
+      }
+      // Optionally close the chatbot after navigation
+      // setIsOpen(false);
+    }
+  };
+
   const handleSend = async () => {
     if (!inputValue.trim()) return;
 
     const userMessage = {
       id: messages.length + 1,
       role: 'user',
-      content: inputValue
+      content: inputValue,
+      navigate: null
     };
 
     setMessages([...messages, userMessage]);
@@ -63,7 +88,8 @@ const ChatBot = () => {
       const botMessage = {
         id: messages.length + 2,
         role: 'assistant',
-        content: response.data.response
+        content: response.data.response,
+        navigate: response.data.navigate || null
       };
 
       if (response.data.session_id !== sessionId) {
@@ -72,12 +98,20 @@ const ChatBot = () => {
       }
 
       setMessages(prev => [...prev, botMessage]);
+
+      // Auto-navigate after a short delay if navigation is requested
+      if (response.data.navigate) {
+        setTimeout(() => {
+          handleNavigate(response.data.navigate);
+        }, 1500);
+      }
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage = {
         id: messages.length + 2,
         role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.'
+        content: 'Sorry, I encountered an error. Please try again.',
+        navigate: null
       };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
@@ -144,6 +178,17 @@ const ChatBot = () => {
                   }`}
                 >
                   <p className="text-sm leading-relaxed">{message.content}</p>
+                  {/* Navigation button for assistant messages with navigation */}
+                  {message.role === 'assistant' && message.navigate && (
+                    <Button
+                      onClick={() => handleNavigate(message.navigate)}
+                      size="sm"
+                      className="mt-2 bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white text-xs rounded-full px-3 py-1 h-auto"
+                    >
+                      <ExternalLink className="w-3 h-3 mr-1" />
+                      Go there now
+                    </Button>
+                  )}
                 </div>
               </div>
             ))}
