@@ -34,40 +34,36 @@ async def enhance_message_with_ai(name: str, email: str, subject: str, message: 
     Enhance the user's message with AI to make it clearer and more structured
     """
     try:
-        chat = Chat(
+        chat = LlmChat(
             api_key=EMERGENT_LLM_KEY,
-            model="gpt-4o-mini"
+            session_id=f"contact_enhance_{datetime.utcnow().timestamp()}",
+            system_message="You are a helpful assistant that reformats client inquiries to be clear and professional."
         )
         
-        prompt = f"""You are helping to format a client inquiry email for a web design studio called PixelForge Studio.
+        chat.with_model("openai", "gpt-4o-mini")
+        
+        prompt = f"""Reformat this client inquiry for a web design studio:
 
-The client has submitted the following:
-- Name: {name}
-- Email: {email}
-- Subject: {subject}
-- Original Message: {message}
+Name: {name}
+Email: {email}  
+Subject: {subject}
+Message: {message}
 
-Please rewrite this message to be:
+Make it:
 1. Professional and clear
-2. Well-structured with bullet points for any specific requirements
-3. Highlighting key points the client needs
-4. Preserving all original information and intent
-5. Keep it concise but comprehensive
+2. Use bullet points for requirements
+3. Keep all original info
+4. Be concise
 
-Format the enhanced message as clean HTML that will look good in an email. Use simple inline styles.
-Do NOT add any greetings or sign-offs - just the enhanced content of their requirements.
-Start directly with the client's requirements."""
+Output as clean HTML with inline styles. No greetings - just the requirements."""
 
-        response = await asyncio.to_thread(
-            chat.send_message,
-            prompt
-        )
+        user_msg = UserMessage(text=prompt)
+        response = await chat.send_message(user_msg)
         
         return response
         
     except Exception as e:
         logger.error(f"AI enhancement failed: {str(e)}")
-        # Return original message if AI fails
         return f"<p>{message}</p>"
 
 @router.post("/contact", response_model=ContactResponse)
