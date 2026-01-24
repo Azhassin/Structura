@@ -78,12 +78,12 @@ const HomePage = () => {
   // Get icon animation class based on icon name
   const getIconAnimationClass = (iconName) => {
     switch(iconName) {
-      case 'Palette': return 'group-hover:animate-palette-invert';
-      case 'ShoppingCart': return 'group-hover:animate-cart-run';
-      case 'Smartphone': return 'group-hover:animate-phone-vibrate';
-      case 'Bot': return 'group-hover:animate-bot-wink';
-      case 'Search': return 'group-hover:animate-search-sparkle';
-      case 'Wrench': return 'group-hover:animate-wrench-shake';
+      case 'Palette': return 'icon-palette';
+      case 'ShoppingCart': return 'icon-cart';
+      case 'Smartphone': return 'icon-phone';
+      case 'Bot': return 'icon-bot';
+      case 'Search': return 'icon-search';
+      case 'Wrench': return 'icon-wrench';
       default: return '';
     }
   };
