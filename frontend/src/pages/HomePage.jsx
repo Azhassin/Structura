@@ -313,50 +313,62 @@ const HomePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredWebsites.length > 0 ? (
               filteredWebsites.map((website, index) => (
-                <Card
+                <Link 
                   key={`${website.id}-${selectedCategory}`}
-                  className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-700 hover:shadow-[0_25px_70px_-20px_rgba(20,184,166,0.5)] overflow-hidden group cursor-pointer relative animate-fade-in-up"
-                  style={{ 
-                    animationDelay: `${index * 100}ms`,
-                    animationFillMode: 'both',
-                  }}
-                  data-testid={`portfolio-card-${website.id}`}
+                  to={`/demo/${website.category.toLowerCase().replace(/\s+/g, '-')}`}
+                  className="block"
                 >
-                  <div className="relative h-56 overflow-hidden">
-                    <img
-                      src={website.image}
-                      alt={website.title}
-                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-teal-900/80 via-teal-900/40 to-transparent group-hover:from-teal-900/90 transition-all duration-500"></div>
-                    
-                    <Badge className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-semibold shadow-2xl backdrop-blur-sm border-0 transform group-hover:scale-110 transition-transform duration-300">
-                      {website.category}
-                    </Badge>
-                    
-                    {/* Sparkle effect on hover */}
-                    <Sparkles className="absolute top-4 left-4 w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:rotate-180" />
-                  </div>
-                  <CardHeader>
-                    <CardTitle className="text-xl font-bold text-slate-900">{website.title}</CardTitle>
-                    <CardDescription className="text-gray-600">
-                      {website.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2">
-                      {website.features.slice(0, 3).map((feature, idx) => (
-                        <Badge
-                          key={idx}
-                          variant="outline"
-                          className="border-teal-200 text-teal-600 text-xs"
-                        >
-                          {feature}
-                        </Badge>
-                      ))}
+                  <Card
+                    className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-700 hover:shadow-[0_25px_70px_-20px_rgba(20,184,166,0.5)] overflow-hidden group cursor-pointer relative animate-fade-in-up h-full"
+                    style={{ 
+                      animationDelay: `${index * 100}ms`,
+                      animationFillMode: 'both',
+                    }}
+                    data-testid={`portfolio-card-${website.id}`}
+                  >
+                    <div className="relative h-56 overflow-hidden">
+                      <img
+                        src={website.image}
+                        alt={website.title}
+                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-teal-900/80 via-teal-900/40 to-transparent group-hover:from-teal-900/90 transition-all duration-500"></div>
+                      
+                      <Badge className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-semibold shadow-2xl backdrop-blur-sm border-0 transform group-hover:scale-110 transition-transform duration-300">
+                        {website.category}
+                      </Badge>
+                      
+                      {/* View Demo overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
+                        <span className="bg-white/90 text-teal-600 font-semibold px-6 py-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                          View Demo →
+                        </span>
+                      </div>
+                      
+                      {/* Sparkle effect on hover */}
+                      <Sparkles className="absolute top-4 left-4 w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:rotate-180" />
                     </div>
-                  </CardContent>
-                </Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl font-bold text-slate-900">{website.title}</CardTitle>
+                      <CardDescription className="text-gray-600">
+                        {website.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-2">
+                        {website.features.slice(0, 3).map((feature, idx) => (
+                          <Badge
+                            key={idx}
+                            variant="outline"
+                            className="border-teal-200 text-teal-600 text-xs"
+                          >
+                            {feature}
+                          </Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))
             ) : (
               <div className="col-span-full text-center py-12">
