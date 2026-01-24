@@ -214,7 +214,7 @@ const HomePage = () => {
               return (
                 <Card
                   key={service.id}
-                  className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-300 hover:shadow-[0_25px_50px_-12px_rgba(20,184,166,0.5)] hover:-translate-y-3 scroll-animate opacity-0 translate-y-10 group cursor-pointer relative overflow-hidden"
+                  className="bg-white/90 backdrop-blur-md border-2 border-teal-100 hover:border-teal-400 transition-all duration-200 hover:shadow-[0_30px_60px_-15px_rgba(20,184,166,0.6)] hover:-translate-y-4 hover:scale-105 scroll-animate opacity-0 translate-y-10 group cursor-pointer relative overflow-hidden"
                   style={{ 
                     transitionDelay: `${delay}ms`,
                   }}

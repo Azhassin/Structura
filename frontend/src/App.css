@@ -2,7 +2,7 @@
 .scroll-animate {
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .scroll-animate.animate-in {
@@ -25,7 +25,7 @@
   animation: gradient-shift 3s ease infinite;
 }
 
-/* Pulse animation - Updated for teal */
+/* Pulse animation */
 @keyframes pulse-glow {
   0%, 100% {
     box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
@@ -41,22 +41,34 @@
 
 /* ========== HOME PAGE SERVICE ICON ANIMATIONS ========== */
 
-/* 1. Palette - Color Inversion */
-@keyframes palette-invert {
-  0%, 100% {
-    filter: hue-rotate(0deg);
+/* 1. Palette - Colorful Rainbow Animation */
+@keyframes palette-colorful {
+  0% {
+    filter: hue-rotate(0deg) brightness(1);
   }
-  50% {
-    filter: hue-rotate(180deg) brightness(1.2);
+  20% {
+    filter: hue-rotate(60deg) brightness(1.2);
+  }
+  40% {
+    filter: hue-rotate(120deg) brightness(1.3);
+  }
+  60% {
+    filter: hue-rotate(200deg) brightness(1.2);
+  }
+  80% {
+    filter: hue-rotate(300deg) brightness(1.1);
+  }
+  100% {
+    filter: hue-rotate(360deg) brightness(1);
   }
 }
 
 .icon-palette {
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
 }
 
 .group:hover .icon-palette {
-  animation: palette-invert 0.8s ease-in-out;
+  animation: palette-colorful 0.5s ease-in-out;
 }
 
 /* 2. Cart - Running Forward */
@@ -64,17 +76,14 @@
   0% {
     transform: translateX(0);
   }
-  20% {
-    transform: translateX(3px) rotate(-5deg);
+  25% {
+    transform: translateX(6px) rotate(-8deg);
   }
-  40% {
-    transform: translateX(8px) rotate(0deg);
+  50% {
+    transform: translateX(12px) rotate(0deg);
   }
-  60% {
-    transform: translateX(12px) rotate(5deg);
-  }
-  80% {
-    transform: translateX(8px) rotate(0deg);
+  75% {
+    transform: translateX(6px) rotate(8deg);
   }
   100% {
     transform: translateX(0);
@@ -82,11 +91,11 @@
 }
 
 .icon-cart {
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
 }
 
 .group:hover .icon-cart {
-  animation: cart-run 0.6s ease-in-out;
+  animation: cart-run 0.35s ease-in-out;
 }
 
 /* 3. Phone - Vibrating */
@@ -94,41 +103,26 @@
   0%, 100% {
     transform: translateX(0) rotate(0deg);
   }
-  10% {
-    transform: translateX(-2px) rotate(-2deg);
-  }
   20% {
-    transform: translateX(2px) rotate(2deg);
-  }
-  30% {
-    transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-3px) rotate(-3deg);
   }
   40% {
-    transform: translateX(2px) rotate(1deg);
-  }
-  50% {
-    transform: translateX(-1px) rotate(-2deg);
+    transform: translateX(3px) rotate(3deg);
   }
   60% {
-    transform: translateX(1px) rotate(2deg);
-  }
-  70% {
-    transform: translateX(-1px) rotate(-1deg);
+    transform: translateX(-3px) rotate(-3deg);
   }
   80% {
-    transform: translateX(1px) rotate(1deg);
-  }
-  90% {
-    transform: translateX(0) rotate(0deg);
+    transform: translateX(3px) rotate(3deg);
   }
 }
 
 .icon-phone {
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
 }
 
 .group:hover .icon-phone {
-  animation: phone-vibrate 0.5s ease-in-out;
+  animation: phone-vibrate 0.3s ease-in-out;
 }
 
 /* 4. Bot - Winking */
@@ -136,86 +130,65 @@
   0%, 100% {
     transform: scale(1);
   }
-  15% {
-    transform: scale(1.05);
+  25% {
+    transform: scale(1.15) scaleY(0.8);
   }
-  30% {
-    transform: scale(1) scaleY(0.9);
-  }
-  45% {
-    transform: scale(1.1);
-  }
-  60% {
-    transform: scale(1) scaleY(0.85);
+  50% {
+    transform: scale(1.2);
   }
   75% {
-    transform: scale(1.05);
+    transform: scale(1.1) scaleY(0.85);
   }
 }
 
 .icon-bot {
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
 }
 
 .group:hover .icon-bot {
-  animation: bot-wink 0.7s ease-in-out;
+  animation: bot-wink 0.4s ease-in-out;
 }
 
 /* 5. Search - Sparkling */
 @keyframes search-sparkle {
   0%, 100% {
-    filter: brightness(1) drop-shadow(0 0 0 transparent);
-  }
-  25% {
-    filter: brightness(1.3) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+    filter: brightness(1);
   }
   50% {
-    filter: brightness(1.5) drop-shadow(0 0 15px rgba(255, 255, 255, 1)) drop-shadow(0 0 25px rgba(20, 184, 166, 0.6));
-  }
-  75% {
-    filter: brightness(1.3) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+    filter: brightness(1.8) drop-shadow(0 0 12px rgba(255, 255, 255, 1));
   }
 }
 
 .icon-search {
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
 }
 
 .group:hover .icon-search {
-  animation: search-sparkle 0.8s ease-in-out;
+  animation: search-sparkle 0.4s ease-in-out;
 }
 
-/* 6. Wrench - Just Shaking */
+/* 6. Wrench - Shaking */
 @keyframes wrench-shake {
   0%, 100% {
     transform: rotate(0deg);
   }
-  15% {
-    transform: rotate(-15deg);
+  25% {
+    transform: rotate(-20deg);
   }
-  30% {
-    transform: rotate(12deg);
-  }
-  45% {
-    transform: rotate(-10deg);
-  }
-  60% {
-    transform: rotate(8deg);
+  50% {
+    transform: rotate(20deg);
   }
   75% {
-    transform: rotate(-5deg);
-  }
-  90% {
-    transform: rotate(3deg);
+    transform: rotate(-15deg);
   }
 }
 
 .icon-wrench {
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
 }
 
 .group:hover .icon-wrench {
-  animation: wrench-shake 0.5s ease-in-out;
+  animation: wrench-shake 0.3s ease-in-out;
 }
 
 /* ========== ABOUT PAGE VALUE ICON ANIMATIONS ========== */
@@ -223,35 +196,25 @@
 /* 7. Target - Arrow Hitting Bullseye */
 @keyframes target-arrow {
   0% {
-    clip-path: inset(0 100% 0 0);
-    transform: scale(0.9);
+    transform: scale(0.8);
+    opacity: 0.5;
   }
-  40% {
-    clip-path: inset(0 50% 0 0);
-    transform: scale(0.95);
-  }
-  60% {
-    clip-path: inset(0 0 0 0);
-    transform: scale(1.15);
-  }
-  70% {
-    transform: scale(1.2);
-  }
-  85% {
-    transform: scale(1.1);
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
   }
   100% {
-    clip-path: inset(0 0 0 0);
     transform: scale(1);
+    opacity: 1;
   }
 }
 
 .icon-target {
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
 }
 
 .group:hover .icon-target {
-  animation: target-arrow 0.8s ease-out;
+  animation: target-arrow 0.35s ease-out;
 }
 
 /* 8. Heart - Pop up and glow white */
@@ -260,49 +223,28 @@
     transform: scale(1);
     filter: brightness(1);
   }
-  30% {
-    transform: scale(1.2);
-    filter: brightness(1.3) drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
-  }
   50% {
     transform: scale(1.4);
-    filter: brightness(1.5) drop-shadow(0 0 15px rgba(255, 255, 255, 1)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.8));
-  }
-  70% {
-    transform: scale(1.2);
-    filter: brightness(1.3) drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+    filter: brightness(1.8) drop-shadow(0 0 15px rgba(255, 255, 255, 1));
   }
 }
 
 .icon-heart {
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
 }
 
 .group:hover .icon-heart {
-  animation: heart-fill 0.6s ease-in-out;
+  animation: heart-fill 0.35s ease-in-out;
 }
 
 /* 9. Rocket - Firing and Going Top-Right */
 @keyframes rocket-fire {
   0% {
     transform: translate(0, 0) rotate(0deg);
-    filter: brightness(1);
   }
-  20% {
-    transform: translate(0, 2px) rotate(-5deg);
-    filter: brightness(1.1);
-  }
-  40% {
-    transform: translate(3px, -5px) rotate(-30deg);
-    filter: brightness(1.3) drop-shadow(0 4px 8px rgba(251, 146, 60, 0.6));
-  }
-  60% {
-    transform: translate(8px, -12px) rotate(-40deg);
-    filter: brightness(1.4) drop-shadow(0 6px 12px rgba(251, 146, 60, 0.8));
-  }
-  80% {
-    transform: translate(12px, -18px) rotate(-45deg);
-    filter: brightness(1.5) drop-shadow(0 8px 16px rgba(251, 146, 60, 1));
+  50% {
+    transform: translate(10px, -15px) rotate(-45deg);
+    filter: brightness(1.5) drop-shadow(0 5px 10px rgba(251, 146, 60, 1));
   }
   100% {
     transform: translate(0, 0) rotate(0deg);
@@ -311,43 +253,30 @@
 }
 
 .icon-rocket {
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
 }
 
 .group:hover .icon-rocket {
-  animation: rocket-fire 0.8s ease-out;
+  animation: rocket-fire 0.4s ease-out;
 }
 
 /* 10. Medal - Shining and Sparkling */
 @keyframes medal-sparkle {
   0%, 100% {
-    filter: brightness(1) drop-shadow(0 0 0 transparent);
-  }
-  20% {
-    filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
-  }
-  40% {
-    filter: brightness(1.5) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
+    filter: brightness(1);
   }
   50% {
-    filter: brightness(1.8) drop-shadow(0 0 15px rgba(255, 215, 0, 1)) drop-shadow(0 0 30px rgba(255, 255, 255, 1));
-    transform: scale(1.1);
-  }
-  60% {
-    filter: brightness(1.5) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
-  }
-  80% {
-    filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
-    transform: scale(1.05);
+    filter: brightness(2) drop-shadow(0 0 15px rgba(255, 215, 0, 1));
+    transform: scale(1.15);
   }
 }
 
 .icon-medal {
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
 }
 
 .group:hover .icon-medal {
-  animation: medal-sparkle 0.9s ease-in-out;
+  animation: medal-sparkle 0.4s ease-in-out;
 }
 
 /* ========== OTHER ANIMATIONS ========== */
@@ -365,7 +294,7 @@
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
+  animation: fade-in-up 0.5s ease-out forwards;
 }
 
 /* Smooth scrolling */
@@ -390,25 +319,4 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #0284c7, #0d9488);
-}
-
-/* Floating animation delays */
-.animation-delay-100 {
-  animation-delay: 0.1s;
-}
-
-.animation-delay-200 {
-  animation-delay: 0.2s;
-}
-
-.animation-delay-300 {
-  animation-delay: 0.3s;
-}
-
-.animation-delay-400 {
-  animation-delay: 0.4s;
-}
-
-.animation-delay-500 {
-  animation-delay: 0.5s;
 }
