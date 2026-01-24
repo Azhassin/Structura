@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Zap, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Zap, Mail, Phone } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -21,20 +21,6 @@ const Footer = () => {
             <p className="text-gray-300 text-sm mb-4">
               Crafting exceptional digital experiences for forward-thinking businesses.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">
-                <Instagram className="w-5 h-5" />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -56,11 +42,6 @@ const Footer = () => {
                   Contact
                 </Link>
               </li>
-              <li>
-                <a href="#services" className="text-gray-300 hover:text-teal-400 transition-colors text-sm">
-                  Services
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -81,15 +62,11 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-gray-300 text-sm">
                 <Mail className="w-4 h-4 mt-0.5 text-teal-400" />
-                <span>hello@pixelforge.studio</span>
+                <span>naseemazhan@outlook.com</span>
               </li>
               <li className="flex items-start gap-2 text-gray-300 text-sm">
                 <Phone className="w-4 h-4 mt-0.5 text-teal-400" />
-                <span>+1 (555) 123-4567</span>
-              </li>
-              <li className="flex items-start gap-2 text-gray-300 text-sm">
-                <MapPin className="w-4 h-4 mt-0.5 text-teal-400" />
-                <span>123 Innovation Drive, Tech Valley</span>
+                <span>+44 7342328508</span>
               </li>
             </ul>
           </div>
