@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Mail, Phone, Send, CheckCircle, Sparkles } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -16,6 +17,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const ContactPage = () => {
+  const location = useLocation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,8 +29,18 @@ const ContactPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [scrollY, setScrollY] = useState(0);
 
+  // Handle hash navigation to scroll to contact form
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (location.hash === '#contact-form-section') {
+      setTimeout(() => {
+        const formElement = document.getElementById('contact-form-section');
+        if (formElement) {
+          formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 500);
+    } else {
+      window.scrollTo(0, 0);
+    }
 
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -57,7 +69,7 @@ const ContactPage = () => {
       window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
-  }, []);
+  }, [location]);
 
   const handleChange = (e) => {
     setFormData({
