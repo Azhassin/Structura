@@ -47,25 +47,25 @@ const AboutPage = () => {
       icon: Target,
       title: 'Mission Driven',
       description: 'We are committed to delivering exceptional web solutions that drive real business results.',
-      animClass: 'group-hover:animate-target-arrow'
+      animClass: 'icon-target'
     },
     {
       icon: Heart,
       title: 'Client Focused',
       description: 'Your success is our success. We work closely with you to understand and achieve your goals.',
-      animClass: 'group-hover:animate-heart-fill'
+      animClass: 'icon-heart'
     },
     {
       icon: Rocket,
       title: 'Innovation First',
       description: 'We leverage the latest technologies, including AI, to create cutting-edge digital experiences.',
-      animClass: 'group-hover:animate-rocket-fire'
+      animClass: 'icon-rocket'
     },
     {
       icon: Award,
       title: 'Quality Assured',
       description: 'Every project undergoes rigorous testing to ensure the highest standards of excellence.',
-      animClass: 'group-hover:animate-medal-sparkle'
+      animClass: 'icon-medal'
     }
   ];
 
