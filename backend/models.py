@@ -28,6 +28,17 @@ class TokenResponse(BaseModel):
 
 
 # ========== CHAT MODELS ==========
+class ChatMessage(BaseModel):
+    role: str
+    content: str
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+class ChatSession(BaseModel):
+    session_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    messages: List['ChatMessage'] = []
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
 class ChatRequest(BaseModel):
     session_id: str
     message: str
