@@ -99,7 +99,7 @@ const AboutPage = () => {
             </Badge>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
               <span className="bg-gradient-to-r from-blue-600 via-teal-500 to-cyan-500 bg-clip-text text-transparent">
-                PixelForge-AZ
+                Structura
               </span>
               <span className="block mt-2 text-slate-800">Studio</span>
             </h1>

@@ -13,7 +13,7 @@ const ChatBot = () => {
     {
       id: 1,
       role: 'assistant',
-      content: 'Hello! Welcome to PixelForge-AZ Studio. How can I help you today? 👋'
+      content: 'Hello! Welcome to Structura Studio. How can I help you today? 👋'
     }
   ]);
   const [inputValue, setInputValue] = useState('');

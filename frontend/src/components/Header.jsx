@@ -41,7 +41,7 @@ const Header = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
-                PixelForge-AZ
+                Structura
               </span>
               <span className="text-xs text-gray-500 -mt-1">Studio</span>
             </div>
