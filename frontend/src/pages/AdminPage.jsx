@@ -205,7 +205,7 @@ const AdminPage = () => {
             <Sparkles className="w-6 h-6 text-white" />
           </div>
           <div>
-            <span className="font-bold text-lg">PixelForge-AZ</span>
+            <span className="font-bold text-lg">Structura</span>
             <span className="block text-xs text-teal-300">Admin Panel</span>
           </div>
         </div>
