@@ -20,15 +20,20 @@
         -->
         <title>Structura Studio | Web Design Agency</title>
         <style>
-            /* Hide Emergent watermark badge */
-            #emergent-badge, [id*="emergent-badge"], a[href*="emergent.sh"][style*="position: fixed"] {
+            /* Hide Emergent watermark badge - aggressive override */
+            body > a[id="emergent-badge"],
+            body > a[href*="emergent.sh"],
+            a#emergent-badge,
+            #emergent-badge {
                 display: none !important;
                 visibility: hidden !important;
                 opacity: 0 !important;
                 pointer-events: none !important;
                 width: 0 !important;
                 height: 0 !important;
-                overflow: hidden !important;
+                position: absolute !important;
+                left: -9999px !important;
+                top: -9999px !important;
             }
         </style>
         <script>
