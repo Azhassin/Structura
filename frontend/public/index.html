@@ -20,39 +20,21 @@
         -->
         <title>Structura Studio | Web Design Agency</title>
         <style>
-            /* Hide Emergent watermark badge - aggressive override */
-            body > a[id="emergent-badge"],
-            body > a[href*="emergent.sh"],
-            a#emergent-badge,
-            #emergent-badge {
+            /* Hide Emergent watermark badge */
+            #emergent-badge, a[href*="emergent.sh"] {
                 display: none !important;
                 visibility: hidden !important;
-                opacity: 0 !important;
-                pointer-events: none !important;
                 width: 0 !important;
                 height: 0 !important;
-                position: absolute !important;
-                left: -9999px !important;
-                top: -9999px !important;
-                z-index: -9999 !important;
+                overflow: hidden !important;
+                position: fixed !important;
+                left: -99999px !important;
+                top: -99999px !important;
+                pointer-events: none !important;
+                z-index: -99999 !important;
             }
         </style>
-        <script>
-            // Aggressively remove Emergent badge
-            (function() {
-                var remove = function() {
-                    var el = document.getElementById('emergent-badge');
-                    if (el) { el.style.cssText = 'display:none!important;visibility:hidden!important;opacity:0!important;position:absolute!important;left:-9999px!important;'; }
-                    document.querySelectorAll('a[href*="emergent.sh"]').forEach(function(e) { 
-                        e.style.cssText = 'display:none!important;visibility:hidden!important;opacity:0!important;position:absolute!important;left:-9999px!important;';
-                    });
-                };
-                setInterval(remove, 50);
-                document.addEventListener('DOMContentLoaded', remove);
-                window.addEventListener('load', remove);
-            })();
-        </script>
-        <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
+        <!-- Emergent script removed for production deployment -->
         <!--
         These two scripts have been added for the Visual Edits, please do not edit or remove them
         -->
