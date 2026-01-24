@@ -3,36 +3,41 @@ from typing import List, Optional
 from datetime import datetime
 import uuid
 
-# Chat Models
-class ChatMessage(BaseModel):
-    role: str  # "user" or "assistant"
-    content: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
 
-class ChatSession(BaseModel):
-    session_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    messages: List[ChatMessage] = []
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+# ========== AUTH MODELS ==========
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: str
+    name: str
 
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+class UserResponse(BaseModel):
+    id: str
+    email: str
+    name: str
+    is_admin: bool = False
+    created_at: datetime
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    user: UserResponse
+
+
+# ========== CHAT MODELS ==========
 class ChatRequest(BaseModel):
-    session_id: Optional[str] = None
+    session_id: str
     message: str
-    user_id: Optional[str] = None
 
 class ChatResponse(BaseModel):
     response: str
     session_id: str
 
-# Contact Form Models
-class ContactSubmission(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    name: str
-    email: EmailStr
-    subject: str
-    message: str
-    submitted_at: datetime = Field(default_factory=datetime.utcnow)
 
+# ========== CONTACT MODELS ==========
 class ContactRequest(BaseModel):
     name: str
     email: EmailStr
@@ -42,3 +47,41 @@ class ContactRequest(BaseModel):
 class ContactResponse(BaseModel):
     success: bool
     message: str
+
+class ContactSubmission(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: str
+    subject: str
+    message: str
+    submitted_at: datetime
+    is_read: bool = False
+
+
+# ========== PORTFOLIO MODELS ==========
+class PortfolioCreate(BaseModel):
+    title: str
+    description: str
+    category: str
+    image: str
+    features: List[str] = []
+    demo_url: Optional[str] = None
+
+class PortfolioUpdate(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    category: Optional[str] = None
+    image: Optional[str] = None
+    features: Optional[List[str]] = None
+    demo_url: Optional[str] = None
+
+class PortfolioResponse(BaseModel):
+    id: str
+    title: str
+    description: str
+    category: str
+    image: str
+    features: List[str] = []
+    demo_url: Optional[str] = None
+    created_at: datetime
+    updated_at: datetime
