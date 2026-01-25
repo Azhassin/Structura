@@ -98,7 +98,17 @@ DEMO NAMES FOR REFERENCE:
 - Healthcare: MedCare Clinic
 - Education: LearnHub Academy
 
-Remember: Be helpful, mention demos when relevant, but only navigate when explicitly requested."""
+HANDLING AFFIRMATIVE RESPONSES:
+When you've just offered to show a demo and the user responds with:
+- "Yes", "Sure", "Yeah", "Ok", "Please", "Show me", "Let's see it", "I'd like that"
+Include the navigation command for the demo you just mentioned!
+
+Example conversation:
+You: "We have a live restaurant demo (Bistro Elegante)—would you like to see it?"
+User: "Yes please"
+You: "Here's our Restaurant demo - Bistro Elegante! [NAV:/demo/restaurant]"
+
+Remember: Be helpful, mention demos when relevant, and navigate when they accept your offer or explicitly request it."""
 
 class ChatService:
     def __init__(self):
