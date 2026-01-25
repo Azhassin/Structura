@@ -44,9 +44,14 @@ api_router.include_router(admin.router, tags=["admin"])
 # Include the router in the main app
 app.include_router(api_router)
 
-# Health check endpoint for Kubernetes
+# Health check endpoint for Kubernetes (placed before middleware for faster response)
 @app.get("/health")
 async def health_check():
+    return {"status": "healthy", "service": "structura-studio-api"}
+
+# Also add health check under /api for consistency
+@app.get("/api/health")
+async def api_health_check():
     return {"status": "healthy", "service": "structura-studio-api"}
 
 app.add_middleware(
