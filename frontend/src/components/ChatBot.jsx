@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { X, Send, MessageSquare, ExternalLink, RotateCcw } from 'lucide-react';
 import { Button } from './ui/button';
@@ -16,47 +16,47 @@ const WELCOME_MESSAGE = {
   navigate: null
 };
 
+// Helper to get stored messages
+const getStoredMessages = () => {
+  try {
+    const stored = localStorage.getItem('chat_messages');
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    console.error('Failed to parse stored messages:', e);
+  }
+  return [WELCOME_MESSAGE];
+};
+
+// Helper to get stored session ID
+const getStoredSessionId = () => {
+  const stored = localStorage.getItem('chat_session_id');
+  if (stored) {
+    return stored;
+  }
+  const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  localStorage.setItem('chat_session_id', newSessionId);
+  return newSessionId;
+};
+
 const ChatBot = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([WELCOME_MESSAGE]);
+  // Initialize from localStorage immediately
+  const [messages, setMessages] = useState(() => getStoredMessages());
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [sessionId, setSessionId] = useState(null);
+  const [sessionId, setSessionId] = useState(() => getStoredSessionId());
   const messagesEndRef = useRef(null);
 
-  // Load chat history and session from localStorage on mount
-  useEffect(() => {
-    // Load session ID
-    const storedSessionId = localStorage.getItem('chat_session_id');
-    if (storedSessionId) {
-      setSessionId(storedSessionId);
-    } else {
-      const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      setSessionId(newSessionId);
-      localStorage.setItem('chat_session_id', newSessionId);
-    }
-
-    // Load chat messages
-    const storedMessages = localStorage.getItem('chat_messages');
-    if (storedMessages) {
-      try {
-        const parsed = JSON.parse(storedMessages);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          setMessages(parsed);
-        }
-      } catch (e) {
-        console.error('Failed to parse stored messages:', e);
-      }
-    }
+  // Save messages to localStorage whenever they change (but not on initial mount with default)
+  const saveMessages = useCallback((msgs) => {
+    localStorage.setItem('chat_messages', JSON.stringify(msgs));
   }, []);
-
-  // Save messages to localStorage whenever they change
-  useEffect(() => {
-    if (messages.length > 0) {
-      localStorage.setItem('chat_messages', JSON.stringify(messages));
-    }
-  }, [messages]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -69,6 +69,9 @@ const ChatBot = () => {
   // Handle navigation - minimize chatbot and navigate
   const handleNavigate = (path) => {
     if (path) {
+      // Save current messages before navigating
+      saveMessages(messages);
+      
       // Minimize chatbot first (keep chat intact)
       setIsOpen(false);
       
@@ -96,8 +99,9 @@ const ChatBot = () => {
     const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     setSessionId(newSessionId);
     localStorage.setItem('chat_session_id', newSessionId);
-    setMessages([WELCOME_MESSAGE]);
-    localStorage.setItem('chat_messages', JSON.stringify([WELCOME_MESSAGE]));
+    const newMessages = [WELCOME_MESSAGE];
+    setMessages(newMessages);
+    localStorage.setItem('chat_messages', JSON.stringify(newMessages));
     setInputValue('');
   };
 
@@ -113,6 +117,7 @@ const ChatBot = () => {
 
     const newMessages = [...messages, userMessage];
     setMessages(newMessages);
+    saveMessages(newMessages);
     setInputValue('');
     setIsTyping(true);
 
@@ -134,7 +139,11 @@ const ChatBot = () => {
         localStorage.setItem('chat_session_id', response.data.session_id);
       }
 
-      setMessages(prev => [...prev, botMessage]);
+      setMessages(prev => {
+        const updated = [...prev, botMessage];
+        saveMessages(updated);
+        return updated;
+      });
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage = {
@@ -143,7 +152,11 @@ const ChatBot = () => {
         content: 'Sorry, I encountered an error. Please try again.',
         navigate: null
       };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages(prev => {
+        const updated = [...prev, errorMessage];
+        saveMessages(updated);
+        return updated;
+      });
     } finally {
       setIsTyping(false);
     }
