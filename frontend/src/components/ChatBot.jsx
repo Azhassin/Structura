@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { X, Send, MessageSquare, Sparkles, ExternalLink } from 'lucide-react';
+import { X, Send, MessageSquare, ExternalLink, RotateCcw } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import axios from 'axios';
@@ -8,24 +8,26 @@ import axios from 'axios';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// Initial welcome message
+const WELCOME_MESSAGE = {
+  id: 1,
+  role: 'assistant',
+  content: 'Hello! Welcome to Structura Studio. How can I help you today? 👋',
+  navigate: null
+};
+
 const ChatBot = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      role: 'assistant',
-      content: 'Hello! Welcome to Structura Studio. How can I help you today? 👋',
-      navigate: null
-    }
-  ]);
+  const [messages, setMessages] = useState([WELCOME_MESSAGE]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [sessionId, setSessionId] = useState(null);
   const messagesEndRef = useRef(null);
 
-  // Initialize or retrieve session ID
+  // Load chat history and session from localStorage on mount
   useEffect(() => {
+    // Load session ID
     const storedSessionId = localStorage.getItem('chat_session_id');
     if (storedSessionId) {
       setSessionId(storedSessionId);
@@ -34,7 +36,27 @@ const ChatBot = () => {
       setSessionId(newSessionId);
       localStorage.setItem('chat_session_id', newSessionId);
     }
+
+    // Load chat messages
+    const storedMessages = localStorage.getItem('chat_messages');
+    if (storedMessages) {
+      try {
+        const parsed = JSON.parse(storedMessages);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setMessages(parsed);
+        }
+      } catch (e) {
+        console.error('Failed to parse stored messages:', e);
+      }
+    }
   }, []);
+
+  // Save messages to localStorage whenever they change
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem('chat_messages', JSON.stringify(messages));
+    }
+  }, [messages]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -69,17 +91,28 @@ const ChatBot = () => {
     }
   };
 
+  // Reset chat - clear messages and start fresh
+  const handleResetChat = () => {
+    const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    setSessionId(newSessionId);
+    localStorage.setItem('chat_session_id', newSessionId);
+    setMessages([WELCOME_MESSAGE]);
+    localStorage.setItem('chat_messages', JSON.stringify([WELCOME_MESSAGE]));
+    setInputValue('');
+  };
+
   const handleSend = async () => {
     if (!inputValue.trim()) return;
 
     const userMessage = {
-      id: messages.length + 1,
+      id: Date.now(),
       role: 'user',
       content: inputValue,
       navigate: null
     };
 
-    setMessages([...messages, userMessage]);
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
     setInputValue('');
     setIsTyping(true);
 
@@ -90,7 +123,7 @@ const ChatBot = () => {
       });
 
       const botMessage = {
-        id: messages.length + 2,
+        id: Date.now() + 1,
         role: 'assistant',
         content: response.data.response,
         navigate: response.data.navigate || null
@@ -102,12 +135,10 @@ const ChatBot = () => {
       }
 
       setMessages(prev => [...prev, botMessage]);
-
-      // Don't auto-navigate - wait for user to click the button
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage = {
-        id: messages.length + 2,
+        id: Date.now() + 1,
         role: 'assistant',
         content: 'Sorry, I encountered an error. Please try again.',
         navigate: null
@@ -143,8 +174,13 @@ const ChatBot = () => {
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-500 to-teal-500 p-5 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
+              {/* Animated Robot GIF */}
+              <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-white/20 backdrop-blur-sm">
+                <img 
+                  src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f916/512.gif" 
+                  alt="Robot" 
+                  className="w-8 h-8"
+                />
               </div>
               <div>
                 <h3 className="font-bold text-white text-lg">AI Assistant</h3>
@@ -208,6 +244,16 @@ const ChatBot = () => {
           {/* Input */}
           <div className="p-4 bg-white border-t border-teal-100">
             <div className="flex gap-2">
+              {/* Reset Chat Button */}
+              <Button
+                onClick={handleResetChat}
+                variant="outline"
+                className="rounded-full w-10 h-10 p-0 border-teal-200 hover:bg-teal-50 hover:border-teal-400"
+                title="Reset Chat"
+                data-testid="chatbot-reset-btn"
+              >
+                <RotateCcw className="w-4 h-4 text-teal-600" />
+              </Button>
               <Input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
