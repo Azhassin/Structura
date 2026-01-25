@@ -103,12 +103,7 @@ const ChatBot = () => {
 
       setMessages(prev => [...prev, botMessage]);
 
-      // Auto-navigate after a short delay if navigation is requested
-      if (response.data.navigate) {
-        setTimeout(() => {
-          handleNavigate(response.data.navigate);
-        }, 1500);
-      }
+      // Don't auto-navigate - wait for user to click the button
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage = {
