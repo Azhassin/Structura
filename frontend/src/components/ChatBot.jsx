@@ -44,24 +44,28 @@ const ChatBot = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Handle navigation
+  // Handle navigation - minimize chatbot and navigate
   const handleNavigate = (path) => {
     if (path) {
-      // Check if it's a hash link for same-page scrolling
-      if (path.startsWith('/#')) {
-        const elementId = path.substring(2);
-        navigate('/');
-        setTimeout(() => {
-          const element = document.getElementById(elementId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }, 100);
-      } else {
-        navigate(path);
-      }
-      // Optionally close the chatbot after navigation
-      // setIsOpen(false);
+      // Minimize chatbot first (keep chat intact)
+      setIsOpen(false);
+      
+      // Small delay before navigating to allow smooth minimize
+      setTimeout(() => {
+        // Check if it's a hash link for same-page scrolling
+        if (path.startsWith('/#')) {
+          const elementId = path.substring(2);
+          navigate('/');
+          setTimeout(() => {
+            const element = document.getElementById(elementId);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 100);
+        } else {
+          navigate(path);
+        }
+      }, 300);
     }
   };
 
