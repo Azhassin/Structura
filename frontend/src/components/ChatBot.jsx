@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { X, Send, MessageSquare, ExternalLink, RotateCcw } from 'lucide-react';
+import { X, Send, MessageSquare, ExternalLink, RotateCcw, Bot } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import axios from 'axios';
@@ -187,13 +187,9 @@ const ChatBot = () => {
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-500 to-teal-500 p-5 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              {/* Animated Robot GIF */}
+              {/* Bot Icon - same as AI Integration section */}
               <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-white/20 backdrop-blur-sm">
-                <img 
-                  src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f916/512.gif" 
-                  alt="Robot" 
-                  className="w-8 h-8"
-                />
+                <Bot className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h3 className="font-bold text-white text-lg">AI Assistant</h3>
