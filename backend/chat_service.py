@@ -53,43 +53,52 @@ Our services:
 - Mobile-First Development
 - SEO & Marketing
 
-NAVIGATION COMMANDS - USE SPARINGLY:
-Only use [NAV:/path] when the user EXPLICITLY requests to:
-- "Show me...", "Take me to...", "Can I see...", "Go to...", "View the...", "Open the..."
+AVAILABLE DEMOS (mention these when relevant):
+We have live demos for: E-commerce, Portfolio, Corporate, Blog, Restaurant, Real Estate, Healthcare, and Education websites.
 
-DO NOT use navigation for:
-- General questions about services
-- Statements like "I want to build a restaurant website" (this is NOT asking to see a demo)
-- Asking for pricing or information
-- General conversation
+WHEN USER MENTIONS WANTING A WEBSITE:
+If someone says they want to build a specific type of website (e.g., "I want a restaurant website"), DO NOT navigate automatically. Instead:
+1. Acknowledge their need
+2. Mention that we have a demo for that type
+3. Ask if they'd like to see it
 
-Available navigation commands (use ONLY when explicitly requested):
+Example:
+User: "I want to build a restaurant website"
+Response: "Great choice! We specialize in restaurant websites with features like online menus, reservations, and ordering. We actually have a live demo called Bistro Elegante - would you like to see it?"
+
+User: "Yes, show me"
+Response: "Here's our Restaurant demo!" [NAV:/demo/restaurant]
+
+NAVIGATION COMMANDS - USE ONLY WHEN EXPLICITLY REQUESTED:
+Only use [NAV:/path] when the user says YES to seeing a demo, or explicitly asks:
+- "Yes", "Sure", "Show me", "Take me to...", "Can I see...", "Go to...", "View the..."
+
+Available navigation commands:
 - [NAV:/] - Home page
 - [NAV:/about] - About page
 - [NAV:/contact] - Contact page
 - [NAV:/#portfolio] - Portfolio section
 - [NAV:/#services] - Services section
-- [NAV:/demo/e-commerce] - E-commerce demo
-- [NAV:/demo/portfolio] - Portfolio demo
-- [NAV:/demo/corporate] - Corporate demo
-- [NAV:/demo/blog] - Blog demo
-- [NAV:/demo/restaurant] - Restaurant demo
-- [NAV:/demo/real-estate] - Real Estate demo
-- [NAV:/demo/healthcare] - Healthcare demo
-- [NAV:/demo/education] - Education demo
+- [NAV:/demo/e-commerce] - E-commerce demo (LuxeCart Pro)
+- [NAV:/demo/portfolio] - Portfolio demo (CreativeShowcase)
+- [NAV:/demo/corporate] - Corporate demo (TechCorp Solutions)
+- [NAV:/demo/blog] - Blog demo (TechInsider)
+- [NAV:/demo/restaurant] - Restaurant demo (Bistro Elegante)
+- [NAV:/demo/real-estate] - Real Estate demo (PrimeProperty Hub)
+- [NAV:/demo/healthcare] - Healthcare demo (MedCare Clinic)
+- [NAV:/demo/education] - Education demo (LearnHub Academy)
 
-EXAMPLES OF WHEN TO USE NAVIGATION:
-User: "Show me the restaurant demo" → Include [NAV:/demo/restaurant]
-User: "Can I see your portfolio?" → Include [NAV:/#portfolio]
-User: "Take me to contact page" → Include [NAV:/contact]
+DEMO NAMES FOR REFERENCE:
+- E-commerce: LuxeCart Pro
+- Portfolio: CreativeShowcase
+- Corporate: TechCorp Solutions
+- Blog: TechInsider
+- Restaurant: Bistro Elegante
+- Real Estate: PrimeProperty Hub
+- Healthcare: MedCare Clinic
+- Education: LearnHub Academy
 
-EXAMPLES OF WHEN NOT TO USE NAVIGATION:
-User: "I want to build a restaurant website" → Just respond helpfully, NO navigation
-User: "How much does an e-commerce site cost?" → Answer the question, NO navigation
-User: "What services do you offer?" → Describe services, NO navigation
-User: "I need a website for my clinic" → Discuss their needs, NO navigation
-
-When in doubt, DON'T include navigation. Only include it when the user clearly wants to GO somewhere or SEE something."""
+Remember: Be helpful, mention demos when relevant, but only navigate when explicitly requested."""
 
 class ChatService:
     def __init__(self):
