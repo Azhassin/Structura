@@ -8,6 +8,7 @@ import RestaurantDemo from './demos/RestaurantDemo';
 import RealEstateDemo from './demos/RealEstateDemo';
 import HealthcareDemo from './demos/HealthcareDemo';
 import EducationDemo from './demos/EducationDemo';
+import ChatBot from '../components/ChatBot';
 
 const DemoPage = () => {
   const { category } = useParams();
@@ -32,7 +33,12 @@ const DemoPage = () => {
     return <Navigate to="/" replace />;
   }
   
-  return <DemoComponent />;
+  return (
+    <>
+      <DemoComponent />
+      <ChatBot />
+    </>
+  );
 };
 
 export default DemoPage;
