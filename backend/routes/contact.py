@@ -220,7 +220,9 @@ async def get_contact_submissions():
     Get all contact submissions (for admin)
     """
     try:
-        submissions = await db.contact_submissions.find({}, {"_id": 0}).sort("submitted_at", -1).to_list(100)
+        submissions = await db.contact_submissions.find(
+            {}, {"_id": 0, "id": 1, "name": 1, "email": 1, "subject": 1, "message": 1, "submitted_at": 1, "is_read": 1}
+        ).sort("submitted_at", -1).limit(100).to_list(100)
         return {"submissions": submissions}
         
     except Exception as e:

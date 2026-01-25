@@ -22,7 +22,9 @@ db = client[os.environ['DB_NAME']]
 async def get_all_portfolio():
     """Get all portfolio projects (public)"""
     try:
-        projects = await db.portfolio.find({}, {"_id": 0}).sort("created_at", -1).to_list(100)
+        projects = await db.portfolio.find(
+            {}, {"_id": 0, "id": 1, "title": 1, "description": 1, "category": 1, "image": 1, "features": 1, "demo_url": 1, "created_at": 1, "updated_at": 1}
+        ).sort("created_at", -1).limit(100).to_list(100)
         
         result = []
         for project in projects:

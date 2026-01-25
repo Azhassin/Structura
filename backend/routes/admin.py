@@ -27,9 +27,9 @@ async def get_dashboard_stats(admin: dict = Depends(get_admin_user)):
         users_count = await db.users.count_documents({})
         chat_sessions_count = await db.chat_sessions.count_documents({})
         
-        # Get recent submissions
+        # Get recent submissions with projection
         recent_submissions = await db.contact_submissions.find(
-            {}, {"_id": 0}
+            {}, {"_id": 0, "id": 1, "name": 1, "email": 1, "subject": 1, "submitted_at": 1, "is_read": 1}
         ).sort("submitted_at", -1).limit(5).to_list(5)
         
         return {
@@ -57,7 +57,7 @@ async def get_all_submissions(
     """Get all contact submissions with pagination"""
     try:
         submissions = await db.contact_submissions.find(
-            {}, {"_id": 0}
+            {}, {"_id": 0, "id": 1, "name": 1, "email": 1, "subject": 1, "message": 1, "submitted_at": 1, "is_read": 1}
         ).sort("submitted_at", -1).skip(skip).limit(limit).to_list(limit)
         
         total = await db.contact_submissions.count_documents({})
@@ -126,8 +126,8 @@ async def get_all_users(admin: dict = Depends(get_admin_user)):
     """Get all users (admin only)"""
     try:
         users = await db.users.find(
-            {}, {"_id": 0, "password": 0}
-        ).sort("created_at", -1).to_list(100)
+            {}, {"_id": 0, "password": 0, "id": 1, "email": 1, "name": 1, "is_admin": 1, "created_at": 1}
+        ).sort("created_at", -1).limit(100).to_list(100)
         
         return {"users": users}
         
