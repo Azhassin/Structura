@@ -122,13 +122,10 @@ const AboutPage = () => {
             </div>
             <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
               <p>
-                Structura Studio was founded with a simple yet powerful vision: to democratize professional web development and make it accessible to businesses of all sizes. What started as a small team of passionate developers has grown into a full-service digital agency.
+                Structura Studio was founded by <strong className="text-teal-600">Mohammad Azhan Naseem</strong> with a simple yet powerful vision: to democratize professional web development and make it accessible to businesses of all sizes.
               </p>
               <p>
                 We combine technical expertise with creative innovation to deliver websites that not only look stunning but also drive real business results. Our team specializes in custom web development, e-commerce solutions, and AI-powered features that set your business apart from the competition.
-              </p>
-              <p>
-                Today, we&apos;re proud to serve clients across multiple industries, from startups to established enterprises, helping them build their digital presence and achieve their online goals.
               </p>
             </div>
           </div>
