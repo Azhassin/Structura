@@ -44,6 +44,7 @@ IMPORTANT RULES:
 1. Keep responses SHORT and TO THE POINT (2-3 sentences max)
 2. Be professional but friendly
 3. Focus on value - how we can help them
+4. ONLY include navigation commands when the user EXPLICITLY asks to see/view/go somewhere
 
 Our services:
 - Custom Web Design
@@ -52,16 +53,20 @@ Our services:
 - Mobile-First Development
 - SEO & Marketing
 
-NAVIGATION COMMANDS:
-When users ask to go somewhere or see something, include a navigation command in your response.
+NAVIGATION COMMANDS - USE SPARINGLY:
+Only use [NAV:/path] when the user EXPLICITLY requests to:
+- "Show me...", "Take me to...", "Can I see...", "Go to...", "View the...", "Open the..."
 
-Use this EXACT format: [NAV:/path]
+DO NOT use navigation for:
+- General questions about services
+- Statements like "I want to build a restaurant website" (this is NOT asking to see a demo)
+- Asking for pricing or information
+- General conversation
 
-Available navigation commands:
+Available navigation commands (use ONLY when explicitly requested):
 - [NAV:/] - Home page
 - [NAV:/about] - About page
 - [NAV:/contact] - Contact page
-- [NAV:/login] - Login page
 - [NAV:/#portfolio] - Portfolio section
 - [NAV:/#services] - Services section
 - [NAV:/demo/e-commerce] - E-commerce demo
@@ -73,20 +78,18 @@ Available navigation commands:
 - [NAV:/demo/healthcare] - Healthcare demo
 - [NAV:/demo/education] - Education demo
 
-EXAMPLES:
-User: "Show me the contact page"
-Response: "Taking you to our contact page now! [NAV:/contact]"
+EXAMPLES OF WHEN TO USE NAVIGATION:
+User: "Show me the restaurant demo" → Include [NAV:/demo/restaurant]
+User: "Can I see your portfolio?" → Include [NAV:/#portfolio]
+User: "Take me to contact page" → Include [NAV:/contact]
 
-User: "I want to see an e-commerce demo"
-Response: "Let me show you our e-commerce demo - LuxeCart Pro! [NAV:/demo/e-commerce]"
+EXAMPLES OF WHEN NOT TO USE NAVIGATION:
+User: "I want to build a restaurant website" → Just respond helpfully, NO navigation
+User: "How much does an e-commerce site cost?" → Answer the question, NO navigation
+User: "What services do you offer?" → Describe services, NO navigation
+User: "I need a website for my clinic" → Discuss their needs, NO navigation
 
-User: "Where can I see your portfolio?"
-Response: "Here's our portfolio with all our work! [NAV:/#portfolio]"
-
-User: "Do you have a restaurant website example?"
-Response: "Yes! Check out Bistro Elegante, our restaurant demo! [NAV:/demo/restaurant]"
-
-ALWAYS include the [NAV:] command when the user wants to navigate somewhere or see a demo."""
+When in doubt, DON'T include navigation. Only include it when the user clearly wants to GO somewhere or SEE something."""
 
 class ChatService:
     def __init__(self):
@@ -95,31 +98,44 @@ class ChatService:
             logger.warning("EMERGENT_LLM_KEY not found in environment variables")
             self.api_key = None
     
-    def detect_navigation_intent(self, message: str) -> dict:
+    def detect_explicit_navigation_intent(self, message: str) -> dict:
         """
-        Detect if the user wants to navigate somewhere and return navigation info
+        Detect if the user EXPLICITLY wants to navigate somewhere.
+        Only triggers on clear navigation requests, not general mentions.
         """
-        msg_lower = message.lower()
+        msg_lower = message.lower().strip()
         
-        # Check for demo requests
-        demo_keywords = ['demo', 'example', 'show me', 'see', 'preview', 'look at', 'view']
-        has_demo_intent = any(kw in msg_lower for kw in demo_keywords)
+        # Explicit navigation phrases - user must use one of these
+        explicit_nav_phrases = [
+            'show me', 'take me to', 'go to', 'navigate to', 
+            'can i see', 'let me see', 'i want to see', 'i\'d like to see',
+            'open', 'view the', 'view your', 'see the', 'see your',
+            'where is', 'where can i find'
+        ]
         
-        if has_demo_intent:
+        # Check if the message contains an explicit navigation phrase
+        has_explicit_intent = any(phrase in msg_lower for phrase in explicit_nav_phrases)
+        
+        if not has_explicit_intent:
+            return {"should_navigate": False}
+        
+        # Check for demo requests with explicit intent
+        demo_keywords = ['demo', 'example', 'preview', 'sample']
+        has_demo_keyword = any(kw in msg_lower for kw in demo_keywords)
+        
+        if has_explicit_intent:
+            # Check for specific demo category
             for category, path in DEMO_CATEGORIES.items():
                 if category in msg_lower:
-                    return {
-                        "should_navigate": True,
-                        "path": path,
-                        "type": "demo",
-                        "category": category
-                    }
-        
-        # Check for page navigation requests
-        nav_keywords = ['go to', 'take me to', 'navigate to', 'where is', 'show me', 'open', 'find']
-        has_nav_intent = any(kw in msg_lower for kw in nav_keywords)
-        
-        if has_nav_intent:
+                    if has_demo_keyword or any(phrase in msg_lower for phrase in ['show me', 'can i see', 'let me see', 'view']):
+                        return {
+                            "should_navigate": True,
+                            "path": path,
+                            "type": "demo",
+                            "category": category
+                        }
+            
+            # Check for page navigation
             for page, path in NAVIGATION_ROUTES.items():
                 if page in msg_lower:
                     return {
@@ -159,14 +175,14 @@ class ChatService:
             }
         
         try:
-            # First, check for direct navigation intent
-            nav_intent = self.detect_navigation_intent(user_message)
+            # Check for explicit navigation intent first
+            nav_intent = self.detect_explicit_navigation_intent(user_message)
             
             if nav_intent["should_navigate"]:
                 if nav_intent["type"] == "demo":
                     category = nav_intent["category"].replace("-", " ").title()
                     return {
-                        "message": f"Taking you to our {category} demo now!",
+                        "message": f"Here's our {category} demo for you!",
                         "navigate": nav_intent["path"]
                     }
                 elif nav_intent["type"] == "page":
@@ -176,7 +192,7 @@ class ChatService:
                         "navigate": nav_intent["path"]
                     }
             
-            # Initialize chat with session ID and system message
+            # For all other messages, use AI without forcing navigation
             chat = LlmChat(
                 api_key=self.api_key,
                 session_id=session_id,
@@ -192,7 +208,7 @@ class ChatService:
             # Get response
             response = await chat.send_message(message)
             
-            # Extract navigation command if present
+            # Extract navigation command if AI included one (should be rare now)
             cleaned_response, nav_path = self.extract_navigation_from_response(response)
             
             return {
