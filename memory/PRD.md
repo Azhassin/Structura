@@ -1,5 +1,12 @@
 # Structura Studio - Product Requirements Document
 
+## Latest Update: January 25, 2026
+
+### Deployment Fixes Applied
+- Fixed .gitignore blocking .env files (CRITICAL deployment blocker)
+- Optimized all MongoDB queries with proper field projections
+- Verified backend health and API endpoints working correctly
+
 ## Original Problem Statement
 A professional portfolio website for a web design studio called "Structura Studio" with:
 - Modern, clean design with blue-to-teal color palette
