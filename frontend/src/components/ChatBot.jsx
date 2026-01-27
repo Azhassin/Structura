@@ -193,11 +193,7 @@ const ChatBot = () => {
           
           {/* Chat window */}
           <div 
-            className="fixed z-[9999] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-teal-100
-              /* Mobile: centered */
-              inset-4 md:inset-auto
-              /* Desktop: bottom-right corner */
-              md:bottom-6 md:right-6 md:w-96 md:h-[550px]"
+            className="fixed z-[9999] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-teal-100 inset-4 md:inset-auto md:bottom-6 md:right-6 md:w-96 md:h-[550px]"
             style={{ maxHeight: 'calc(100vh - 2rem)' }}
             data-testid="chatbot-window"
           >
