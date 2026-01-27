@@ -461,7 +461,10 @@ const HomePage = () => {
       </section>
 
       <Footer />
-    </div>
+      </div>
+      {/* ChatBot rendered outside main container for proper fixed positioning */}
+      <ChatBot />
+    </>
   );
 };
 
