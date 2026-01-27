@@ -270,15 +270,15 @@ const EcommerceDemo = () => {
       </section>
 
       {/* Category Filter Tabs */}
-      <section className="py-8 bg-gray-50">
+      <section className="py-6 md:py-8 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="flex items-center gap-4 overflow-x-auto pb-2">
+          <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-hide">
             <Filter className="w-5 h-5 text-gray-500 flex-shrink-0" />
             {categories.map(cat => (
               <button
                 key={cat.id}
                 onClick={() => setActiveTab(cat.id)}
-                className={`px-6 py-2 rounded-full whitespace-nowrap transition-all ${
+                className={`px-4 md:px-6 py-2 rounded-full whitespace-nowrap transition-all text-sm md:text-base ${
                   activeTab === cat.id 
                     ? 'bg-purple-600 text-white' 
                     : 'bg-white text-gray-600 hover:bg-purple-50'
@@ -292,22 +292,51 @@ const EcommerceDemo = () => {
       </section>
 
       {/* Products */}
-      <section className="py-16">
+      <section className="py-8 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-3xl font-bold text-gray-900">
+          <div className="flex items-center justify-between mb-6 md:mb-8">
+            <h3 className="text-xl md:text-3xl font-bold text-gray-900">
               {activeTab === 'all' ? 'Featured Products' : categories.find(c => c.id === activeTab)?.name}
             </h3>
-            <span className="text-gray-500">{filteredProducts.length} products</span>
+            <span className="text-sm md:text-base text-gray-500">{filteredProducts.length} products</span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
             {filteredProducts.map(product => (
-              <div key={product.id} className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group">
-                <div className="relative h-64 bg-gray-100">
+              <div key={product.id} className="bg-white rounded-xl md:rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                <div className="relative h-40 md:h-64 bg-gray-100">
                   <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   <button 
                     onClick={() => toggleWishlist(product.id)}
-                    className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-purple-50 transition-colors"
+                    className="absolute top-2 right-2 md:top-4 md:right-4 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-purple-50 transition-colors"
+                  >
+                    <Heart className={`w-4 h-4 md:w-5 md:h-5 ${wishlist.includes(product.id) ? 'fill-red-500 text-red-500' : 'text-gray-400 hover:text-purple-600'}`} />
+                  </button>
+                  <Badge className="absolute top-2 left-2 md:top-4 md:left-4 bg-red-500 text-white text-xs">Sale</Badge>
+                </div>
+                <div className="p-3 md:p-4">
+                  <h4 className="font-semibold text-gray-900 mb-1 md:mb-2 text-sm md:text-base line-clamp-2">{product.name}</h4>
+                  <div className="flex items-center gap-1 md:gap-2 mb-2 md:mb-3">
+                    <div className="flex items-center">
+                      <Star className="w-3 h-3 md:w-4 md:h-4 text-yellow-400 fill-yellow-400" />
+                      <span className="text-xs md:text-sm text-gray-600 ml-1">{product.rating}</span>
+                    </div>
+                    <span className="text-xs text-gray-400 hidden md:inline">({product.reviews} reviews)</span>
+                  </div>
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                    <div>
+                      <span className="text-lg md:text-xl font-bold text-purple-600">${product.price}</span>
+                      <span className="text-xs md:text-sm text-gray-400 line-through ml-1 md:ml-2">${product.originalPrice}</span>
+                    </div>
+                    <Button size="sm" className="bg-purple-600 hover:bg-purple-700 text-xs md:text-sm w-full md:w-auto" onClick={() => addToCart(product)}>
+                      Add to Cart
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
                   >
                     <Heart className={`w-5 h-5 ${wishlist.includes(product.id) ? 'fill-red-500 text-red-500' : 'text-gray-400 hover:text-purple-600'}`} />
                   </button>
