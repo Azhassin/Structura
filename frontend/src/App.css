@@ -531,16 +531,28 @@ body {
 }
 
 /* ========== CHATBOT FIXED POSITIONING ========== */
-[data-testid="chatbot-toggle-btn"] {
+.chatbot-button-wrapper {
   position: fixed !important;
   bottom: 24px !important;
   right: 24px !important;
-  z-index: 9999 !important;
+  z-index: 99999 !important;
 }
 
-[data-testid="chatbot-window"] {
+.chatbot-window {
   position: fixed !important;
-  z-index: 9999 !important;
+  z-index: 99999 !important;
+}
+
+/* Desktop chatbot window positioning */
+@media (min-width: 768px) {
+  .chatbot-window {
+    top: auto !important;
+    left: auto !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    width: 384px !important;
+    height: 550px !important;
+  }
 }
 
 .scrollbar-hide::-webkit-scrollbar {
