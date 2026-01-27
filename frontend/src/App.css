@@ -524,6 +524,23 @@ body {
   }
 }
 
+/* ========== UTILITY CLASSES ========== */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* ========== DEMO PAGE MOBILE FIXES ========== */
 @media (max-width: 768px) {
   /* Fix hero section button alignment */
