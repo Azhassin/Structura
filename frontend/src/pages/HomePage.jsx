@@ -61,16 +61,34 @@ const HomePage = () => {
     : portfolioProjects.filter(site => site.category === selectedCategory);
 
   useEffect(() => {
+    // Check if mobile
+    const isMobile = window.innerWidth <= 768;
+    
+    // Throttled scroll handler for better performance
+    let ticking = false;
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
+    // Mouse move only on desktop (not needed on mobile/touch)
     const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      if (!isMobile) {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    
+    // Only add mousemove listener on desktop
+    if (!isMobile) {
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    }
 
     const observerOptions = {
       threshold: 0.1,
@@ -85,13 +103,23 @@ const HomePage = () => {
       });
     }, observerOptions);
 
-    document.querySelectorAll('.scroll-animate').forEach((el) => {
-      observer.observe(el);
-    });
+    // Only observe scroll animations on desktop
+    if (!isMobile) {
+      document.querySelectorAll('.scroll-animate').forEach((el) => {
+        observer.observe(el);
+      });
+    } else {
+      // On mobile, immediately show all elements
+      document.querySelectorAll('.scroll-animate').forEach((el) => {
+        el.classList.add('animate-in');
+      });
+    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
+      if (!isMobile) {
+        window.removeEventListener('mousemove', handleMouseMove);
+      }
       observer.disconnect();
     };
   }, []);
