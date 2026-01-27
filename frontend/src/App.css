@@ -536,6 +536,9 @@ body {
   bottom: 24px !important;
   right: 24px !important;
   z-index: 99999 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .chatbot-window {
@@ -552,6 +555,9 @@ body {
     right: 24px !important;
     width: 384px !important;
     height: 550px !important;
+    max-width: 384px !important;
+    max-height: 550px !important;
+    transform: none !important;
   }
 }
 
