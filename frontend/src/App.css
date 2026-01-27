@@ -530,6 +530,19 @@ body {
   scrollbar-width: none;
 }
 
+/* ========== CHATBOT FIXED POSITIONING ========== */
+[data-testid="chatbot-toggle-btn"] {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 9999 !important;
+}
+
+[data-testid="chatbot-window"] {
+  position: fixed !important;
+  z-index: 9999 !important;
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
