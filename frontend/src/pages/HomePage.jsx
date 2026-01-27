@@ -143,16 +143,16 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <AnimatedBackground />
-      <ScrollProgress />
-      <Header />
-      <ChatBot />
+    <>
+      <div className="min-h-screen relative">
+        <AnimatedBackground />
+        <ScrollProgress />
+        <Header />
 
-      {/* Cursor follower effect */}
-      <div
-        className="fixed w-96 h-96 rounded-full pointer-events-none z-0 mix-blend-screen"
-        style={{
+        {/* Cursor follower effect */}
+        <div
+          className="fixed w-96 h-96 rounded-full pointer-events-none z-0 mix-blend-screen hidden md:block"
+          style={{
           background: 'radial-gradient(circle, rgba(20, 184, 166, 0.15) 0%, transparent 70%)',
           left: `${mousePosition.x - 192}px`,
           top: `${mousePosition.y - 192}px`,
