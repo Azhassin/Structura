@@ -357,7 +357,7 @@ const RealEstateDemo = () => {
                 PrimeProperty has been connecting buyers and sellers with their dream properties since 2005. With over 500 expert agents across 45 cities, we have helped thousands of families find their perfect home.
               </p>
               <p className="text-slate-600 mb-6 text-lg leading-relaxed">
-                Our commitment to excellence, transparency, and client satisfaction has made us one of the most trusted names in real estate. Whether you're buying your first home or selling a luxury estate, we're here to guide you every step of the way.
+                Our commitment to excellence, transparency, and client satisfaction has made us one of the most trusted names in real estate. Whether you are buying your first home or selling a luxury estate, we are here to guide you every step of the way.
               </p>
             </div>
           </div>
