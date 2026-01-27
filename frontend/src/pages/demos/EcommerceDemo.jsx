@@ -97,9 +97,9 @@ const EcommerceDemo = () => {
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-4">
-            <div className="flex items-center gap-8">
-              <h1 className="text-2xl font-bold text-purple-600">LuxeCart</h1>
+          <div className="flex items-center justify-between py-3 md:py-4">
+            <div className="flex items-center gap-4 md:gap-8">
+              <h1 className="text-xl md:text-2xl font-bold text-purple-600">LuxeCart</h1>
               <nav className="hidden md:flex gap-6">
                 {categories.slice(1).map(cat => (
                   <button 
@@ -112,23 +112,23 @@ const EcommerceDemo = () => {
                 ))}
               </nav>
             </div>
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" onClick={() => setSearchOpen(true)}>
-                <Search className="w-5 h-5" />
+            <div className="flex items-center gap-1 md:gap-4">
+              <Button variant="ghost" size="icon" className="h-9 w-9 md:h-10 md:w-10" onClick={() => setSearchOpen(true)}>
+                <Search className="w-4 h-4 md:w-5 md:h-5" />
               </Button>
-              <Button variant="ghost" size="icon"><User className="w-5 h-5" /></Button>
-              <Button variant="ghost" size="icon" className="relative">
-                <Heart className={`w-5 h-5 ${wishlist.length > 0 ? 'fill-red-500 text-red-500' : ''}`} />
+              <Button variant="ghost" size="icon" className="hidden sm:flex h-9 w-9 md:h-10 md:w-10"><User className="w-4 h-4 md:w-5 md:h-5" /></Button>
+              <Button variant="ghost" size="icon" className="relative h-9 w-9 md:h-10 md:w-10">
+                <Heart className={`w-4 h-4 md:w-5 md:h-5 ${wishlist.length > 0 ? 'fill-red-500 text-red-500' : ''}`} />
                 {wishlist.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center text-[10px] md:text-xs">
                     {wishlist.length}
                   </span>
                 )}
               </Button>
-              <Button variant="ghost" size="icon" className="relative" onClick={() => setCartOpen(true)}>
-                <ShoppingCart className="w-5 h-5" />
+              <Button variant="ghost" size="icon" className="relative h-9 w-9 md:h-10 md:w-10" onClick={() => setCartOpen(true)}>
+                <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-xs w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center text-[10px] md:text-xs">
                     {cartCount}
                   </span>
                 )}
