@@ -444,3 +444,84 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #0284c7, #0d9488);
 }
+
+/* ========== MOBILE SCROLL & TOUCH OPTIMIZATIONS ========== */
+
+/* Smooth touch scrolling on iOS */
+body {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+}
+
+/* Prevent layout shift on mobile */
+@media (max-width: 768px) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  /* Faster, simpler fadeIn for mobile */
+  .animate-fadeIn {
+    animation: fadeInMobile 0.2s ease-out;
+  }
+  
+  @keyframes fadeInMobile {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+  }
+  
+  /* Remove box shadows on mobile for performance */
+  .shadow-lg,
+  .shadow-xl,
+  .shadow-2xl {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+  }
+  
+  /* Simplify hover states on mobile (touch) */
+  .hover\:shadow-xl:hover,
+  .hover\:shadow-lg:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+  }
+  
+  /* Disable backdrop blur on low-end devices */
+  .backdrop-blur-md,
+  .backdrop-blur-sm,
+  .backdrop-blur {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgba(0,0,0,0.8) !important;
+  }
+  
+  /* Optimize sticky header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  
+  /* Prevent repaints on scroll */
+  .container {
+    contain: layout style;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .animate-gradient {
+    animation-duration: 6s;
+  }
+  
+  .animate-pulse-glow {
+    animation-duration: 4s;
+  }
+}
+
+/* Touch-friendly tap targets */
+@media (hover: none) and (pointer: coarse) {
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
