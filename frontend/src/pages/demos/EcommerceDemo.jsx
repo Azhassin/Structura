@@ -226,23 +226,23 @@ const EcommerceDemo = () => {
       )}
 
       {/* Hero Banner */}
-      <section className="relative bg-gradient-to-r from-purple-900 to-indigo-900 text-white py-20">
+      <section className="relative bg-gradient-to-r from-purple-900 to-indigo-900 text-white py-12 md:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl">
             <Badge className="bg-yellow-400 text-yellow-900 mb-4">Summer Sale - Up to 50% Off</Badge>
-            <h2 className="text-5xl font-bold mb-4">Discover Premium Products</h2>
-            <p className="text-xl text-purple-200 mb-8">Shop the latest trends with exclusive deals and free shipping on orders over $50</p>
-            <div className="flex gap-4">
-              <Button size="lg" className="bg-white text-purple-900 hover:bg-gray-100" onClick={() => setActiveTab('all')}>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">Discover Premium Products</h2>
+            <p className="text-base md:text-xl text-purple-200 mb-6 md:mb-8">Shop the latest trends with exclusive deals and free shipping on orders over $50</p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button size="lg" className="bg-white text-purple-900 hover:bg-gray-100 w-full sm:w-auto" onClick={() => setActiveTab('all')}>
                 Shop Now <ChevronRight className="ml-2 w-4 h-4" />
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" onClick={() => setActiveTab('electronics')}>
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 w-full sm:w-auto" onClick={() => setActiveTab('electronics')}>
                 View Collections
               </Button>
             </div>
           </div>
         </div>
-        <div className="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-purple-500/20 to-transparent" />
+        <div className="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-purple-500/20 to-transparent hidden md:block" />
       </section>
 
       {/* Features */}
