@@ -1,25 +1,84 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const AnimatedBackground = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const rafRef = useRef(null);
 
   useEffect(() => {
+    // Check if mobile
+    const checkMobile = () => window.innerWidth <= 768;
+    setIsMobile(checkMobile());
+
+    // Throttled scroll handler using requestAnimationFrame
+    let ticking = false;
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (!ticking && !checkMobile()) {
+        rafRef.current = window.requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    const handleResize = () => {
+      setIsMobile(checkMobile());
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      if (rafRef.current) {
+        window.cancelAnimationFrame(rafRef.current);
+      }
+    };
   }, []);
 
   // Calculate scroll progress (0 to 1)
   const maxScroll = 3000;
   const scrollProgress = Math.min(scrollY / maxScroll, 1);
 
-  // Interpolate from Blue to Teal
-  const hue1 = 210 - (scrollProgress * 30); // Blue (210) to Teal-Blue (180)
-  const hue2 = 200 - (scrollProgress * 35); // Blue (200) to Teal (165)
-  const hue3 = 195 - (scrollProgress * 40); // Blue (195) to Cyan (155)
+  // Mobile: Simple static gradient background
+  if (isMobile) {
+    return (
+      <div className="fixed inset-0 -z-10">
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, hsl(210, 70%, 96%) 0%, hsl(200, 75%, 94%) 50%, hsl(195, 80%, 95%) 100%)'
+          }}
+        />
+        {/* Simple static orbs for mobile */}
+        <div 
+          className="absolute w-64 h-64 rounded-full"
+          style={{
+            top: '10%',
+            left: '-5%',
+            background: 'radial-gradient(circle, hsla(210, 75%, 60%, 0.12), transparent)',
+            filter: 'blur(60px)'
+          }}
+        />
+        <div 
+          className="absolute w-48 h-48 rounded-full"
+          style={{
+            bottom: '20%',
+            right: '5%',
+            background: 'radial-gradient(circle, hsla(175, 80%, 55%, 0.1), transparent)',
+            filter: 'blur(50px)'
+          }}
+        />
+      </div>
+    );
+  }
+
+  // Desktop: Full animated background
+  const hue1 = 210 - (scrollProgress * 30);
+  const hue2 = 200 - (scrollProgress * 35);
+  const hue3 = 195 - (scrollProgress * 40);
 
   return (
     <>
@@ -34,7 +93,7 @@ const AnimatedBackground = () => {
               hsl(${hue3}, ${80 + scrollProgress * 5}%, ${95 - scrollProgress * 2}%) 100%)`,
             transition: 'background 0.5s ease-out'
           }}
-        ></div>
+        />
         
         {/* Animated Orbs - Color changes from blue to teal */}
         <div 
@@ -46,7 +105,7 @@ const AnimatedBackground = () => {
               hsla(${210 - scrollProgress * 30}, 75%, 60%, ${0.12 + scrollProgress * 0.05}), 
               transparent)`,
             transform: `translate(${scrollY * 0.2}px, ${scrollY * 0.15}px)`,
-            transition: 'all 0.5s ease-out'
+            transition: 'transform 0.5s ease-out'
           }}
         />
         <div 
@@ -58,7 +117,7 @@ const AnimatedBackground = () => {
               hsla(${175 - scrollProgress * 10}, 80%, 55%, ${0.1 + scrollProgress * 0.08}), 
               transparent)`,
             transform: `translate(-${scrollY * 0.18}px, -${scrollY * 0.2}px)`,
-            transition: 'all 0.5s ease-out'
+            transition: 'transform 0.5s ease-out'
           }}
         />
         <div 
@@ -70,7 +129,7 @@ const AnimatedBackground = () => {
               hsla(${190 - scrollProgress * 20}, 75%, 58%, ${0.08 + scrollProgress * 0.06}), 
               transparent)`,
             transform: `translate(-${scrollY * 0.15}px, ${scrollY * 0.12}px)`,
-            transition: 'all 0.5s ease-out'
+            transition: 'transform 0.5s ease-out'
           }}
         />
 
@@ -82,7 +141,7 @@ const AnimatedBackground = () => {
             right: '15%',
             border: `2px solid hsla(${200 - scrollProgress * 25}, 70%, 65%, ${0.3 + scrollProgress * 0.2})`,
             transform: `rotate(${scrollY * 0.08}deg)`,
-            transition: 'all 0.3s ease-out'
+            transition: 'transform 0.3s ease-out'
           }}
         />
         <div
@@ -92,7 +151,7 @@ const AnimatedBackground = () => {
             left: '10%',
             border: `2px solid hsla(${175 - scrollProgress * 10}, 75%, 60%, ${0.25 + scrollProgress * 0.2})`,
             transform: `rotate(-${scrollY * 0.06}deg)`,
-            transition: 'all 0.3s ease-out'
+            transition: 'transform 0.3s ease-out'
           }}
         />
         <div
@@ -102,7 +161,7 @@ const AnimatedBackground = () => {
             left: '8%',
             border: `2px solid hsla(${185 - scrollProgress * 15}, 72%, 62%, ${0.28 + scrollProgress * 0.15})`,
             transform: `rotate(${45 + scrollY * 0.1}deg)`,
-            transition: 'all 0.3s ease-out'
+            transition: 'transform 0.3s ease-out'
           }}
         />
 
@@ -133,8 +192,7 @@ const AnimatedBackground = () => {
             strokeWidth="2"
             fill="none"
             style={{
-              transform: `translateX(${-scrollY * 0.3}px)`,
-              transition: 'transform 0.1s ease-out'
+              transform: `translateX(${-scrollY * 0.3}px)`
             }}
           />
           <path
@@ -143,8 +201,7 @@ const AnimatedBackground = () => {
             strokeWidth="2"
             fill="none"
             style={{
-              transform: `translateX(${-scrollY * 0.2}px)`,
-              transition: 'transform 0.1s ease-out'
+              transform: `translateX(${-scrollY * 0.2}px)`
             }}
           />
         </svg>
@@ -159,12 +216,11 @@ const AnimatedBackground = () => {
               linear-gradient(90deg, hsla(${200 - scrollProgress * 25}, 75%, 55%, 0.08) 1px, transparent 1px)
             `,
             backgroundSize: '60px 60px',
-            transform: `translate(${scrollY * 0.05}px, ${scrollY * 0.08}px)`,
-            transition: 'all 0.2s ease-out'
+            transform: `translate(${scrollY * 0.05}px, ${scrollY * 0.08}px)`
           }}
         />
 
-        {/* Scroll indicator text */}
+        {/* Scroll indicator text - hidden on mobile via parent check */}
         <div 
           className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-10 text-center"
           style={{
