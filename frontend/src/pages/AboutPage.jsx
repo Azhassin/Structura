@@ -70,10 +70,10 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden" data-testid="about-page">
-      <AnimatedBackground />
-      <Header />
-      <ChatBot />
+    <>
+      <div className="min-h-screen relative" data-testid="about-page">
+        <AnimatedBackground />
+        <Header />
 
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center px-4 pt-32 pb-20">
@@ -178,7 +178,10 @@ const AboutPage = () => {
       </section>
 
       <Footer />
-    </div>
+      </div>
+      {/* ChatBot outside main container for proper fixed positioning */}
+      <ChatBot />
+    </>
   );
 };
 
