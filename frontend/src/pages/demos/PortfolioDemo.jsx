@@ -41,7 +41,7 @@ const PortfolioDemo = () => {
 
   const handleContact = (e) => {
     e.preventDefault();
-    showNotification('Message sent! I\'ll get back to you soon.');
+    showNotification('Message sent! I will get back to you soon.');
     setContactModal(false);
   };
 
@@ -329,7 +329,7 @@ const PortfolioDemo = () => {
             <div className="text-center mb-12">
               <Badge className="bg-amber-500/20 text-amber-400 border-amber-500/30 mb-4">Contact</Badge>
               <h2 className="text-4xl font-bold mb-4">Let's Work Together</h2>
-              <p className="text-neutral-400">Have a project in mind? I'd love to hear about it.</p>
+              <p className="text-neutral-400">Have a project in mind? I would love to hear about it.</p>
             </div>
             <div className="bg-neutral-900 p-8 rounded-2xl">
               <form onSubmit={handleContact} className="space-y-6">

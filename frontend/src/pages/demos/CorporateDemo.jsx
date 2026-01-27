@@ -36,7 +36,7 @@ const CorporateDemo = () => {
 
   const handleContact = (e) => {
     e.preventDefault();
-    showNotification('Message sent! We\'ll contact you soon.');
+    showNotification('Message sent! We will contact you soon.');
     setContactModal(false);
   };
 
@@ -196,7 +196,7 @@ const CorporateDemo = () => {
                 <Badge className="bg-blue-100 text-blue-600 mb-4">About Us</Badge>
                 <h2 className="text-4xl font-bold text-slate-900 mb-6">Leading the Future of Business Consulting</h2>
                 <p className="text-slate-600 mb-4">
-                  Founded in 2005, TechCorp has grown from a small consulting firm to a global leader in business transformation. We've helped over 500 enterprises across 45 countries achieve their strategic goals.
+                  Founded in 2005, TechCorp has grown from a small consulting firm to a global leader in business transformation. We have helped over 500 enterprises across 45 countries achieve their strategic goals.
                 </p>
                 <p className="text-slate-600 mb-6">
                   Our team of 200+ experts brings decades of combined experience across industries, from finance and healthcare to technology and manufacturing.

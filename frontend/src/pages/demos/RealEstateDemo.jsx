@@ -45,7 +45,7 @@ const RealEstateDemo = () => {
 
   const handleInquiry = (e) => {
     e.preventDefault();
-    showNotification('Inquiry sent! Agent will contact you soon.');
+    showNotification('Inquiry sent! An agent will contact you soon.');
     setInquiryModal(null);
   };
 
@@ -354,7 +354,7 @@ const RealEstateDemo = () => {
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-sm">
               <p className="text-slate-600 mb-6 text-lg leading-relaxed">
-                PrimeProperty has been connecting buyers and sellers with their dream properties since 2005. With over 500 expert agents across 45 cities, we've helped thousands of families find their perfect home.
+                PrimeProperty has been connecting buyers and sellers with their dream properties since 2005. With over 500 expert agents across 45 cities, we have helped thousands of families find their perfect home.
               </p>
               <p className="text-slate-600 mb-6 text-lg leading-relaxed">
                 Our commitment to excellence, transparency, and client satisfaction has made us one of the most trusted names in real estate. Whether you're buying your first home or selling a luxury estate, we're here to guide you every step of the way.
