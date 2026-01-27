@@ -104,14 +104,14 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 py-4 border-t border-teal-100 space-y-4 animate-in fade-in slide-in-from-top duration-300">
+          <div className="md:hidden mt-4 py-4 px-4 -mx-4 bg-gradient-to-br from-blue-500 to-teal-500 space-y-4 animate-in fade-in slide-in-from-top duration-300 rounded-b-2xl shadow-lg">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`block text-sm font-medium transition-colors ${
-                  location.pathname === link.path ? 'text-teal-600' : 'text-gray-600 hover:text-teal-600'
+                  location.pathname === link.path ? 'text-white font-bold' : 'text-white/90 hover:text-white'
                 }`}
               >
                 {link.label}
@@ -119,7 +119,7 @@ const Header = () => {
             ))}
             <Button 
               onClick={scrollToContactForm}
-              className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold"
+              className="w-full bg-white text-teal-600 hover:bg-gray-100 font-semibold shadow-md"
             >
               Get Started
             </Button>
