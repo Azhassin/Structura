@@ -58,10 +58,13 @@ const DemoPage = () => {
   }
   
   return (
-    <div className="animate-fadeIn">
-      <DemoComponent />
+    <>
+      <div className="animate-fadeIn">
+        <DemoComponent />
+      </div>
+      {/* ChatBot rendered outside for proper fixed positioning */}
       <ChatBot />
-    </div>
+    </>
   );
 };
 
