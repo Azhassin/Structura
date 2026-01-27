@@ -125,7 +125,13 @@ const AboutPage = () => {
                 Structura Studio was founded by <strong className="text-teal-600">Mohammad Azhan Naseem</strong> with a simple yet powerful vision: to democratize professional web development and make it accessible to businesses of all sizes.
               </p>
               <p>
-                We combine technical expertise with creative innovation to deliver websites that not only look stunning but also drive real business results. Our team specializes in custom web development, e-commerce solutions, and AI-powered features that set your business apart from the competition.
+                What started as a passion for creating beautiful, functional websites has grown into a dedicated studio focused on delivering exceptional digital experiences. Every project is approached with meticulous attention to detail, ensuring that each website not only looks stunning but also performs flawlessly across all devices.
+              </p>
+              <p>
+                The philosophy at Structura is straightforward: <strong className="text-teal-600">quality over quantity</strong>. Rather than taking on countless projects, the focus remains on providing personalized service and crafting bespoke solutions tailored to each client's unique needs. This approach ensures that every website receives the care and expertise it deserves.
+              </p>
+              <p>
+                From custom web development and e-commerce solutions to AI-powered features and responsive design, Structura Studio combines technical expertise with creative innovation. The goal is always the same — to help businesses establish a strong online presence that drives real results and leaves a lasting impression.
               </p>
             </div>
           </div>
