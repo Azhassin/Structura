@@ -172,18 +172,13 @@ const ChatBot = () => {
     <>
       {/* Chat Button - Fixed position, always visible */}
       {!isOpen && (
-        <div 
-          className="fixed bottom-6 right-6 z-[9999]"
-          style={{ position: 'fixed', bottom: '24px', right: '24px' }}
+        <button
+          onClick={() => setIsOpen(true)}
+          className="fixed bottom-6 right-6 z-[9999] w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 shadow-2xl shadow-teal-500/40 transition-all duration-300 hover:scale-110 flex items-center justify-center"
+          data-testid="chatbot-toggle-btn"
         >
-          <Button
-            onClick={() => setIsOpen(true)}
-            className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 shadow-2xl shadow-teal-500/40 transition-all duration-300 hover:scale-110"
-            data-testid="chatbot-toggle-btn"
-          >
-            <MessageSquare className="w-6 h-6 md:w-7 md:h-7 text-white" />
-          </Button>
-        </div>
+          <MessageSquare className="w-6 h-6 md:w-7 md:h-7 text-white" />
+        </button>
       )}
 
       {/* Chat Window - Centered on mobile, bottom-right on desktop */}
@@ -192,14 +187,14 @@ const ChatBot = () => {
           {/* Mobile overlay backdrop */}
           <div 
             className="fixed inset-0 bg-black/50 z-[9998] md:hidden"
-            style={{ position: 'fixed' }}
             onClick={() => setIsOpen(false)}
           />
           
-          {/* Chat window */}
+          {/* Chat window - mobile: full screen with margin, desktop: bottom-right */}
           <div 
-            className="fixed z-[9999] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-teal-100 inset-4 md:inset-auto md:bottom-6 md:right-6 md:w-96 md:h-[550px]"
-            style={{ position: 'fixed', maxHeight: 'calc(100vh - 2rem)' }}
+            className="fixed z-[9999] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-teal-100
+              top-4 left-4 right-4 bottom-4
+              md:top-auto md:left-auto md:bottom-6 md:right-6 md:w-96 md:h-[550px]"
             data-testid="chatbot-window"
           >
           {/* Header */}
