@@ -299,6 +299,7 @@ const ChatBot = () => {
             </div>
           </div>
         </div>
+        </>
       )}
     </>
   );
