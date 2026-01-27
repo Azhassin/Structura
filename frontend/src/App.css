@@ -524,3 +524,86 @@ body {
   }
 }
 
+/* ========== DEMO PAGE MOBILE FIXES ========== */
+@media (max-width: 768px) {
+  /* Fix hero section button alignment */
+  .flex.gap-4 {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    padding: 0 1rem;
+  }
+  
+  /* Fix category filter horizontal scroll */
+  .flex.flex-wrap.gap-3,
+  .flex.gap-3,
+  .flex.gap-4 {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 0.5rem;
+  }
+  
+  .flex.flex-wrap.gap-3::-webkit-scrollbar,
+  .flex.gap-3::-webkit-scrollbar,
+  .flex.gap-4::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Improve demo page header spacing */
+  header .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Fix product grid on mobile */
+  .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-4,
+  .grid.md\:grid-cols-2.lg\:grid-cols-4,
+  .grid.md\:grid-cols-2.lg\:grid-cols-3 {
+    gap: 1rem;
+  }
+  
+  /* Ensure cards don't overflow */
+  .rounded-2xl {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  /* Fix modal centering on mobile */
+  .fixed.inset-0.flex.items-center.justify-center {
+    padding: 1rem;
+  }
+  
+  /* Reduce padding in demo pages */
+  section.py-16,
+  section.py-20 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  /* Fix text sizes on mobile */
+  .text-5xl {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .text-6xl {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  /* Hero buttons stack vertically on mobile */
+  .flex.gap-4.justify-center {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .flex.gap-4.justify-center > * {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
