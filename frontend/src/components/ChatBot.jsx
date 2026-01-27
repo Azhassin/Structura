@@ -170,20 +170,37 @@ const ChatBot = () => {
 
   return (
     <>
-      {/* Chat Button */}
+      {/* Chat Button - Fixed position, always visible */}
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 shadow-2xl shadow-teal-500/40 transition-all duration-300 hover:scale-110"
+          className="fixed bottom-6 right-6 z-[9999] w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 shadow-2xl shadow-teal-500/40 transition-all duration-300 hover:scale-110"
+          style={{ position: 'fixed' }}
           data-testid="chatbot-toggle-btn"
         >
-          <MessageSquare className="w-7 h-7 text-white" />
+          <MessageSquare className="w-6 h-6 md:w-7 md:h-7 text-white" />
         </Button>
       )}
 
-      {/* Chat Window */}
+      {/* Chat Window - Centered on mobile, bottom-right on desktop */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-96 h-[550px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-teal-100" data-testid="chatbot-window">
+        <>
+          {/* Mobile overlay backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/50 z-[9998] md:hidden"
+            onClick={() => setIsOpen(false)}
+          />
+          
+          {/* Chat window */}
+          <div 
+            className="fixed z-[9999] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-teal-100
+              /* Mobile: centered */
+              inset-4 md:inset-auto
+              /* Desktop: bottom-right corner */
+              md:bottom-6 md:right-6 md:w-96 md:h-[550px]"
+            style={{ maxHeight: 'calc(100vh - 2rem)' }}
+            data-testid="chatbot-window"
+          >
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-500 to-teal-500 p-5 flex items-center justify-between">
             <div className="flex items-center gap-3">
