@@ -318,16 +318,18 @@ const HomePage = () => {
                 Explore our portfolio of high-performing websites
               </p>
 
-              <div className="flex flex-wrap gap-3 justify-center">
+              {/* Category Filter - Wrap on mobile */}
+              <div className="flex flex-wrap gap-2 md:gap-3 justify-center px-2">
                 {categories.map((category) => (
                   <Button
                     key={category}
                     onClick={() => handleCategorySelect(category)}
                     variant={selectedCategory === category ? 'default' : 'outline'}
-                    className={`rounded-full font-medium transition-all duration-300 ${
+                    size="sm"
+                    className={`rounded-full font-medium transition-all duration-300 text-xs md:text-sm px-3 md:px-4 py-1.5 md:py-2 h-auto ${
                       selectedCategory === category
-                        ? 'bg-gradient-to-r from-blue-500 to-teal-500 text-white shadow-lg shadow-teal-500/30 hover:scale-105'
-                        : 'border-teal-200 text-teal-600 hover:bg-teal-50'
+                        ? 'bg-gradient-to-r from-blue-500 to-teal-500 text-white shadow-lg shadow-teal-500/30'
+                        : 'border-teal-200 text-teal-600 hover:bg-teal-50 bg-white'
                     }`}
                     data-testid={`category-${category.toLowerCase().replace(' ', '-')}`}
                   >
