@@ -14,15 +14,16 @@ const DemoPage = () => {
   const { category } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   
-  // Scroll to top with smooth animation on page load
+  // Scroll to top on page load - instant for better mobile performance
   useEffect(() => {
-    // Immediately scroll to top
+    // Use instant scroll for mobile, smooth for desktop
+    const isMobile = window.innerWidth <= 768;
     window.scrollTo({ top: 0, behavior: 'instant' });
     
-    // Show loading animation briefly
+    // Shorter loading time on mobile
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 300);
+    }, isMobile ? 100 : 300);
     
     return () => clearTimeout(timer);
   }, [category]);
@@ -47,14 +48,11 @@ const DemoPage = () => {
     return <Navigate to="/" replace />;
   }
   
-  // Loading animation overlay
+  // Simpler loading state for mobile
   if (isLoading) {
     return (
       <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
-          <p className="text-slate-600 animate-pulse">Loading demo...</p>
-        </div>
+        <div className="w-8 h-8 border-3 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
       </div>
     );
   }
