@@ -216,12 +216,13 @@ const ChatBot = () => {
             style={{
               position: 'fixed',
               zIndex: 99999,
-              // Mobile: centered with margins
-              top: '16px',
-              left: '16px',
-              right: '16px',
-              bottom: '16px',
-              // Override for desktop via media query in CSS
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: 'calc(100% - 32px)',
+              height: 'calc(100% - 32px)',
+              maxWidth: '400px',
+              maxHeight: '600px'
             }}
             data-testid="chatbot-window"
           >
