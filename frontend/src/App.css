@@ -575,29 +575,11 @@ body {
 /* ========== DEMO PAGE MOBILE FIXES ========== */
 @media (max-width: 768px) {
   /* Fix hero section button alignment */
-  .flex.gap-4 {
+  .hero-buttons {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
     padding: 0 1rem;
-  }
-  
-  /* Fix category filter horizontal scroll */
-  .flex.flex-wrap.gap-3,
-  .flex.gap-3,
-  .flex.gap-4 {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-bottom: 0.5rem;
-  }
-  
-  .flex.flex-wrap.gap-3::-webkit-scrollbar,
-  .flex.gap-3::-webkit-scrollbar,
-  .flex.gap-4::-webkit-scrollbar {
-    display: none;
   }
   
   /* Improve demo page header spacing */
