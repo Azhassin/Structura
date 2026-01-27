@@ -337,42 +337,13 @@ const EcommerceDemo = () => {
           </div>
         </div>
       </section>
-                  >
-                    <Heart className={`w-5 h-5 ${wishlist.includes(product.id) ? 'fill-red-500 text-red-500' : 'text-gray-400 hover:text-purple-600'}`} />
-                  </button>
-                  <Badge className="absolute top-4 left-4 bg-red-500 text-white">Sale</Badge>
-                </div>
-                <div className="p-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">{product.name}</h4>
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex items-center">
-                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                      <span className="text-sm text-gray-600 ml-1">{product.rating}</span>
-                    </div>
-                    <span className="text-sm text-gray-400">({product.reviews} reviews)</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <span className="text-xl font-bold text-purple-600">${product.price}</span>
-                      <span className="text-sm text-gray-400 line-through ml-2">${product.originalPrice}</span>
-                    </div>
-                    <Button size="sm" className="bg-purple-600 hover:bg-purple-700" onClick={() => addToCart(product)}>
-                      Add to Cart
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Newsletter */}
-      <section className="py-16 bg-purple-600 text-white">
+      <section className="py-12 md:py-16 bg-purple-600 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h3 className="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h3>
-          <p className="text-purple-200 mb-8 max-w-xl mx-auto">Get exclusive deals, new arrivals, and 10% off your first order</p>
-          <div className="flex max-w-md mx-auto gap-2">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">Subscribe to Our Newsletter</h3>
+          <p className="text-purple-200 mb-6 md:mb-8 max-w-xl mx-auto text-sm md:text-base">Get exclusive deals, new arrivals, and 10% off your first order</p>
+          <div className="flex flex-col sm:flex-row max-w-md mx-auto gap-2">
             <input type="email" placeholder="Enter your email" className="flex-1 px-4 py-3 rounded-lg text-gray-900" />
             <Button className="bg-yellow-400 text-yellow-900 hover:bg-yellow-300 px-6" onClick={() => showNotification('Subscribed successfully!')}>
               Subscribe
