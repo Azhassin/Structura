@@ -1,5 +1,92 @@
 /* Professional animations and styles - Blue/Teal Theme */
 
+/* ========== MOBILE PERFORMANCE OPTIMIZATIONS ========== */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile: Disable heavy animations, use simple transitions */
+@media (max-width: 768px) {
+  .scroll-animate {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .animate-gradient {
+    animation: none !important;
+    background-position: 0% 50% !important;
+  }
+  
+  .animate-pulse-glow {
+    animation: none !important;
+  }
+  
+  /* Disable icon hover animations on mobile */
+  .group:hover .icon-palette,
+  .group:hover .icon-cart,
+  .group:hover .icon-phone,
+  .group:hover .icon-bot,
+  .group:hover .icon-search,
+  .group:hover .icon-wrench,
+  .group:hover .icon-target,
+  .group:hover .icon-heart,
+  .group:hover .icon-rocket,
+  .group:hover .icon-medal {
+    animation: none !important;
+  }
+  
+  /* Simplify all transitions on mobile */
+  * {
+    transition-duration: 0.15s !important;
+  }
+  
+  /* Disable transform animations that cause jank */
+  .group-hover\:scale-105,
+  .group-hover\:scale-110,
+  .hover\:scale-105,
+  .hover\:scale-110 {
+    transform: none !important;
+  }
+  
+  /* Force GPU acceleration for smoother scrolling */
+  .min-h-screen,
+  section,
+  header,
+  footer {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
+
+/* Hardware acceleration for smooth animations */
+.animate-fadeIn,
+.animate-fade-in-up,
+.scroll-animate {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: opacity, transform;
+}
+
+/* Optimize image rendering */
+img {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  image-rendering: -webkit-optimize-contrast;
+}
+
 /* Hide Emergent watermark badge */
 #emergent-badge,
 a[href*="emergent.sh"],
