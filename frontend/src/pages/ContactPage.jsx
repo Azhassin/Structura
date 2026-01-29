@@ -117,10 +117,10 @@ const ContactPage = () => {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden" data-testid="contact-page">
-      <AnimatedBackground />
-      <Header />
-      <ChatBot />
+    <>
+      <div className="min-h-screen relative" data-testid="contact-page">
+        <AnimatedBackground />
+        <Header />
 
       {/* Hero Section */}
       <section className="relative min-h-[40vh] flex items-center justify-center px-4 pt-32 pb-12">
@@ -326,7 +326,10 @@ const ContactPage = () => {
       </section>
 
       <Footer />
-    </div>
+      </div>
+      {/* ChatBot outside main container for proper fixed positioning */}
+      <ChatBot />
+    </>
   );
 };
 
